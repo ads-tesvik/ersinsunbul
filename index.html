@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dr. Ersin SÜNBÜL | Akademik Web Sitesi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
+            background: #f5f7fb;
+            color: #1a2a3a;
+            line-height: 1.5;
+        }
+
+        :root {
+            --primary: #2c5282;
+            --primary-dark: #1a365d;
+            --primary-light: #ebf4ff;
+            --accent: #dd6b20;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            background: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-info h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info .title {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255,255,255,0.5);
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            padding: 1.75rem;
+            margin-bottom: 1.75rem;
+            transition: box-shadow 0.2s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--primary);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pub-list, .announce-list {
+            list-style: none;
+        }
+
+        .pub-item, .announce-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .pub-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .pub-meta {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            border: 1px solid var(--gray-200);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .admin-section {
+            margin-top: 3rem;
+            border-top: 2px dashed var(--gray-200);
+            padding-top: 2rem;
+        }
+
+        .admin-panel {
+            display: none;
+            background: var(--gray-50);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 1rem;
+            font-family: inherit;
+        }
+
+        .file-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .file-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 2rem;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Sürükle-bırak stilleri */
+        .dropzone {
+            border: 2px dashed var(--gray-400);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+        .dropzone.drag-over {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .dropzone input {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            .contact-info {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <!-- Hero Bölümü -->
+    <div class="hero">
+        <img id="profilePhoto" class="profile-pic" src="https://ui-avatars.com/api/?name=Ersin+Sünbül&background=2c5282&color=fff&size=150" alt="Profil Fotoğrafı">
+        <div class="profile-info">
+            <h1 id="profileName">Dr. Ersin SÜNBÜL</h1>
+            <div class="title" id="profileTitle">Dr. Öğr. Üyesi | Uluslararası Ticaret ve İşletmecilik</div>
+            <div class="contact-info">
+                <span>✉️ <span id="profileEmail">ersinsunbul@hotmail.com</span></span>
+                <span>📞 <span id="profilePhone">+90 532 326 16 73</span></span>
+                <span>🔗 <a id="profileOrcid" href="#" target="_blank">ORCID</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Duyurular -->
+    <div class="card">
+        <h2>📢 Duyurular</h2>
+        <ul class="announce-list" id="announcementsList">
+            <li>Yükleniyor...</li>
+        </ul>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h2>📄 Hakkımda</h2>
+            <div id="aboutText"></div>
+            <h3>🎓 Öğrenim</h3>
+            <div id="educationText"></div>
+            <h3>💼 Kariyer</h3>
+            <div id="careerText"></div>
+            <h3>📚 İlgi Alanları</h3>
+            <div id="interestsText"></div>
+        </div>
+
+        <div class="card">
+            <h2>📖 Yayınlar</h2>
+            <div style="margin-bottom: 1rem;">
+                <button class="btn btn-outline" onclick="filterPublications('all')">Tümü</button>
+                <button class="btn btn-outline" onclick="filterPublications('international')">Uluslararası</button>
+                <button class="btn btn-outline" onclick="filterPublications('tr')">TR Dizin</button>
+            </div>
+            <ul class="pub-list" id="publicationsList"></ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📚 Verdiğim Dersler</h2>
+        <div id="coursesText"></div>
+    </div>
+
+    <div class="card">
+        <h2>🏅 Yetkinlikler & Sertifikalar</h2>
+        <div id="skillsText"></div>
+    </div>
+
+    <div class="admin-section">
+        <button class="btn btn-primary" id="adminToggleBtn">🔐 Yönetim Paneli (Admin)</button>
+        <div id="adminPanel" class="admin-panel">
+            <div id="adminLoginArea">
+                <h3>Admin Girişi</h3>
+                <div class="form-group">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" id="adminUsername" placeholder="kullanıcı adı">
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="adminPassword" placeholder="şifre">
+                </div>
+                <button class="btn btn-primary" onclick="adminLogin()">Giriş Yap</button>
+            </div>
+            <div id="adminContent" style="display:none;">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="tabAnnounce">Duyurular</button>
+                    <button class="tab-btn" data-tab="tabPubs">Yayınlar</button>
+                    <button class="tab-btn" data-tab="tabFiles">Dosyalar</button>
+                    <button class="tab-btn" data-tab="tabSettings">Ayarlar</button>
+                </div>
+
+                <!-- Duyuru Sekmesi -->
+                <div id="tabAnnounce" class="tab-content active">
+                    <h4>📢 Duyuru Yönetimi</h4>
+                    <div class="form-group">
+                        <label>Başlık</label>
+                        <input type="text" id="annTitle">
+                    </div>
+                    <div class="form-group">
+                        <label>İçerik</label>
+                        <textarea id="annContent" rows="2"></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="addAnnouncement()">Duyuru Ekle</button>
+                </div>
+
+                <!-- Yayın Sekmesi -->
+                <div id="tabPubs" class="tab-content">
+                    <h4>📄 Yayın Ekle</h4>
+                    <div class="form-group"><input type="text" id="pubTitle" placeholder="Makale Başlığı"></div>
+                    <div class="form-group"><input type="text" id="pubAuthors" placeholder="Yazarlar"></div>
+                    <div class="form-group"><input type="text" id="pubJournal" placeholder="Dergi / Kitap"></div>
+                    <div class="form-group"><input type="number" id="pubYear" placeholder="Yıl"></div>
+                    <div class="form-group">
+                        <select id="pubType">
+                            <option value="Uluslararası Makale">Uluslararası Makale</option>
+                            <option value="TR Dizin Makale">TR Dizin Makale</option>
+                            <option value="Kitap Bölümü">Kitap Bölümü</option>
+                            <option value="Bildiri">Bildiri</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="addPublication()">Yayın Ekle</button>
+                </div>
+
+                <!-- Dosya Sekmesi (Sürükle-Bırak Eklendi) -->
+                <div id="tabFiles" class="tab-content">
+                    <h4>📎 Dosya Yükle (Sürükle-Bırak veya Tıkla)</h4>
+                    <div class="form-group">
+                        <label>Kategori Seç</label>
+                        <select id="fileCategory">
+                            <option value="photo">Profil Fotoğrafı</option>
+                            <option value="document">Doküman (PDF/Doc/PPT)</option>
+                            <option value="brochure">Broşür</option>
+                        </select>
+                    </div>
+                    <!-- Sürükle-bırak alanı -->
+                    <div id="dropzone" class="dropzone" onclick="document.getElementById('fileInput').click()">
+                        <p>📂 Dosyaları buraya sürükleyin veya tıklayarak seçin</p>
+                        <p style="font-size:0.8rem; margin-top:0.5rem;">Desteklenen: jpg, png, pdf, doc, docx, ppt, pptx</p>
+                        <input type="file" id="fileInput" style="display:none;" accept=".jpg,.png,.pdf,.doc,.docx,.ppt,.pptx" multiple>
+                    </div>
+                    <div id="uploadedFilesList" class="file-list"></div>
+                </div>
+
+                <!-- Ayarlar Sekmesi -->
+                <div id="tabSettings" class="tab-content">
+                    <h4>🔐 Admin Hesabı Değiştir</h4>
+                    <div class="form-group">
+                        <label>Yeni Kullanıcı Adı</label>
+                        <input type="text" id="newAdminUser" placeholder="kullanıcı adı">
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni Şifre</label>
+                        <input type="password" id="newAdminPass" placeholder="yeni şifre">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateAdminCredentials()">Güncelle</button>
+
+                    <hr style="margin: 1.5rem 0;">
+                    <h4>✏️ Hero (Profil) Bilgilerini Düzenle</h4>
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" id="editName" placeholder="Ad Soyad">
+                    </div>
+                    <div class="form-group">
+                        <label>Unvan</label>
+                        <input type="text" id="editTitle" placeholder="Unvan">
+                    </div>
+                    <div class="form-group">
+                        <label>E-posta</label>
+                        <input type="email" id="editEmail" placeholder="E-posta">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="text" id="editPhone" placeholder="Telefon">
+                    </div>
+                    <div class="form-group">
+                        <label>ORCID Linki</label>
+                        <input type="text" id="editOrcid" placeholder="https://orcid.org/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Profil Fotoğrafı URL (veya yukarıdan sürükle-bırak ile güncelleyin)</label>
+                        <input type="text" id="editPhotoUrl" placeholder="Fotoğraf URL">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateHeroInfo()">Hero Bilgilerini Güncelle</button>
+                </div>
+
+                <button class="btn btn-outline" onclick="adminLogout()" style="margin-top:1rem;">Çıkış Yap</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        © 2025 Dr. Ersin SÜNBÜL | Tüm hakları saklıdır. | Güncelleme: 01.12.2025
+    </footer>
+</div>
+
+<script>
+    // ---------- VERİ MODELLERİ (localStorage) ----------
+    let currentAdmin = false;
+    let publications = [];
+    let announcements = [];
+    let uploadedFiles = []; // {name, url, category, type}
+
+    let adminCredentials = {
+        username: "ersinsunbul",
+        password: "Eses3399."
+    };
+
+    let profileData = {
+        name: "Dr. Ersin SÜNBÜL",
+        title: "Dr. Öğr. Üyesi | Uluslararası Ticaret ve İşletmecilik",
+        email: "ersinsunbul@hotmail.com",
+        phone: "+90 532 326 16 73",
+        orcid: "https://orcid.org/0000-0001-6187-2038",
+        about: "Uluslararası İşletmecilik, Pazarlama, Tedarik Zinciri Yönetimi, Lojistik Yönetimi, Ekonomi ve İktisat alanlarında çalışmalar yapıyorum. Stratejik Yönetim ve Planlama konularında danışmanlık yürütüyorum. Zaman Serisi Ekonometrisi (Doğrusal ve Doğrusal olmayan yöntemlerle R programında profesyonel uygulama yetkinliğim var. R programlama dilinde uygulamalı kodlamalar yaparak lineer ve nonlineer zaman serisi uygulamaları ve hibrit zaman serisi ekonometrisi uygulamaları yapmaktayım. Son zamanlarda R ile doğal dil işleme modelleri üzerine çalışıyorum.",
+        education: "Lisans: İşletme, Anadolu Üniversitesi (2004)\nYüksek Lisans: İşletme, Ankara Yıldırım Beyazıt Üniversitesi (2017)\nDoktora: Uluslararası Ticaret, Ankara Hacı Bayram Veli Üniversitesi (2022)\nDoktora (devam): İşletme, Kırıkkale Üniversitesi",
+        career: "Türk Silahlı Kuvvetleri (Emekli Astsubay) 1993-2020\nEkonomi, Finans ve Uluslararası Ticaret Danışmanı, ANKASAM (2023-2026)\nDr. Öğr. Üyesi, Nişantaşı Üniversitesi (2023-2025)",
+        interests: "Uluslararası İşletmecilik, Pazarlama, Tedarik Zinciri Yönetimi, Lojistik Yönetimi, Zaman Serisi Ekonometrisi, R Programlama, Makine Öğrenmesi, Doğal Dil İşleme",
+        courses: "Lisans: Uluslararası Taşımacılık, Tedarik Zinciri Yönetimi, Gümrük Mevzuatı, Proje Lojistiği, Yapay Zeka, Uluslararası Pazarlama, Liderlik Analizi, Blok Zincir, Finansal Tahminleme (R ile)\nYüksek Lisans: Yapay Zeka, Büyük Veri Analizi, Uluslararası Ticaret Finansmanı",
+        skills: "Dokümantasyon, Risk Analizi, Liderlik, Girişimcilik, Proje Yönetimi, Microsoft Office, R Programlama (Zaman Serisi, Makine Öğrenmesi), SPSS, Eviews, KOSGEB Girişimcilik Sertifikaları"
+    };
+
+    const defaultPublications = [
+        { title: "Döviz Kurunu Belirleyen Değişkenlerin Tahmini: Doğrusal Zaman Serisi ve Doğrusal Olmayan Yapay Sinir Ağı (YSA) ile Bir Model Önerisi", authors: "Sünbül, E. & Keskin Benli, Y.", journal: "Bankacılık ve Finansal Araştırmalar Dergisi", year: 2025, type: "Uluslararası Makale" },
+        { title: "Bitcoin's Effect on Selected Crypto Assets: Quantitative Evidence", authors: "Sünbül, E.", journal: "Alanya Academic Review", year: 2024, type: "TR Dizin Makale" },
+        { title: "Linear and Nonlinear Relationship Between Real Exchange Rate, Real Interest Rate and Consumer Price Index", authors: "Sünbül, E.", journal: "Scientific Annals of Economics and Business", year: 2023, type: "Uluslararası Makale" },
+        { title: "VAR Analysis on the Relationship Between Consumer Price Index, Real Interest and Exchange Rate: The Case of Turkey", authors: "Sünbül, E.", journal: "International Journal of Empirical Economics", year: 2022, type: "Uluslararası Makale" },
+        { title: "Yeşil Tedarik Zinciri Yönetimi ve Sürdürülebilir Lojistik: Literatür Taraması", authors: "Sünbül, E.", journal: "Ege Üniversitesi Ulaştırma Yönetimi Araştırmaları Dergisi", year: 2025, type: "Uluslararası Makale" },
+        { title: "Proje Lojistiği (Kitap)", authors: "Sünbül, E.", journal: "Nobel Akademik Yayıncılık", year: 2024, type: "Kitap Bölümü" }
+    ];
+
+    function loadData() {
+        const storedCred = localStorage.getItem("akademik_admin_cred");
+        if(storedCred) adminCredentials = JSON.parse(storedCred);
+
+        const storedPubs = localStorage.getItem("akademik_publications");
+        if(storedPubs) publications = JSON.parse(storedPubs);
+        else publications = defaultPublications;
+
+        const storedAnn = localStorage.getItem("akademik_announcements");
+        if(storedAnn) announcements = JSON.parse(storedAnn);
+        else announcements = [{title: "Hoş Geldiniz", content: "Dr. Ersin Sünbül akademik web sitesine hoş geldiniz. Yeni yayınlar için takipte kalın.", date: new Date().toLocaleString()}];
+
+        const storedFiles = localStorage.getItem("akademik_files");
+        if(storedFiles) uploadedFiles = JSON.parse(storedFiles);
+        else uploadedFiles = [];
+
+        const storedPhoto = localStorage.getItem("akademik_profile_photo");
+        if(storedPhoto) document.getElementById("profilePhoto").src = storedPhoto;
+
+        const storedProfile = localStorage.getItem("akademik_profile_data");
+        if(storedProfile) {
+            const saved = JSON.parse(storedProfile);
+            profileData = { ...profileData, ...saved };
+        }
+        renderAll();
+    }
+
+    function saveAdminCred() { localStorage.setItem("akademik_admin_cred", JSON.stringify(adminCredentials)); }
+    function savePublications() { localStorage.setItem("akademik_publications", JSON.stringify(publications)); }
+    function saveAnnouncements() { localStorage.setItem("akademik_announcements", JSON.stringify(announcements)); }
+    function saveFiles() { localStorage.setItem("akademik_files", JSON.stringify(uploadedFiles)); }
+    function saveProfileData() { localStorage.setItem("akademik_profile_data", JSON.stringify(profileData)); }
+
+    function renderAll() {
+        renderAnnouncements();
+        renderPublications();
+        document.getElementById("aboutText").innerHTML = `<p>${profileData.about}</p>`;
+        document.getElementById("educationText").innerHTML = `<p style="white-space:pre-line">${profileData.education}</p>`;
+        document.getElementById("careerText").innerHTML = `<p style="white-space:pre-line">${profileData.career}</p>`;
+        document.getElementById("interestsText").innerHTML = `<p>${profileData.interests}</p>`;
+        document.getElementById("coursesText").innerHTML = `<p style="white-space:pre-line">${profileData.courses}</p>`;
+        document.getElementById("skillsText").innerHTML = `<p style="white-space:pre-line">${profileData.skills}</p>`;
+        document.getElementById("profileName").innerText = profileData.name;
+        document.getElementById("profileTitle").innerText = profileData.title;
+        document.getElementById("profileEmail").innerText = profileData.email;
+        document.getElementById("profilePhone").innerText = profileData.phone;
+        document.getElementById("profileOrcid").href = profileData.orcid;
+        renderFileList();
+    }
+
+    function renderAnnouncements() {
+        const container = document.getElementById("announcementsList");
+        if(announcements.length === 0) { container.innerHTML = "<li>Henüz duyuru yok.</li>"; return; }
+        container.innerHTML = announcements.map((ann, idx) => `
+            <li class="announce-item">
+                <strong>📢 ${ann.title}</strong><br>
+                <span>${ann.content}</span><br>
+                <small style="color:#888">${ann.date || ""}</small>
+                ${currentAdmin ? `<button class="btn" style="margin-top:5px;" onclick="deleteAnnouncement(${idx})">🗑 Sil</button>` : ""}
+            </li>
+        `).join("");
+    }
+
+    let currentFilter = "all";
+    function renderPublications() {
+        let filtered = publications;
+        if(currentFilter === "international") filtered = publications.filter(p => p.type === "Uluslararası Makale");
+        else if(currentFilter === "tr") filtered = publications.filter(p => p.type === "TR Dizin Makale");
+        const container = document.getElementById("publicationsList");
+        if(filtered.length === 0) { container.innerHTML = "<li>Yayın bulunamadı.</li>"; return; }
+        container.innerHTML = filtered.map((pub, idx) => {
+            const origIdx = publications.findIndex(p => p.title === pub.title && p.year === pub.year);
+            return `
+            <li class="pub-item">
+                <div class="pub-title">${pub.title}</div>
+                <div class="pub-meta">${pub.authors} • ${pub.journal} • ${pub.year} <span class="badge">${pub.type}</span></div>
+                ${currentAdmin ? `<button class="btn" style="margin-top:5px;" onclick="deletePublication(${origIdx})">🗑 Sil</button>` : ""}
+            </li>
+        `;}).join("");
+    }
+
+    function filterPublications(type) {
+        currentFilter = type;
+        renderPublications();
+    }
+
+    function addAnnouncement() {
+        if(!currentAdmin) return alert("Admin girişi yapın!");
+        const title = document.getElementById("annTitle").value.trim();
+        const content = document.getElementById("annContent").value.trim();
+        if(!title || !content) return alert("Başlık ve içerik giriniz.");
+        announcements.unshift({title, content, date: new Date().toLocaleString()});
+        saveAnnouncements();
+        renderAnnouncements();
+        document.getElementById("annTitle").value = "";
+        document.getElementById("annContent").value = "";
+    }
+
+    function deleteAnnouncement(index) {
+        if(!currentAdmin) return;
+        announcements.splice(index,1);
+        saveAnnouncements();
+        renderAnnouncements();
+    }
+
+    function addPublication() {
+        if(!currentAdmin) return alert("Admin girişi yapın!");
+        const title = document.getElementById("pubTitle").value.trim();
+        const authors = document.getElementById("pubAuthors").value.trim();
+        const journal = document.getElementById("pubJournal").value.trim();
+        const year = parseInt(document.getElementById("pubYear").value);
+        const type = document.getElementById("pubType").value;
+        if(!title || !authors || !journal || !year) return alert("Tüm alanları doldurun.");
+        publications.push({title, authors, journal, year, type});
+        savePublications();
+        renderPublications();
+        document.getElementById("pubTitle").value = "";
+        document.getElementById("pubAuthors").value = "";
+        document.getElementById("pubJournal").value = "";
+        document.getElementById("pubYear").value = "";
+    }
+
+    function deletePublication(index) {
+        if(!currentAdmin) return;
+        publications.splice(index,1);
+        savePublications();
+        renderPublications();
+    }
+
+    // Dosya yükleme (base64) - hem sürükle-bırak hem input için
+    function handleFiles(files, category) {
+        if(!currentAdmin) return alert("Admin yetkisi gerekli.");
+        if(!files || files.length === 0) return;
+        Array.from(files).forEach(file => {
+            const allowed = ['.jpg','.jpeg','.png','.pdf','.doc','.docx','.ppt','.pptx'];
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            if(!allowed.includes(ext)) {
+                alert(`Desteklenmeyen dosya türü: ${file.name}`);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fileData = {
+                    name: file.name,
+                    url: e.target.result,
+                    category: category,
+                    type: file.type,
+                    size: file.size
+                };
+                if(category === "photo") {
+                    document.getElementById("profilePhoto").src = e.target.result;
+                    localStorage.setItem("akademik_profile_photo", e.target.result);
+                    alert(`Profil fotoğrafı güncellendi: ${file.name}`);
+                } else {
+                    uploadedFiles.push(fileData);
+                    saveFiles();
+                    renderFileList();
+                    alert(`Dosya yüklendi: ${file.name}`);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+        // Input temizleme
+        const fileInput = document.getElementById("fileInput");
+        if(fileInput) fileInput.value = "";
+    }
+
+    function uploadFileViaInput() {
+        const input = document.getElementById("fileInput");
+        const category = document.getElementById("fileCategory").value;
+        if(!input.files || input.files.length === 0) return alert("Dosya seçin.");
+        handleFiles(input.files, category);
+    }
+
+    function renderFileList() {
+        const container = document.getElementById("uploadedFilesList");
+        if(!container) return;
+        const filesToShow = uploadedFiles.filter(f => f.category !== "photo");
+        if(filesToShow.length === 0) { container.innerHTML = "<p>Henüz dosya yüklenmedi.</p>"; return; }
+        container.innerHTML = filesToShow.map((file, idx) => `
+            <div class="file-card">
+                📄 ${file.name} <br>
+                <a href="${file.url}" download="${file.name}" target="_blank">⬇️ İndir</a>
+                ${currentAdmin ? `<button onclick="deleteFile(${idx})">🗑</button>` : ""}
+            </div>
+        `).join("");
+    }
+
+    function deleteFile(idx) {
+        if(!currentAdmin) return;
+        uploadedFiles.splice(idx,1);
+        saveFiles();
+        renderFileList();
+    }
+
+    function adminLogin() {
+        const username = document.getElementById("adminUsername").value;
+        const password = document.getElementById("adminPassword").value;
+        if(username === adminCredentials.username && password === adminCredentials.password) {
+            currentAdmin = true;
+            document.getElementById("adminLoginArea").style.display = "none";
+            document.getElementById("adminContent").style.display = "block";
+            document.getElementById("newAdminUser").value = adminCredentials.username;
+            document.getElementById("newAdminPass").value = "";
+            document.getElementById("editName").value = profileData.name;
+            document.getElementById("editTitle").value = profileData.title;
+            document.getElementById("editEmail").value = profileData.email;
+            document.getElementById("editPhone").value = profileData.phone;
+            document.getElementById("editOrcid").value = profileData.orcid;
+            document.getElementById("editPhotoUrl").value = "";
+            renderAnnouncements();
+            renderPublications();
+            renderFileList();
+            setupTabs();
+            // Sürükle-bırak olaylarını bağla
+            setupDragAndDrop();
+        } else {
+            alert("Kullanıcı adı veya şifre hatalı!");
+        }
+    }
+
+    function adminLogout() {
+        currentAdmin = false;
+        document.getElementById("adminLoginArea").style.display = "block";
+        document.getElementById("adminContent").style.display = "none";
+        document.getElementById("adminUsername").value = "";
+        document.getElementById("adminPassword").value = "";
+        renderAnnouncements();
+        renderPublications();
+    }
+
+    function updateAdminCredentials() {
+        if(!currentAdmin) return;
+        const newUser = document.getElementById("newAdminUser").value.trim();
+        const newPass = document.getElementById("newAdminPass").value.trim();
+        if(!newUser || !newPass) return alert("Kullanıcı adı ve şifre boş olamaz.");
+        adminCredentials.username = newUser;
+        adminCredentials.password = newPass;
+        saveAdminCred();
+        alert("Admin bilgileri güncellendi. Yeni bilgilerle tekrar giriş yapmalısınız.");
+        adminLogout();
+    }
+
+    function updateHeroInfo() {
+        if(!currentAdmin) return;
+        const newName = document.getElementById("editName").value.trim();
+        const newTitle = document.getElementById("editTitle").value.trim();
+        const newEmail = document.getElementById("editEmail").value.trim();
+        const newPhone = document.getElementById("editPhone").value.trim();
+        const newOrcid = document.getElementById("editOrcid").value.trim();
+        const newPhotoUrl = document.getElementById("editPhotoUrl").value.trim();
+        if(!newName || !newTitle) return alert("Ad soyad ve unvan boş olamaz.");
+        profileData.name = newName;
+        profileData.title = newTitle;
+        profileData.email = newEmail;
+        profileData.phone = newPhone;
+        profileData.orcid = newOrcid;
+        if(newPhotoUrl) {
+            document.getElementById("profilePhoto").src = newPhotoUrl;
+            localStorage.setItem("akademik_profile_photo", newPhotoUrl);
+        }
+        saveProfileData();
+        renderAll();
+        alert("Hero bilgileri güncellendi!");
+    }
+
+    function setupTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(btn => {
+            btn.removeEventListener('click', tabClickHandler);
+            btn.addEventListener('click', tabClickHandler);
+        });
+        function tabClickHandler(e) {
+            const tabId = e.currentTarget.getAttribute('data-tab');
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            tabs.forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            if(tabId === 'tabFiles') setupDragAndDrop();
+        }
+    }
+
+    function setupDragAndDrop() {
+        const dropzone = document.getElementById('dropzone');
+        if(!dropzone) return;
+        const fileInput = document.getElementById('fileInput');
+        // Sürükle-bırak olaylarını kaldırıp yeniden ekle (tekrarları önlemek için)
+        dropzone.removeEventListener('dragover', dragOverHandler);
+        dropzone.removeEventListener('dragleave', dragLeaveHandler);
+        dropzone.removeEventListener('drop', dropHandler);
+        dropzone.removeEventListener('click', clickHandler);
+        fileInput.removeEventListener('change', changeHandler);
+
+        function dragOverHandler(e) {
+            e.preventDefault();
+            dropzone.classList.add('drag-over');
+        }
+        function dragLeaveHandler(e) {
+            e.preventDefault();
+            dropzone.classList.remove('drag-over');
+        }
+        function dropHandler(e) {
+            e.preventDefault();
+            dropzone.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            const category = document.getElementById('fileCategory').value;
+            handleFiles(files, category);
+        }
+        function clickHandler() {
+            fileInput.click();
+        }
+        function changeHandler(e) {
+            const category = document.getElementById('fileCategory').value;
+            handleFiles(e.target.files, category);
+        }
+
+        dropzone.addEventListener('dragover', dragOverHandler);
+        dropzone.addEventListener('dragleave', dragLeaveHandler);
+        dropzone.addEventListener('drop', dropHandler);
+        dropzone.addEventListener('click', clickHandler);
+        fileInput.addEventListener('change', changeHandler);
+    }
+
+    document.getElementById("adminToggleBtn").addEventListener("click", () => {
+        const panel = document.getElementById("adminPanel");
+        panel.classList.toggle("active");
+        if(panel.classList.contains("active") && !currentAdmin) {
+            document.getElementById("adminLoginArea").style.display = "block";
+            document.getElementById("adminContent").style.display = "none";
+        }
+    });
+
+    loadData();
+</script>
+</body>
+</html>
