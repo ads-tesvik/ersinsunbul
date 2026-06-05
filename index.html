@@ -1,254 +1,1133 @@
-<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akademisyen Profil Sayfası - Görsel Yükleme Destekli</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #2c3e50; line-height: 1.7; }
-        :root {
-            --primary: #2c3e50;
-            --primary-light: #34495e;
-            --accent: #5d6d7e;
-            --bg: #f8f9fa;
-            --border: #e9ecef;
-            --radius: 12px;
-            --shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        /* navbar, hero, cards vs. önceki stiller aynen korunacak (kısaltmak için tekrar yazmıyorum, aynı stiller) */
-        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .nav-logo { font-weight: 600; color: var(--primary); text-decoration: none; display: flex; gap: 10px; align-items: center; }
-        .nav-links { display: flex; gap: 6px; list-style: none; }
-        .nav-links a { text-decoration: none; color: #5d6d7e; padding: 8px 14px; border-radius: 8px; transition: 0.3s; display: flex; gap: 6px; align-items: center; }
-        .nav-links a:hover, .nav-links a.active { background: var(--bg); color: var(--primary); }
-        .admin-btn { background: var(--primary); color: white !important; }
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 24px 60px; background: linear-gradient(135deg, #f8f9fa, #fff); position: relative; }
-        .hero-content { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
-        .image-placeholder { width: 320px; height: 320px; border-radius: 50%; background: #e9ecef; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 4px solid white; box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
-        .image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-info h1 { font-size: 2.8rem; font-weight: 700; color: var(--primary); }
-        .hero-stats { display: flex; gap: 32px; margin: 24px 0; flex-wrap: wrap; }
-        .stat-number { font-size: 1.6rem; font-weight: 700; }
-        .section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-size: 2rem; }
-        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .card { background: white; border-radius: var(--radius); padding: 28px; border: 1px solid var(--border); transition: 0.3s; }
-        .pub-item, .announcement-item { background: white; border-radius: var(--radius); padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); display: flex; gap: 20px; }
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 16px; }
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr)); gap: 24px; }
-        .blog-card { background: white; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
-        .blog-image { height: 200px; background: #e9ecef; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .blog-image img { width: 100%; height: 100%; object-fit: cover; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .footer { background: var(--primary); color: rgba(255,255,255,0.7); text-align: center; padding: 40px 24px; }
-        .admin-overlay, .login-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-        .admin-overlay.active, .login-modal.active { display: flex; }
-        .admin-panel { background: white; border-radius: var(--radius); width: 90%; max-width: 1000px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
-        .admin-header { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .admin-body { display: flex; flex: 1; overflow: hidden; }
-        .admin-sidebar { width: 220px; background: var(--bg); border-right: 1px solid var(--border); padding: 16px 0; overflow-y: auto; }
-        .admin-sidebar button { width: 100%; padding: 12px 20px; text-align: left; background: none; border: none; display: flex; gap: 10px; cursor: pointer; }
-        .admin-sidebar button.active { background: white; color: var(--primary); border-left: 3px solid var(--primary); }
-        .admin-content { flex: 1; padding: 24px; overflow-y: auto; }
-        .admin-form .form-group { margin-bottom: 16px; }
-        .admin-form label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 5px; }
-        .admin-form input, .admin-form textarea, .admin-form select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; }
-        .btn { padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; background: var(--primary); color: white; display: inline-flex; gap: 8px; align-items: center; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--primary); }
-        .image-upload-area { border: 2px dashed var(--border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 16px; }
-        .image-upload-area.drag-over { background: #e9ecef; border-color: var(--primary); }
-        .image-preview { max-width: 200px; max-height: 200px; margin: 10px auto; border-radius: 12px; overflow: hidden; }
-        .image-preview img { width: 100%; height: auto; }
-        .empty-state { text-align: center; padding: 40px; color: #95a5a6; }
-        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--primary); color: white; padding: 12px 24px; border-radius: 40px; transition: 0.3s; z-index: 3000; }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-        @media (max-width: 768px) { .hero-content { grid-template-columns: 1fr; text-align: center; } .nav-links { display: none; } .mobile-menu-btn { display: block; } .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: white; padding: 16px; } .admin-body { flex-direction: column; } .admin-sidebar { width: 100%; display: flex; overflow-x: auto; } }
-        .scroll-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.3s; }
-        .scroll-top.visible { opacity: 1; visibility: visible; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="docTitle">Akademisyen Profil</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#2c3e50;--primary-light:#34495e;--accent:#3498db;
+  --bg:#f8f9fa;--white:#ffffff;--border:#e9ecef;
+  --text:#2c3e50;--text2:#5d6d7e;--text3:#95a5a6;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.06);--shadow-md:0 4px 20px rgba(0,0,0,0.10);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-container{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:64px}
+.nav-logo{font-weight:700;color:var(--primary);text-decoration:none;display:flex;gap:10px;align-items:center;font-size:1rem}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text2);padding:7px 13px;border-radius:8px;font-size:0.85rem;font-weight:500;transition:0.2s;display:flex;gap:6px;align-items:center}
+.nav-links a:hover,.nav-links a.active{background:var(--bg);color:var(--primary)}
+.admin-btn{background:var(--primary)!important;color:white!important;border-radius:8px!important}
+.admin-btn:hover{background:var(--primary-light)!important}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--primary)}
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 60px;background:linear-gradient(135deg,#f8f9fa 0%,#fff 100%)}
+.hero-content{max-width:1100px;width:100%;display:grid;grid-template-columns:340px 1fr;gap:60px;align-items:center}
+.hero-image{display:flex;justify-content:center}
+.image-placeholder{width:300px;height:300px;border-radius:50%;background:#e9ecef;display:flex;align-items:center;justify-content:center;border:4px solid white;box-shadow:0 20px 60px rgba(0,0,0,0.12);overflow:hidden;position:relative;flex-shrink:0}
+.image-placeholder img{width:100%;height:100%;object-fit:cover}
+.image-placeholder i{color:var(--text3);font-size:4rem}
+.hero-info h1{font-size:2.5rem;font-weight:700;color:var(--primary);line-height:1.2;margin-bottom:6px}
+.hero-info .title{font-size:1.1rem;color:var(--text2);margin-bottom:4px}
+.hero-info .institution{font-size:0.95rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.hero-info .bio{font-size:0.92rem;color:var(--text2);line-height:1.75;margin-bottom:20px;max-width:520px}
+/* ── STATS ── */
+.hero-stats{display:flex;gap:28px;margin:20px 0;flex-wrap:wrap}
+.stat-item{text-align:center;min-width:60px}
+.stat-number{font-size:1.7rem;font-weight:700;color:var(--primary);display:block;line-height:1}
+.stat-label{font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px}
+/* ── SOCIAL BUTTONS ── */
+.hero-social{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.social-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;background:white;border:1.5px solid var(--border);color:var(--primary);text-decoration:none;font-size:0.83rem;font-weight:600;transition:0.2s;white-space:nowrap}
+.social-btn:hover{background:var(--primary);color:white;border-color:var(--primary);transform:translateY(-1px);box-shadow:var(--shadow)}
+.social-btn i{font-size:0.95rem;width:14px;text-align:center}
+/* ── SECTIONS ── */
+.section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-bg{background:white}
+.section-header{text-align:center;margin-bottom:50px}
+.section-header h2{font-size:2rem;font-weight:700;color:var(--primary)}
+.section-divider{width:50px;height:3px;background:var(--accent);margin:12px auto 0;border-radius:2px}
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card{background:white;border-radius:var(--radius);padding:24px;border:1px solid var(--border);transition:0.2s;box-shadow:var(--shadow)}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.card-icon{width:42px;height:42px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--primary);font-size:1.1rem}
+.card h3{font-size:1.05rem;font-weight:700;margin-bottom:12px;color:var(--primary)}
+/* About list items inside cards */
+.about-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.about-list li{display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text2);padding:8px 10px;border-radius:8px;background:var(--bg)}
+.about-list li .al-icon{color:var(--accent);flex-shrink:0;margin-top:2px;font-size:0.85rem}
+.about-list li .al-body strong{display:block;font-weight:600;color:var(--primary);font-size:0.9rem}
+.about-list li .al-meta{font-size:0.75rem;color:var(--text3);margin-top:2px}
+.tag-list{display:flex;flex-wrap:wrap;gap:7px}
+.tag-pill{background:var(--bg);border:1px solid var(--border);color:var(--primary);border-radius:50px;padding:4px 12px;font-size:0.8rem;font-weight:500}
+/* ── PUBLICATIONS ── */
+.pub-list{display:flex;flex-direction:column;gap:16px}
+.pub-item{background:white;border-radius:var(--radius);padding:22px 24px;border:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;transition:0.2s}
+.pub-item:hover{box-shadow:var(--shadow-md)}
+.pub-number{width:32px;height:32px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.pub-body h4{font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:5px;line-height:1.4}
+.pub-body .pub-authors{font-size:0.84rem;color:var(--text2);margin-bottom:3px}
+.pub-body .pub-journal{font-size:0.84rem;color:var(--text3)}
+.pub-body .pub-links{display:flex;gap:10px;margin-top:8px}
+.pub-body .pub-links a{font-size:0.78rem;font-weight:600;color:var(--accent);background:#ebf5fb;padding:3px 10px;border-radius:50px}
+.pub-badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:2px 9px;border-radius:50px;margin-left:8px;vertical-align:middle}
+.b-intl{background:#dbeafe;color:#1e40af}.b-tr{background:#dcfce7;color:#166534}.b-book{background:#fef3c7;color:#92400e}.b-conf{background:#f3e8ff;color:#6b21a8}
+/* ── ANNOUNCEMENTS ── */
+.announcement-item{background:white;border-radius:var(--radius);padding:22px;margin-bottom:14px;border:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;border-left:4px solid var(--primary);transition:0.2s}
+.announcement-item:hover{box-shadow:var(--shadow-md)}
+.announcement-item.pinned{border-left-color:#e67e22}
+.ann-date-badge{background:var(--bg);border-radius:10px;padding:8px 12px;text-align:center;flex-shrink:0;min-width:60px}
+.ann-date-badge .day{font-size:1.5rem;font-weight:700;color:var(--primary);line-height:1}
+.ann-date-badge .mon{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em}
+.ann-body h4{font-size:1rem;font-weight:700;margin-bottom:6px;color:var(--primary)}
+.ann-body p{font-size:0.88rem;color:var(--text2);line-height:1.65;white-space:pre-wrap}
+.ann-body img{max-height:120px;border-radius:8px;margin-top:10px}
+/* ── LINKS ── */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.link-item{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;transition:0.2s;text-decoration:none;color:var(--text)}
+.link-item:hover{box-shadow:var(--shadow-md);border-color:var(--accent);transform:translateY(-2px)}
+.link-item .link-icon-wrap{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--primary)}
+.link-item .link-title{font-size:0.9rem;font-weight:700;color:var(--primary)}
+.link-item .link-desc{font-size:0.78rem;color:var(--text3);line-height:1.4}
+/* ── BLOG ── */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.blog-card{background:white;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:0.2s;cursor:pointer;display:flex;flex-direction:column}
+.blog-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.blog-image{height:190px;background:linear-gradient(135deg,#e9ecef,#f0f3f4);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--text3)}
+.blog-image img{width:100%;height:100%;object-fit:cover}
+.blog-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.blog-category{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:8px}
+.blog-body h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:8px;line-height:1.4}
+.blog-excerpt{font-size:0.85rem;color:var(--text2);line-height:1.6;flex:1}
+.blog-meta{display:flex;gap:14px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:0.77rem;color:var(--text3)}
+/* ── BLOG MODAL ── */
+.blog-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:3000;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+.blog-modal.active{display:flex}
+.blog-modal-box{background:white;border-radius:16px;max-width:760px;width:100%;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;margin:auto}
+.blog-modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text3);line-height:1;transition:0.2s}
+.blog-modal-close:hover{color:var(--primary)}
+.blog-modal-cat{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px}
+.blog-modal-title{font-size:1.8rem;font-weight:700;color:var(--primary);line-height:1.3;margin-bottom:10px}
+.blog-modal-meta{font-size:0.82rem;color:var(--text3);margin-bottom:24px;display:flex;gap:14px}
+.blog-modal-img{border-radius:12px;overflow:hidden;margin-bottom:24px;max-height:360px}
+.blog-modal-img img{width:100%;height:100%;object-fit:cover}
+.blog-modal-content{font-size:0.95rem;line-height:1.85;color:var(--text);white-space:pre-wrap}
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-info{background:white;border-radius:var(--radius);padding:28px;border:1px solid var(--border)}
+.contact-info h3{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:var(--primary)}
+.contact-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:0.9rem;color:var(--text2)}
+.contact-row i{color:var(--accent);width:18px;margin-top:3px;flex-shrink:0}
+.contact-form{background:white;border-radius:var(--radius);padding:28px;border:1px solid var(--border)}
+.contact-form h3{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:var(--primary)}
+.contact-form input,.contact-form textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.88rem;margin-bottom:12px;transition:border-color 0.2s}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:100px}
+/* ── FOOTER ── */
+.footer{background:var(--primary);color:rgba(255,255,255,0.7);text-align:center;padding:40px 24px;font-size:0.85rem}
+/* ── BUTTONS ── */
+.btn{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;background:var(--primary);color:white;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;display:inline-flex;gap:8px;align-items:center;transition:0.2s}
+.btn:hover{background:var(--primary-light)}
+.btn-sm{padding:6px 14px;font-size:0.78rem}
+.btn-outline{background:transparent!important;border:1.5px solid var(--border)!important;color:var(--primary)!important}
+.btn-outline:hover{border-color:var(--primary)!important;background:var(--bg)!important}
+.btn-danger{background:#e74c3c!important;color:white!important}
+.btn-danger:hover{background:#c0392b!important}
+.btn-success{background:#27ae60!important;color:white!important}
+.btn-success:hover{background:#229954!important}
+/* ── TOAST & SCROLL ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary);color:white;padding:12px 24px;border-radius:40px;transition:0.3s;z-index:9999;font-size:0.88rem;font-weight:500}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:white;border:none;cursor:pointer;opacity:0;visibility:hidden;transition:0.3s;font-size:1rem;z-index:500}
+.scroll-top.visible{opacity:1;visibility:visible}
+/* ── LOGIN MODAL ── */
+.login-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.login-modal.active{display:flex}
+.login-box{background:white;border-radius:16px;padding:36px 32px;width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.login-box h2{font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:6px}
+.login-box p{font-size:0.82rem;color:var(--text3);margin-bottom:24px}
+.login-box input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;margin-bottom:12px;font-size:0.88rem}
+.login-box input:focus{outline:none;border-color:var(--primary)}
+/* ── ADMIN PANEL ── */
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:stretch;backdrop-filter:blur(4px)}
+.admin-overlay.active{display:flex}
+.admin-panel{background:white;border-radius:0;width:90%;max-width:1060px;max-height:100vh;display:flex;flex-direction:column;overflow:hidden;margin:auto;border-radius:16px;max-height:92vh}
+.admin-header{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--primary);color:white;border-radius:16px 16px 0 0}
+.admin-header h2{font-size:1.1rem;font-weight:700}
+.admin-close{background:rgba(255,255,255,0.15);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:0.2s}
+.admin-close:hover{background:rgba(255,255,255,0.3)}
+.admin-body{display:flex;flex:1;overflow:hidden}
+.admin-sidebar{width:200px;background:var(--bg);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto;flex-shrink:0}
+.admin-sidebar button{width:100%;padding:11px 18px;text-align:left;background:none;border:none;border-left:3px solid transparent;display:flex;gap:10px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:500;color:var(--text2);transition:0.2s}
+.admin-sidebar button:hover{background:white;color:var(--primary)}
+.admin-sidebar button.active{background:white;color:var(--primary);font-weight:700;border-left-color:var(--primary)}
+.admin-sidebar .sidebar-group{padding:8px 18px 4px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3)}
+.admin-content{flex:1;padding:24px;overflow-y:auto}
+.admin-content h3{font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+/* Admin form styles */
+.admin-form .form-group{margin-bottom:14px}
+.admin-form label,.form-label{display:block;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:5px}
+.admin-form input,.admin-form textarea,.admin-form select,.fi{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.87rem;color:var(--text);background:var(--bg);transition:border-color 0.2s}
+.admin-form input:focus,.admin-form textarea:focus,.admin-form select:focus,.fi:focus{outline:none;border-color:var(--primary);background:white}
+.admin-form textarea{resize:vertical;min-height:70px}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.form-row-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+/* Admin tabs (sub-tabs inside a panel) */
+.admin-tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:2px solid var(--border);padding-bottom:8px}
+.admin-tab{background:none;border:none;padding:7px 16px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:600;cursor:pointer;color:var(--text2);transition:0.2s}
+.admin-tab.active,.admin-tab:hover{background:var(--primary);color:white}
+/* Admin list items */
+.admin-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.admin-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.admin-item-body{flex:1;min-width:0}
+.admin-item-title{font-size:0.88rem;font-weight:600;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.admin-item-sub{font-size:0.77rem;color:var(--text3);margin-top:2px}
+.admin-item-acts{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.admin-table{width:100%;border-collapse:collapse;font-size:0.85rem}
+.admin-table th{background:var(--bg);padding:10px 12px;text-align:left;font-weight:700;font-size:0.77rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border)}
+.admin-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.admin-table tr:hover td{background:#fafbfc}
+/* Add form section inside admin panel */
+.add-form-section{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:20px}
+.add-form-section h4{font-size:0.88rem;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+/* Upload area */
+.image-upload-area{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:0.2s;margin-bottom:14px;background:white}
+.image-upload-area:hover,.image-upload-area.drag-over{background:var(--bg);border-color:var(--primary)}
+.image-preview{max-width:200px;margin:10px auto;border-radius:10px;overflow:hidden}
+.image-preview img{width:100%;height:auto}
+.empty-state{text-align:center;padding:32px;color:var(--text3);font-size:0.88rem}
+.notif{padding:10px 14px;border-radius:8px;font-size:0.84rem;font-weight:500;margin-bottom:12px}
+.notif-ok{background:#d4edda;color:#155724}.notif-err{background:#f8d7da;color:#721c24}.notif-info{background:#d1ecf1;color:#0c5460}
+/* CV download btn */
+.cv-download-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent);color:white;border-radius:10px;font-size:0.88rem;font-weight:600;transition:0.2s;text-decoration:none;border:none;cursor:pointer}
+.cv-download-btn:hover{opacity:0.88;transform:translateY(-1px)}
+/* Responsive */
+@media(max-width:900px){.hero-content{grid-template-columns:1fr;text-align:center}.hero-social{justify-content:center}.hero-stats{justify-content:center}}
+@media(max-width:768px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;flex-direction:column;padding:12px;border-bottom:1px solid var(--border)}.nav-links.active{display:flex}.mobile-menu-btn{display:block}.contact-grid{grid-template-columns:1fr}.admin-body{flex-direction:column}.admin-sidebar{width:100%;display:flex;flex-wrap:wrap;padding:8px}.admin-sidebar button{width:auto}.hero-content{gap:32px}.form-grid-2,.form-grid-3{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <a href="#hero" class="nav-logo"><i class="fas fa-graduation-cap"></i><span id="navName">Akademisyen</span></a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#hero">Ana Sayfa</a></li>
-            <li><a href="#about">Ben Kimim</a></li>
-            <li><a href="#publications">Yayınlar</a></li>
-            <li><a href="#announcements">Duyurular</a></li>
-            <li><a href="#links">Linkler</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#contact">İletişim</a></li>
-            <li><a href="#" onclick="openLogin(); return false;" class="admin-btn">Admin</a></li>
-        </ul>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
-    </div>
+  <div class="nav-container">
+    <a href="#hero" class="nav-logo"><i class="fas fa-graduation-cap"></i><span id="navName">Akademisyen</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Ana Sayfa</a></li>
+      <li><a href="#about">Ben Kimim</a></li>
+      <li><a href="#publications">Yayınlar</a></li>
+      <li><a href="#announcements">Duyurular</a></li>
+      <li><a href="#links">Linkler</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">İletişim</a></li>
+      <li><a href="#" onclick="openLogin();return false" class="admin-btn"><i class="fas fa-lock"></i> Admin</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+  </div>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero" id="hero">
-    <div class="hero-content">
-        <div class="hero-image">
-            <div class="image-placeholder" id="heroImagePreview"><i class="fas fa-user fa-4x"></i></div>
-        </div>
-        <div class="hero-info">
-            <h1 id="heroName">Prof. Dr. Ad Soyad</h1>
-            <div class="title" id="heroTitle">Akademik Unvan</div>
-            <div class="institution" id="heroInstitution"><i class="fas fa-university"></i> <span>Üniversite</span></div>
-            <p class="bio" id="heroBio">Biyografi metni...</p>
-            <div class="hero-stats" id="heroStats"></div>
-            <div class="hero-social" id="heroSocial"></div>
-        </div>
+  <div class="hero-content">
+    <div class="hero-image">
+      <div class="image-placeholder" id="heroImagePreview"><i class="fas fa-user"></i></div>
     </div>
+    <div class="hero-info">
+      <h1 id="heroName">Ad Soyad</h1>
+      <div class="title" id="heroTitle">Akademik Unvan</div>
+      <div class="institution" id="heroInstitution"><i class="fas fa-university"></i><span>Üniversite</span></div>
+      <p class="bio" id="heroBio"></p>
+      <div class="hero-stats" id="heroStats"></div>
+      <div class="hero-social" id="heroSocial"></div>
+      <a id="heroCvBtn" href="#" download="cv.pdf" class="cv-download-btn" style="display:none;margin-top:16px"><i class="fas fa-file-pdf"></i> CV İndir</a>
+    </div>
+  </div>
 </section>
 
-<!-- Diğer bölümler (about, publications, announcements, links, blog, contact) aynı yapıda olacak, kısaltmak için sabit ID'ler bırakıyorum -->
-<section class="section" id="about"><div class="section-header"><h2>Ben Kimim</h2><div class="section-divider"></div></div><div class="card-grid" id="aboutCards"></div></section>
-<section class="section" id="publications" style="background:white;"><div class="section-header"><h2>Yayınlar</h2></div><div class="pub-list" id="pubList"></div></section>
-<section class="section" id="announcements"><div class="section-header"><h2>Duyurular</h2></div><div id="announcementList"></div></section>
-<section class="section" id="links" style="background:white;"><div class="section-header"><h2>Faydalı Linkler</h2></div><div class="links-grid" id="linksGrid"></div></section>
-<section class="section" id="blog"><div class="section-header"><h2>Blog</h2></div><div class="blog-grid" id="blogGrid"></div></section>
-<section class="section" id="contact" style="background:white;"><div class="section-header"><h2>İletişim</h2></div><div class="contact-grid" id="contactGrid"></div></section>
+<!-- BEN KİMİM -->
+<section class="section" id="about" style="background:white">
+  <div class="section-header"><h2>Ben Kimim</h2><div class="section-divider"></div></div>
+  <div class="card-grid" id="aboutCards"></div>
+</section>
 
-<footer class="footer"><div class="footer-content"><p id="footerText">© 2025 Akademisyen Profil Sayfası</p></div></footer>
+<!-- YAYINLAR -->
+<section class="section" id="publications">
+  <div class="section-header"><h2>Yayınlar</h2><div class="section-divider"></div></div>
+  <div id="pubFilters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px"></div>
+  <div class="pub-list" id="pubList"></div>
+</section>
+
+<!-- DUYURULAR -->
+<section class="section" id="announcements" style="background:white">
+  <div class="section-header"><h2>Duyurular</h2><div class="section-divider"></div></div>
+  <div id="announcementList"></div>
+</section>
+
+<!-- LİNKLER -->
+<section class="section" id="links">
+  <div class="section-header"><h2>Faydalı Linkler</h2><div class="section-divider"></div></div>
+  <div class="links-grid" id="linksGrid"></div>
+</section>
+
+<!-- BLOG -->
+<section class="section" id="blog" style="background:white">
+  <div class="section-header"><h2>Blog</h2><div class="section-divider"></div></div>
+  <div class="blog-grid" id="blogGrid"></div>
+</section>
+
+<!-- İLETİŞİM -->
+<section class="section" id="contact">
+  <div class="section-header"><h2>İletişim</h2><div class="section-divider"></div></div>
+  <div class="contact-grid" id="contactGrid"></div>
+</section>
+
+<footer class="footer"><p id="footerText">© 2025 Akademisyen Profil</p></footer>
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 <div class="toast" id="toast"></div>
 
-<!-- Login Modal -->
-<div class="login-modal" id="loginModal"><div class="login-box"><h2>Admin Girişi</h2><form onsubmit="handleLogin(event)"><input type="text" id="loginUser" placeholder="Kullanıcı adı" required><input type="password" id="loginPass" placeholder="Şifre" required><button type="submit" class="btn">Giriş</button></form><small>Varsayılan: admin / admin123</small></div></div>
+<!-- BLOG MODAL -->
+<div class="blog-modal" id="blogModal" onclick="if(event.target===this)closeBlogModal()">
+  <div class="blog-modal-box">
+    <button class="blog-modal-close" onclick="closeBlogModal()">×</button>
+    <div class="blog-modal-cat" id="bModalCat"></div>
+    <div class="blog-modal-title" id="bModalTitle"></div>
+    <div class="blog-modal-meta" id="bModalMeta"></div>
+    <div class="blog-modal-img" id="bModalImg"></div>
+    <div class="blog-modal-content" id="bModalContent"></div>
+  </div>
+</div>
 
-<!-- Admin Panel -->
-<div class="admin-overlay" id="adminOverlay"><div class="admin-panel"><div class="admin-header"><h2>Yönetim Paneli</h2><button class="admin-close" onclick="closeAdmin()">&times;</button></div><div class="admin-body"><div class="admin-sidebar" id="adminSidebar"></div><div class="admin-content" id="adminContent"></div></div></div></div>
+<!-- LOGIN -->
+<div class="login-modal" id="loginModal" onclick="if(event.target===this)closeLogin()">
+  <div class="login-box">
+    <h2><i class="fas fa-shield-alt" style="color:var(--accent)"></i> Admin Girişi</h2>
+    <p>Yönetim paneline erişmek için giriş yapın</p>
+    <div id="loginErr"></div>
+    <form onsubmit="handleLogin(event)">
+      <input type="text" id="loginUser" placeholder="Kullanıcı adı" required autocomplete="username">
+      <input type="password" id="loginPass" placeholder="Şifre" required autocomplete="current-password">
+      <button type="submit" class="btn" style="width:100%"><i class="fas fa-sign-in-alt"></i> Giriş Yap</button>
+    </form>
+    <p style="font-size:0.75rem;color:var(--text3);margin-top:12px;text-align:center">Varsayılan: admin / admin123</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2><i class="fas fa-cog"></i> Yönetim Paneli</h2>
+      <button class="admin-close" onclick="closeAdmin()">×</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-sidebar" id="adminSidebar"></div>
+      <div class="admin-content" id="adminContent"></div>
+    </div>
+  </div>
+</div>
 
 <script>
-    // ---------- GÜVENLİK ----------
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+/* ═══════════════════════════════════════════════
+   VERİ MODELİ
+═══════════════════════════════════════════════ */
+function escapeHtml(s){if(!s)return '';return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function uid(){return Math.random().toString(36).slice(2,10)}
 
-    // ---------- VERİ ----------
-    let data = {
-        hero: { name: 'Prof. Dr. Ad Soyad', title: 'Akademik Unvan', institution: 'Üniversite', bio: 'Biyografi...', image: '', stats: { pubs: 0, cites: 0, projects: 0, years: 0 }, social: { linkedin: '', twitter: '', scholar: '', researchgate: '', orcid: '' } },
-        about: { education: 'Eğitim bilgisi', experience: 'Deneyim', research: 'Araştırma alanları', awards: 'Ödüller', courses: 'Dersler', memberships: 'Üyelikler' },
-        publications: [],
-        announcements: [],
-        links: [],
-        blog: [],
-        contact: { address: 'Adres', email: 'ornek@universite.edu.tr', phone: '+90 000 000 0000', hours: '09:00-17:00' },
-        settings: { siteName: 'Akademisyen', footerText: '© 2025' },
-        admin: { username: 'admin', password: 'admin123' }
-    };
+let data = {
+  hero:{ name:'', title:'', institution:'', bio:'', image:'', cv:'',
+    stats:{pubs:0,cites:0,projects:0,years:0},
+    social:{linkedin:'',twitter:'',scholar:'',researchgate:'',orcid:'',academia:'',email:'',website:''}
+  },
+  about:{
+    education:[],   // {id,degree,field,inst,year,note}
+    experience:[],  // {id,title,org,period,desc}
+    research:[],    // string tags
+    awards:[],      // {id,title,org,year}
+    courses:[],     // {id,code,title,level,desc}
+    memberships:[]  // string tags
+  },
+  publications:[], // {id,title,authors,journal,year,type,doi,pdf,abstract,cites}
+  announcements:[], // {id,title,content,category,date,pinned,image,startDate,endDate}
+  links:[], // {id,title,url,description,icon}
+  blog:[], // {id,title,excerpt,content,category,date,readTime,image,published}
+  contact:{address:'',email:'',phone:'',hours:''},
+  settings:{siteName:'Akademisyen',footerText:'© 2025'},
+  admin:{username:'admin',password:'admin123'}
+};
 
-    function loadData() { let saved = localStorage.getItem('academicData'); if(saved) { try { let p = JSON.parse(saved); if(p.admin) data = p; else { data = p; data.admin = { username: 'admin', password: 'admin123' }; } } catch(e){} } renderAll(); }
-    function saveData() { localStorage.setItem('academicData', JSON.stringify(data)); renderAll(); showToast('Kaydedildi'); }
-    function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2500); }
+let currentPubFilter = 'all';
 
-    // ---------- DOSYA YÜKLEME (Base64) ----------
-    function fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); }); }
-    async function handleImageUpload(file, maxSizeMB=2) { if(file.size > maxSizeMB*1024*1024) { showToast(`Dosya ${maxSizeMB}MB\'dan büyük`); return null; } if(!file.type.startsWith('image/')) { showToast('Lütfen bir resim dosyası seçin'); return null; } return await fileToBase64(file); }
-    function createUploadArea(currentSrc, onUpload, width=200) { let div = document.createElement('div'); div.className = 'image-upload-area'; div.innerHTML = `<div class="image-preview" id="preview-${Date.now()}">${currentSrc ? `<img src="${currentSrc}" style="max-width:${width}px">` : '<i class="fas fa-cloud-upload-alt fa-3x"></i><p>Resmi sürükleyin veya tıklayın</p>'}</div><input type="file" accept="image/*" style="display:none">`; let fileInput = div.querySelector('input'); let previewDiv = div.querySelector('.image-preview'); div.addEventListener('click', (e) => { if(e.target !== fileInput) fileInput.click(); }); fileInput.addEventListener('change', async (e) => { let file = e.target.files[0]; if(!file) return; let base64 = await handleImageUpload(file); if(base64) { previewDiv.innerHTML = `<img src="${base64}" style="max-width:${width}px">`; onUpload(base64); } }); div.addEventListener('dragover', (e) => { e.preventDefault(); div.classList.add('drag-over'); }); div.addEventListener('dragleave', () => div.classList.remove('drag-over')); div.addEventListener('drop', async (e) => { e.preventDefault(); div.classList.remove('drag-over'); let file = e.dataTransfer.files[0]; if(file) { let base64 = await handleImageUpload(file); if(base64) { previewDiv.innerHTML = `<img src="${base64}" style="max-width:${width}px">`; onUpload(base64); } } }); return div; }
-
-    // ---------- RENDER (Görünüm) ----------
-    function renderAll() {
-        document.getElementById('navName').innerText = data.settings.siteName;
-        document.getElementById('heroName').innerText = data.hero.name;
-        document.getElementById('heroTitle').innerText = data.hero.title;
-        document.getElementById('heroInstitution').innerHTML = `<i class="fas fa-university"></i> <span>${escapeHtml(data.hero.institution)}</span>`;
-        document.getElementById('heroBio').innerText = data.hero.bio;
-        let heroImgDiv = document.getElementById('heroImagePreview');
-        heroImgDiv.innerHTML = data.hero.image ? `<img src="${data.hero.image}">` : '<i class="fas fa-user fa-4x"></i>';
-        // stats
-        let statsHtml = `<div class="stat-item"><div class="stat-number">${data.hero.stats.pubs}</div><div class="stat-label">Yayın</div></div><div class="stat-item"><div class="stat-number">${data.hero.stats.cites}</div><div class="stat-label">Atıf</div></div><div class="stat-item"><div class="stat-number">${data.hero.stats.projects}</div><div class="stat-label">Proje</div></div><div class="stat-item"><div class="stat-number">${data.hero.stats.years}</div><div class="stat-label">Yıl</div></div>`;
-        document.getElementById('heroStats').innerHTML = statsHtml;
-        let socialHtml = '';
-        for(let [k,v] of Object.entries(data.hero.social)) if(v) socialHtml += `<a href="${v}" target="_blank"><i class="fab fa-${k==='linkedin'?'linkedin-in':k==='twitter'?'twitter':k==='scholar'?'graduation-cap':k==='researchgate'?'researchgate':'id-card'}"></i></a>`;
-        document.getElementById('heroSocial').innerHTML = socialHtml;
-        // about cards
-        let aboutCards = ['education','experience','research','awards','courses','memberships'];
-        let aboutHtml = aboutCards.map(c => `<div class="card"><div class="card-icon"><i class="fas fa-${c==='education'?'graduation-cap':c==='experience'?'briefcase':c==='research'?'flask':c==='awards'?'award':c==='courses'?'chalkboard-teacher':'users'}"></i></div><h3>${c.charAt(0).toUpperCase()+c.slice(1)}</h3><p>${escapeHtml(data.about[c])}</p></div>`).join('');
-        document.getElementById('aboutCards').innerHTML = aboutHtml;
-        // publications
-        let pubList = document.getElementById('pubList');
-        if(!data.publications.length) pubList.innerHTML = '<div class="empty-state">Henüz yayın yok</div>';
-        else pubList.innerHTML = data.publications.map((p,i)=>`<div class="pub-item"><div class="pub-number">${i+1}</div><div><h4>${escapeHtml(p.title)}</h4><div>${escapeHtml(p.authors)}</div><div><i>${escapeHtml(p.journal)}</i> (${p.year})</div>${p.doi?`<a href="https://doi.org/${p.doi}" target="_blank">DOI</a>`:''} ${p.pdf?`<a href="${p.pdf}" target="_blank">PDF</a>`:''}</div></div>`).join('');
-        // announcements
-        let annList = document.getElementById('announcementList');
-        let now = new Date();
-        let activeAnn = data.announcements.filter(a=>{ let s=a.startDate?new Date(a.startDate):null, e=a.endDate?new Date(a.endDate):null; if(s&&now<s) return false; if(e&&now>e) return false; return true; }).sort((a,b)=> (b.pinned-a.pinned) || new Date(b.date)-new Date(a.date));
-        if(!activeAnn.length) annList.innerHTML = '<div class="empty-state">Duyuru yok</div>';
-        else annList.innerHTML = activeAnn.map(a=>`<div class="announcement-item ${a.pinned?'pinned':''}"><div><strong>${new Date(a.date).toLocaleDateString('tr')}</strong></div><div><h4>${escapeHtml(a.title)}</h4><p>${escapeHtml(a.content)}</p>${a.image?`<img src="${a.image}" style="max-height:100px; margin-top:10px;">`:''}</div></div>`).join('');
-        // links
-        let linksGrid = document.getElementById('linksGrid');
-        if(!data.links.length) linksGrid.innerHTML = '<div class="empty-state">Link yok</div>';
-        else linksGrid.innerHTML = data.links.map(l=>`<a href="${l.url}" target="_blank" class="link-item"><i class="${l.icon||'fas fa-link'}"></i> ${escapeHtml(l.title)}<br><small>${escapeHtml(l.description||'')}</small></a>`).join('');
-        // blog
-        let blogGrid = document.getElementById('blogGrid');
-        if(!data.blog.length) blogGrid.innerHTML = '<div class="empty-state">Blog yazısı yok</div>';
-        else blogGrid.innerHTML = data.blog.map(b=>`<div class="blog-card"><div class="blog-image">${b.image?`<img src="${b.image}">`:'<i class="fas fa-image fa-3x"></i>'}</div><div class="blog-body"><h3>${escapeHtml(b.title)}</h3><p>${escapeHtml(b.excerpt)}</p><div><i class="fas fa-calendar"></i> ${new Date(b.date).toLocaleDateString('tr')} <i class="fas fa-clock"></i> ${b.readTime||'3 dk'}</div></div></div>`).join('');
-        // contact
-        document.getElementById('contactGrid').innerHTML = `<div class="contact-info"><h3>İletişim</h3><p><i class="fas fa-map-marker-alt"></i> ${escapeHtml(data.contact.address)}</p><p><i class="fas fa-envelope"></i> <a href="mailto:${data.contact.email}">${data.contact.email}</a></p><p><i class="fas fa-phone"></i> ${data.contact.phone}</p><p><i class="fas fa-clock"></i> ${data.contact.hours}</p></div><div class="contact-form"><h3>Mesaj Gönder</h3><form id="contactForm" onsubmit="handleContact(event)"><input type="text" placeholder="Adınız" required><input type="email" placeholder="E-posta" required><input type="text" placeholder="Konu"><textarea rows="4" placeholder="Mesajınız"></textarea><button type="submit" class="btn">Gönder</button></form></div>`;
-        document.getElementById('footerText').innerText = data.settings.footerText;
+/* ═══════════════════════════════════════════════
+   STORAGE & MİGRASYON
+═══════════════════════════════════════════════ */
+function loadData(){
+  const raw = localStorage.getItem('academicData');
+  if(raw){ try{
+    let p = JSON.parse(raw);
+    if(!p.admin) p.admin = {username:'admin',password:'admin123'};
+    // Migrate old string-based about to array format
+    if(p.about && typeof p.about.education === 'string'){
+      const old = p.about;
+      p.about = {education:[],experience:[],research:[],awards:[],courses:[],memberships:[]};
+      if(old.education) p.about.education.push({id:uid(),degree:'',field:'',inst:old.education,year:'',note:''});
+      if(old.experience) p.about.experience.push({id:uid(),title:'',org:old.experience,period:'',desc:''});
+      if(old.research) old.research.split(',').map(s=>s.trim()).filter(Boolean).forEach(r=>p.about.research.push(r));
+      if(old.awards) p.about.awards.push({id:uid(),title:old.awards,org:'',year:''});
+      if(old.courses) p.about.courses.push({id:uid(),code:'',title:old.courses,level:'',desc:''});
+      if(old.memberships) old.memberships.split(',').map(s=>s.trim()).filter(Boolean).forEach(m=>p.about.memberships.push(m));
     }
-    function handleContact(e) { e.preventDefault(); showToast('Mesajınız alındı (demo)'); e.target.reset(); }
+    // Ensure blog has published flag
+    if(p.blog) p.blog = p.blog.map(b=>({published:true,...b}));
+    data = p;
+  } catch(e){} }
+  renderAll();
+}
+function saveData(silent){
+  localStorage.setItem('academicData', JSON.stringify(data));
+  renderAll();
+  if(!silent) showToast('Kaydedildi ✓');
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
 
-    // ---------- ADMIN PANELİ ----------
-    let currentTab = 'hero';
-    function buildAdminSidebar() { let tabs = ['hero','about','publications','announcements','links','blog','contact','settings']; let html = ''; tabs.forEach(t=>{ html += `<button data-tab="${t}" onclick="showAdminTab('${t}')"><i class="fas ${t==='hero'?'fa-home':t==='about'?'fa-user':t==='publications'?'fa-book':t==='announcements'?'fa-bullhorn':t==='links'?'fa-link':t==='blog'?'fa-pen-nib':t==='contact'?'fa-envelope':'fa-cog'}"></i> ${t.charAt(0).toUpperCase()+t.slice(1)}</button>`; }); document.getElementById('adminSidebar').innerHTML = html; }
-    function showAdminTab(tab) { currentTab = tab; document.querySelectorAll('#adminSidebar button').forEach(btn=>btn.classList.toggle('active', btn.dataset.tab===tab)); let content = document.getElementById('adminContent'); if(tab==='hero') heroAdminForm(content); else if(tab==='about') aboutAdminForm(content); else if(tab==='publications') pubAdminForm(content); else if(tab==='announcements') annAdminForm(content); else if(tab==='links') linkAdminForm(content); else if(tab==='blog') blogAdminForm(content); else if(tab==='contact') contactAdminForm(content); else if(tab==='settings') settingsAdminForm(content); }
-    function heroAdminForm(container) { container.innerHTML = `<h3>Hero Bölümü</h3><div class="admin-form"><div class="form-group"><label>Ad Soyad</label><input id="heroName" value="${escapeHtml(data.hero.name)}"></div><div class="form-group"><label>Unvan</label><input id="heroTitle" value="${escapeHtml(data.hero.title)}"></div><div class="form-group"><label>Kurum</label><input id="heroInst" value="${escapeHtml(data.hero.institution)}"></div><div class="form-group"><label>Biyografi</label><textarea id="heroBio">${escapeHtml(data.hero.bio)}</textarea></div><div class="form-group"><label>Profil Fotoğrafı</label><div id="heroImageUpload"></div></div><h4>İstatistikler</h4><div style="display:grid; grid-template-columns:1fr 1fr; gap:10px"><input id="statPubs" placeholder="Yayın" value="${data.hero.stats.pubs}"><input id="statCites" placeholder="Atıf" value="${data.hero.stats.cites}"><input id="statProjects" placeholder="Proje" value="${data.hero.stats.projects}"><input id="statYears" placeholder="Yıl" value="${data.hero.stats.years}"></div><h4>Sosyal Medya</h4><input id="socialLinkedin" placeholder="LinkedIn" value="${escapeHtml(data.hero.social.linkedin)}"><input id="socialTwitter" placeholder="Twitter" value="${escapeHtml(data.hero.social.twitter)}"><input id="socialScholar" placeholder="Scholar" value="${escapeHtml(data.hero.social.scholar)}"><input id="socialRG" placeholder="ResearchGate" value="${escapeHtml(data.hero.social.researchgate)}"><input id="socialOrcid" placeholder="ORCID" value="${escapeHtml(data.hero.social.orcid)}"><button class="btn" onclick="saveHero()">Kaydet</button></div>`; let uploadDiv = document.getElementById('heroImageUpload'); uploadDiv.appendChild(createUploadArea(data.hero.image, (base64)=>{ data.hero.image = base64; saveData(); showAdminTab('hero'); })); }
-    function saveHero() { data.hero.name = document.getElementById('heroName').value; data.hero.title = document.getElementById('heroTitle').value; data.hero.institution = document.getElementById('heroInst').value; data.hero.bio = document.getElementById('heroBio').value; data.hero.stats.pubs = parseInt(document.getElementById('statPubs').value)||0; data.hero.stats.cites = parseInt(document.getElementById('statCites').value)||0; data.hero.stats.projects = parseInt(document.getElementById('statProjects').value)||0; data.hero.stats.years = parseInt(document.getElementById('statYears').value)||0; data.hero.social.linkedin = document.getElementById('socialLinkedin').value; data.hero.social.twitter = document.getElementById('socialTwitter').value; data.hero.social.scholar = document.getElementById('socialScholar').value; data.hero.social.researchgate = document.getElementById('socialRG').value; data.hero.social.orcid = document.getElementById('socialOrcid').value; saveData(); showAdminTab('hero'); }
-    function aboutAdminForm(container) { let fields = ['education','experience','research','awards','courses','memberships']; let html = '<h3>Ben Kimim</h3>'; fields.forEach(f=>{ html += `<div class="form-group"><label>${f}</label><textarea id="about_${f}">${escapeHtml(data.about[f])}</textarea></div>`; }); html += `<button class="btn" onclick="saveAbout()">Kaydet</button>`; container.innerHTML = html; }
-    function saveAbout() { let fields = ['education','experience','research','awards','courses','memberships']; fields.forEach(f=>{ data.about[f] = document.getElementById(`about_${f}`).value; }); saveData(); showAdminTab('about'); }
-    function pubAdminForm(container) { let listHtml = `<div class="admin-tabs"><button class="admin-tab active" onclick="showPubList()">Liste</button><button class="admin-tab" onclick="showPubAdd()">Yeni Ekle</button></div><div id="pubSubArea">${renderPubList()}</div>`; container.innerHTML = listHtml; window.showPubList = ()=> { document.getElementById('pubSubArea').innerHTML = renderPubList(); }; window.showPubAdd = ()=> { document.getElementById('pubSubArea').innerHTML = `<div class="admin-form"><input placeholder="Başlık" id="pubTitle"><input placeholder="Yazarlar" id="pubAuthors"><input placeholder="Dergi" id="pubJournal"><input placeholder="Yıl" id="pubYear"><input placeholder="DOI" id="pubDoi"><input placeholder="PDF URL" id="pubPdf"><button class="btn" onclick="addPub()">Ekle</button></div>`; }; }
-    function renderPubList() { if(!data.publications.length) return '<div class="empty-state">Yayın yok</div>'; let h='<table class="admin-table"><tr><th>Başlık</th><th>Yazarlar</th><th>İşlemler</th></tr>'; data.publications.forEach((p,i)=>{ h+=`<tr><td>${escapeHtml(p.title)}</td><td>${escapeHtml(p.authors)}</td><td><button onclick="editPub(${i})">Düzenle</button> <button onclick="deletePub(${i})">Sil</button></td></tr>`; }); h+='</table>'; return h; }
-    window.addPub = function() { let pub = { title:document.getElementById('pubTitle').value, authors:document.getElementById('pubAuthors').value, journal:document.getElementById('pubJournal').value, year:document.getElementById('pubYear').value, doi:document.getElementById('pubDoi').value, pdf:document.getElementById('pubPdf').value }; if(!pub.title) return; data.publications.unshift(pub); saveData(); showAdminTab('publications'); };
-    window.deletePub = function(i) { if(confirm('Sil?')){ data.publications.splice(i,1); saveData(); showAdminTab('publications'); } };
-    window.editPub = function(i) { let p = data.publications[i]; let form = `<div class="admin-form"><input id="editTitle" value="${escapeHtml(p.title)}"><input id="editAuthors" value="${escapeHtml(p.authors)}"><input id="editJournal" value="${escapeHtml(p.journal)}"><input id="editYear" value="${p.year}"><input id="editDoi" value="${p.doi||''}"><input id="editPdf" value="${p.pdf||''}"><button onclick="updatePub(${i})">Güncelle</button></div>`; document.getElementById('pubSubArea').innerHTML = form; };
-    window.updatePub = function(i) { data.publications[i] = { title:document.getElementById('editTitle').value, authors:document.getElementById('editAuthors').value, journal:document.getElementById('editJournal').value, year:document.getElementById('editYear').value, doi:document.getElementById('editDoi').value, pdf:document.getElementById('editPdf').value }; saveData(); showAdminTab('publications'); };
-    // announcements (görsel destekli)
-    function annAdminForm(container) { container.innerHTML = `<div class="admin-tabs"><button class="admin-tab active" onclick="showAnnList()">Liste</button><button class="admin-tab" onclick="showAnnAdd()">Yeni Ekle</button></div><div id="annSubArea">${renderAnnList()}</div>`; window.showAnnList = ()=> document.getElementById('annSubArea').innerHTML = renderAnnList(); window.showAnnAdd = ()=> { document.getElementById('annSubArea').innerHTML = `<div class="admin-form"><input placeholder="Başlık" id="annTitle"><textarea placeholder="İçerik" id="annContent"></textarea><input placeholder="Kategori" id="annCategory"><input type="date" id="annDate"><label><input type="checkbox" id="annPinned"> Sabit</label><div id="annImageUpload"></div><button class="btn" onclick="addAnnouncement()">Ekle</button></div>`; let up = document.getElementById('annImageUpload'); up.appendChild(createUploadArea('', (base64)=>{ window.tempAnnImage = base64; }, 150)); }; }
-    window.tempAnnImage = '';
-    window.addAnnouncement = function() { let ann = { title:document.getElementById('annTitle').value, content:document.getElementById('annContent').value, category:document.getElementById('annCategory').value, date:document.getElementById('annDate').value || new Date().toISOString().split('T')[0], pinned:document.getElementById('annPinned').checked, image: window.tempAnnImage || '', startDate:'', endDate:'' }; if(!ann.title) return; data.announcements.unshift(ann); saveData(); showAdminTab('announcements'); };
-    function renderAnnList() { if(!data.announcements.length) return '<div class="empty-state">Duyuru yok</div>'; let h='<table class="admin-table"><tr><th>Başlık</th><th>Tarih</th><th>Görsel</th><th>İşlem</th></tr>'; data.announcements.forEach((a,i)=>{ h+=`<tr><td>${escapeHtml(a.title)}</td><td>${a.date}</td><td>${a.image?'<i class="fas fa-image"></i>':'-'}</td><td><button onclick="editAnn(${i})">Düzenle</button> <button onclick="deleteAnn(${i})">Sil</button></td></tr>`; }); h+='</table>'; return h; }
-    window.deleteAnn = function(i) { if(confirm('Sil?')){ data.announcements.splice(i,1); saveData(); showAdminTab('announcements'); } };
-    window.editAnn = function(i) { let a = data.announcements[i]; let form = `<div class="admin-form"><input id="editAnnTitle" value="${escapeHtml(a.title)}"><textarea id="editAnnContent">${escapeHtml(a.content)}</textarea><input id="editAnnCat" value="${escapeHtml(a.category||'')}"><input type="date" id="editAnnDate" value="${a.date}"><label><input type="checkbox" id="editAnnPinned" ${a.pinned?'checked':''}> Sabit</label><div id="editAnnImageUpload"></div><button onclick="updateAnn(${i})">Güncelle</button></div>`; document.getElementById('annSubArea').innerHTML = form; let upDiv = document.getElementById('editAnnImageUpload'); upDiv.appendChild(createUploadArea(a.image||'', (base64)=>{ a.image = base64; saveData(); showAdminTab('announcements'); }, 150)); };
-    window.updateAnn = function(i) { data.announcements[i].title = document.getElementById('editAnnTitle').value; data.announcements[i].content = document.getElementById('editAnnContent').value; data.announcements[i].category = document.getElementById('editAnnCat').value; data.announcements[i].date = document.getElementById('editAnnDate').value; data.announcements[i].pinned = document.getElementById('editAnnPinned').checked; saveData(); showAdminTab('announcements'); };
-    // links, blog (benzer şekilde kısa)
-    function linkAdminForm(container) { container.innerHTML = `<div class="admin-tabs"><button class="admin-tab active" onclick="showLinkList()">Liste</button><button class="admin-tab" onclick="showLinkAdd()">Ekle</button></div><div id="linkSubArea">${renderLinkList()}</div>`; window.showLinkList = ()=> document.getElementById('linkSubArea').innerHTML = renderLinkList(); window.showLinkAdd = ()=> { document.getElementById('linkSubArea').innerHTML = `<div class="admin-form"><input id="linkTitle" placeholder="Başlık"><input id="linkUrl" placeholder="URL"><input id="linkDesc" placeholder="Açıklama"><input id="linkIcon" placeholder="İkon sınıfı" value="fas fa-link"><button onclick="addLink()">Ekle</button></div>`; }; }
-    function renderLinkList() { if(!data.links.length) return '<div class="empty-state">Link yok</div>'; let h='<table><tr><th>Başlık</th><th>İşlem</th></tr>'; data.links.forEach((l,i)=>{ h+=`<tr><td>${escapeHtml(l.title)}</td><td><button onclick="editLink(${i})">Düzenle</button> <button onclick="deleteLink(${i})">Sil</button></td></tr>`; }); h+='</table>'; return h; }
-    window.addLink = function() { let link = { title:document.getElementById('linkTitle').value, url:document.getElementById('linkUrl').value, description:document.getElementById('linkDesc').value, icon:document.getElementById('linkIcon').value }; if(link.title && link.url) { data.links.push(link); saveData(); showAdminTab('links'); } };
-    window.deleteLink = function(i) { if(confirm('Sil?')){ data.links.splice(i,1); saveData(); showAdminTab('links'); } };
-    window.editLink = function(i) { let l=data.links[i]; let form = `<div class="admin-form"><input id="editLinkTitle" value="${escapeHtml(l.title)}"><input id="editLinkUrl" value="${escapeHtml(l.url)}"><input id="editLinkDesc" value="${escapeHtml(l.description||'')}"><input id="editLinkIcon" value="${escapeHtml(l.icon||'fas fa-link')}"><button onclick="updateLink(${i})">Güncelle</button></div>`; document.getElementById('linkSubArea').innerHTML = form; };
-    window.updateLink = function(i) { data.links[i] = { title:document.getElementById('editLinkTitle').value, url:document.getElementById('editLinkUrl').value, description:document.getElementById('editLinkDesc').value, icon:document.getElementById('editLinkIcon').value }; saveData(); showAdminTab('links'); };
-    function blogAdminForm(container) { container.innerHTML = `<div class="admin-tabs"><button class="admin-tab active" onclick="showBlogList()">Liste</button><button class="admin-tab" onclick="showBlogAdd()">Yeni Yazı</button></div><div id="blogSubArea">${renderBlogList()}</div>`; window.showBlogList = ()=> document.getElementById('blogSubArea').innerHTML = renderBlogList(); window.showBlogAdd = ()=> { document.getElementById('blogSubArea').innerHTML = `<div class="admin-form"><input id="blogTitle" placeholder="Başlık"><textarea id="blogExcerpt" placeholder="Özet"></textarea><input id="blogCategory" placeholder="Kategori"><input type="date" id="blogDate"><input id="blogReadTime" placeholder="Okuma süresi" value="3 dk"><div id="blogImageUpload"></div><button onclick="addBlogPost()">Ekle</button></div>`; let up = document.getElementById('blogImageUpload'); up.appendChild(createUploadArea('', (base64)=>{ window.tempBlogImage = base64; }, 150)); }; }
-    window.tempBlogImage = '';
-    window.addBlogPost = function() { let post = { title:document.getElementById('blogTitle').value, excerpt:document.getElementById('blogExcerpt').value, category:document.getElementById('blogCategory').value, date:document.getElementById('blogDate').value || new Date().toISOString().split('T')[0], readTime:document.getElementById('blogReadTime').value, image: window.tempBlogImage || '' }; if(post.title) { data.blog.unshift(post); saveData(); showAdminTab('blog'); } };
-    function renderBlogList() { if(!data.blog.length) return '<div class="empty-state">Blog yazısı yok</div>'; let h='<table><tr><th>Başlık</th><th>Tarih</th><th>İşlem</th></tr>'; data.blog.forEach((b,i)=>{ h+=`<tr><td>${escapeHtml(b.title)}</td><td>${b.date}</td><td><button onclick="editBlog(${i})">Düzenle</button> <button onclick="deleteBlog(${i})">Sil</button></td></tr>`; }); h+='</table>'; return h; }
-    window.deleteBlog = function(i) { if(confirm('Sil?')){ data.blog.splice(i,1); saveData(); showAdminTab('blog'); } };
-    window.editBlog = function(i) { let b=data.blog[i]; let form = `<div class="admin-form"><input id="editBlogTitle" value="${escapeHtml(b.title)}"><textarea id="editBlogExcerpt">${escapeHtml(b.excerpt)}</textarea><input id="editBlogCat" value="${escapeHtml(b.category||'')}"><input type="date" id="editBlogDate" value="${b.date}"><input id="editBlogRead" value="${b.readTime||'3 dk'}"><div id="editBlogImage"></div><button onclick="updateBlog(${i})">Güncelle</button></div>`; document.getElementById('blogSubArea').innerHTML = form; let upDiv = document.getElementById('editBlogImage'); upDiv.appendChild(createUploadArea(b.image||'', (base64)=>{ b.image = base64; saveData(); showAdminTab('blog'); }, 150)); };
-    window.updateBlog = function(i) { data.blog[i].title = document.getElementById('editBlogTitle').value; data.blog[i].excerpt = document.getElementById('editBlogExcerpt').value; data.blog[i].category = document.getElementById('editBlogCat').value; data.blog[i].date = document.getElementById('editBlogDate').value; data.blog[i].readTime = document.getElementById('editBlogRead').value; saveData(); showAdminTab('blog'); };
-    function contactAdminForm(container) { container.innerHTML = `<h3>İletişim Bilgileri</h3><div class="admin-form"><input id="contactAddress" placeholder="Adres" value="${escapeHtml(data.contact.address)}"><input id="contactEmail" placeholder="E-posta" value="${escapeHtml(data.contact.email)}"><input id="contactPhone" placeholder="Telefon" value="${escapeHtml(data.contact.phone)}"><input id="contactHours" placeholder="Saatler" value="${escapeHtml(data.contact.hours)}"><button class="btn" onclick="saveContact()">Kaydet</button></div>`; }
-    function saveContact() { data.contact.address = document.getElementById('contactAddress').value; data.contact.email = document.getElementById('contactEmail').value; data.contact.phone = document.getElementById('contactPhone').value; data.contact.hours = document.getElementById('contactHours').value; saveData(); showAdminTab('contact'); }
-    function settingsAdminForm(container) { container.innerHTML = `<h3>Genel Ayarlar</h3><div class="admin-form"><input id="siteName" placeholder="Site Adı" value="${escapeHtml(data.settings.siteName)}"><input id="footerText" placeholder="Footer" value="${escapeHtml(data.settings.footerText)}"><h4>Admin Bilgileri</h4><input id="adminUser" placeholder="Kullanıcı adı" value="${escapeHtml(data.admin.username)}"><input type="password" id="adminPass" placeholder="Yeni şifre"><input type="password" id="adminPass2" placeholder="Şifre tekrar"><button class="btn" onclick="saveSettings()">Kaydet</button><hr><button class="btn-outline" onclick="resetAllData()">Tüm Verileri Sıfırla</button></div>`; }
-    function saveSettings() { data.settings.siteName = document.getElementById('siteName').value; data.settings.footerText = document.getElementById('footerText').value; let newUser = document.getElementById('adminUser').value.trim(); if(newUser) data.admin.username = newUser; let p1 = document.getElementById('adminPass').value; let p2 = document.getElementById('adminPass2').value; if(p1) { if(p1 !== p2) { showToast('Şifreler uyuşmuyor'); return; } if(p1.length<4) { showToast('Şifre en az 4 karakter'); return; } data.admin.password = p1; } saveData(); showToast('Ayarlar kaydedildi'); showAdminTab('settings'); }
-    function resetAllData() { if(confirm('Tüm veriler silinecek!')) { localStorage.removeItem('academicData'); location.reload(); } }
+/* ═══════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════ */
+function renderAll(){
+  renderHero(); renderAbout(); renderPublications();
+  renderAnnouncements(); renderLinks(); renderBlog(); renderContact();
+  document.getElementById('navName').textContent = data.settings.siteName||'Akademisyen';
+  document.getElementById('footerText').textContent = data.settings.footerText||'© 2025';
+  document.title = data.settings.siteName||'Akademisyen';
+}
 
-    // Giriş
-    function openLogin() { document.getElementById('loginModal').classList.add('active'); }
-    function closeLogin() { document.getElementById('loginModal').classList.remove('active'); }
-    function handleLogin(e) { e.preventDefault(); let u = document.getElementById('loginUser').value; let p = document.getElementById('loginPass').value; if(u===data.admin.username && p===data.admin.password) { closeLogin(); openAdmin(); } else showToast('Hatalı giriş'); }
-    function openAdmin() { document.getElementById('adminOverlay').classList.add('active'); buildAdminSidebar(); showAdminTab('hero'); }
-    function closeAdmin() { document.getElementById('adminOverlay').classList.remove('active'); }
-    document.getElementById('loginModal').addEventListener('click', e=>{ if(e.target===document.getElementById('loginModal')) closeLogin(); });
-    document.getElementById('adminOverlay').addEventListener('click', e=>{ if(e.target===document.getElementById('adminOverlay')) closeAdmin(); });
-    function toggleMobileMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-    window.addEventListener('scroll', ()=>{ document.getElementById('scrollTop').classList.toggle('visible', window.scrollY>200); });
-    loadData();
+/* ── HERO ── */
+const SOCIAL_DEFS = {
+  linkedin:    {icon:'fab fa-linkedin-in',    label:'LinkedIn',         color:'#0077b5'},
+  twitter:     {icon:'fab fa-twitter',        label:'Twitter / X',      color:'#1da1f2'},
+  scholar:     {icon:'fas fa-graduation-cap', label:'Google Scholar',   color:'#4285f4'},
+  researchgate:{icon:'fab fa-researchgate',   label:'ResearchGate',     color:'#00d0af'},
+  orcid:       {icon:'fas fa-id-badge',       label:'ORCID',            color:'#a6ce39'},
+  academia:    {icon:'fas fa-book-open',      label:'Academia.edu',     color:'#333'},
+  email:       {icon:'fas fa-envelope',       label:'E-posta',          color:'#e74c3c'},
+  website:     {icon:'fas fa-globe',          label:'Web Sitesi',       color:'#27ae60'}
+};
+function renderHero(){
+  document.getElementById('heroName').textContent        = data.hero.name||'Ad Soyad';
+  document.getElementById('heroTitle').textContent       = data.hero.title||'Akademik Unvan';
+  document.getElementById('heroInstitution').innerHTML   = `<i class="fas fa-university"></i><span>${escapeHtml(data.hero.institution||'Üniversite')}</span>`;
+  document.getElementById('heroBio').textContent         = data.hero.bio||'';
+  document.getElementById('heroImagePreview').innerHTML  = data.hero.image ? `<img src="${data.hero.image}" alt="Profil">` : '<i class="fas fa-user" style="font-size:4rem;color:#adb5bd"></i>';
+  // Stats
+  const s = data.hero.stats||{};
+  const statDefs = [{v:s.pubs,l:'Yayın'},{v:s.cites,l:'Atıf'},{v:s.projects,l:'Proje'},{v:s.years,l:'Yıl'}];
+  document.getElementById('heroStats').innerHTML = statDefs.filter(x=>x.v).map(x=>`<div class="stat-item"><span class="stat-number">${x.v}</span><div class="stat-label">${x.l}</div></div>`).join('');
+  // Social
+  const soc = data.hero.social||{};
+  let socialHtml = '';
+  Object.entries(SOCIAL_DEFS).forEach(([k, def])=>{
+    const url = soc[k]; if(!url) return;
+    const href = k==='email' ? `mailto:${url}` : url;
+    socialHtml += `<a href="${escapeHtml(href)}" target="${k==='email'?'_self':'_blank'}" class="social-btn"><i class="${def.icon}" style="color:${def.color}"></i>${def.label}</a>`;
+  });
+  document.getElementById('heroSocial').innerHTML = socialHtml;
+  // CV
+  const cvBtn = document.getElementById('heroCvBtn');
+  if(data.hero.cv){ cvBtn.href=data.hero.cv; cvBtn.style.display='inline-flex'; }
+  else cvBtn.style.display='none';
+}
+
+/* ── ABOUT ── */
+function renderAbout(){
+  const a = data.about;
+  const cards = [
+    { key:'education', icon:'fa-graduation-cap', title:'Eğitim', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-graduation-cap al-icon"></i><div class="al-body"><strong>${escapeHtml(e.degree)}${e.field?' – '+escapeHtml(e.field):''}</strong><div class="al-meta">${escapeHtml(e.inst)}${e.year?' · '+escapeHtml(e.year):''}${e.note?' · '+escapeHtml(e.note):''}</div></div></li>`).join('') },
+    { key:'experience', icon:'fa-briefcase',     title:'Deneyim', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-briefcase al-icon"></i><div class="al-body"><strong>${escapeHtml(e.title)}</strong><div class="al-meta">${escapeHtml(e.org)}${e.period?' · '+escapeHtml(e.period):''}</div>${e.desc?`<div style="font-size:0.78rem;color:var(--text3);margin-top:3px">${escapeHtml(e.desc)}</div>`:''}</div></li>`).join('') },
+    { key:'research',   icon:'fa-flask',          title:'Araştırma Alanları', renderFn: (items)=> `<div class="tag-list">${items.map(t=>`<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>`, isTags:true },
+    { key:'awards',     icon:'fa-award',          title:'Ödüller & Başarılar', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-award al-icon" style="color:#f39c12"></i><div class="al-body"><strong>${escapeHtml(e.title)}</strong><div class="al-meta">${escapeHtml(e.org)}${e.year?' · '+escapeHtml(e.year):''}</div></div></li>`).join('') },
+    { key:'courses',    icon:'fa-chalkboard-teacher', title:'Verdiği Dersler', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-chalkboard-teacher al-icon"></i><div class="al-body"><strong>${e.code?`<span style="font-family:monospace;font-size:0.78rem;color:var(--accent)">${escapeHtml(e.code)}</span> `:''}${escapeHtml(e.title)}</strong><div class="al-meta">${e.level?escapeHtml(e.level):''}${e.desc?' – '+escapeHtml(e.desc):''}</div></div></li>`).join('') },
+    { key:'memberships',icon:'fa-users',          title:'Üyelikler', renderFn: (items)=> `<div class="tag-list">${items.map(t=>`<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>`, isTags:true }
+  ];
+  const container = document.getElementById('aboutCards');
+  let html = '';
+  cards.forEach(card=>{
+    const items = a[card.key]||[];
+    if(!items.length) return;
+    const inner = card.isTags ? card.renderFn(items) : `<ul class="about-list">${card.renderFn(items)}</ul>`;
+    html += `<div class="card"><div class="card-icon"><i class="fas ${card.icon}"></i></div><h3>${card.title}</h3>${inner}</div>`;
+  });
+  container.innerHTML = html || '<div class="empty-state"><i class="fas fa-user-edit fa-2x" style="margin-bottom:12px"></i><p>Hakkında bilgisi henüz eklenmedi.</p></div>';
+}
+
+/* ── PUBLICATIONS ── */
+const PUB_TYPES = ['Uluslararası Makale','TR Dizin Makale','Kitap / Bölüm','Bildiri'];
+const PUB_BADGE = {'Uluslararası Makale':'b-intl','TR Dizin Makale':'b-tr','Kitap / Bölüm':'b-book','Bildiri':'b-conf'};
+function renderPublications(){
+  const filters = document.getElementById('pubFilters');
+  filters.innerHTML = ['Tümü',...PUB_TYPES].map(t=>`<button class="btn btn-sm ${(currentPubFilter===t||(t==='Tümü'&&currentPubFilter==='all'))?'':'btn-outline'}" onclick="setPubFilter('${t}')">${t}</button>`).join('');
+  let items = currentPubFilter==='all' ? data.publications : data.publications.filter(p=>p.type===currentPubFilter);
+  const list = document.getElementById('pubList');
+  if(!items.length){ list.innerHTML='<div class="empty-state"><i class="fas fa-book fa-2x" style="margin-bottom:12px"></i><p>Yayın bulunamadı.</p></div>'; return; }
+  list.innerHTML = items.map((p,i)=>{
+    const bc = PUB_BADGE[p.type]||'b-intl';
+    return `<div class="pub-item"><div class="pub-number">${i+1}</div><div class="pub-body">
+      <h4>${escapeHtml(p.title)}${p.type?`<span class="pub-badge ${bc}">${p.type}</span>`:''}</h4>
+      <div class="pub-authors">${escapeHtml(p.authors)}</div>
+      <div class="pub-journal"><i>${escapeHtml(p.journal)}</i>${p.year?' ('+p.year+')':''}${p.cites?' · <strong>'+p.cites+' atıf</strong>':''}</div>
+      ${p.abstract?`<details style="margin-top:8px"><summary style="font-size:0.8rem;cursor:pointer;color:var(--accent);font-weight:600">Özeti göster</summary><p style="font-size:0.82rem;color:var(--text2);margin-top:6px;line-height:1.65;padding:8px 0">${escapeHtml(p.abstract)}</p></details>`:''}
+      <div class="pub-links">${p.doi?`<a href="https://doi.org/${escapeHtml(p.doi)}" target="_blank"><i class="fas fa-external-link-alt"></i> DOI</a>`:''}${p.pdf?`<a href="${escapeHtml(p.pdf)}" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>`:''}</div>
+    </div></div>`;
+  }).join('');
+}
+function setPubFilter(t){ currentPubFilter = t==='Tümü'?'all':t; renderPublications(); }
+
+/* ── ANNOUNCEMENTS ── */
+function renderAnnouncements(){
+  const now = new Date();
+  let items = data.announcements.filter(a=>{
+    const s=a.startDate?new Date(a.startDate):null, e=a.endDate?new Date(a.endDate):null;
+    if(s&&now<s)return false; if(e&&now>e)return false; return true;
+  }).sort((a,b)=>(b.pinned-a.pinned)||new Date(b.date)-new Date(a.date));
+  const list = document.getElementById('announcementList');
+  if(!items.length){ list.innerHTML='<div class="empty-state"><i class="fas fa-bullhorn fa-2x" style="margin-bottom:12px"></i><p>Henüz duyuru yok.</p></div>'; return; }
+  list.innerHTML = items.map(a=>{
+    const d = a.date ? new Date(a.date) : new Date();
+    const day = isNaN(d)?'--':d.getDate();
+    const mon = isNaN(d)?'--':d.toLocaleString('tr',{month:'short'}).toUpperCase();
+    return `<div class="announcement-item ${a.pinned?'pinned':''}">
+      <div class="ann-date-badge"><div class="day">${day}</div><div class="mon">${mon}</div></div>
+      <div class="ann-body">
+        <h4>${a.pinned?'<i class="fas fa-thumbtack" style="color:#e67e22;margin-right:6px"></i>':''}${escapeHtml(a.title)}</h4>
+        <p>${escapeHtml(a.content)}</p>
+        ${a.image?`<img src="${a.image}" style="max-height:140px;border-radius:8px;margin-top:10px" alt="">`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── LINKS ── */
+function renderLinks(){
+  const grid = document.getElementById('linksGrid');
+  if(!data.links.length){ grid.innerHTML='<div class="empty-state"><i class="fas fa-link fa-2x" style="margin-bottom:12px"></i><p>Henüz link eklenmedi.</p></div>'; return; }
+  grid.innerHTML = data.links.map(l=>`
+    <a href="${escapeHtml(l.url)}" target="_blank" class="link-item">
+      <div class="link-icon-wrap"><i class="${escapeHtml(l.icon||'fas fa-link')}"></i></div>
+      <div class="link-title">${escapeHtml(l.title)}</div>
+      ${l.description?`<div class="link-desc">${escapeHtml(l.description)}</div>`:''}
+    </a>`).join('');
+}
+
+/* ── BLOG ── */
+function renderBlog(){
+  const grid = document.getElementById('blogGrid');
+  const posts = data.blog.filter(b=>b.published!==false);
+  if(!posts.length){ grid.innerHTML='<div class="empty-state"><i class="fas fa-pen-nib fa-2x" style="margin-bottom:12px"></i><p>Henüz blog yazısı yayımlanmadı.</p></div>'; return; }
+  grid.innerHTML = posts.map(b=>`
+    <div class="blog-card" onclick="openBlogModal('${b.id}')">
+      <div class="blog-image">${b.image?`<img src="${b.image}" alt="">`:'<i class="fas fa-pen-nib fa-2x"></i>'}</div>
+      <div class="blog-body">
+        ${b.category?`<div class="blog-category">${escapeHtml(b.category)}</div>`:''}
+        <h3>${escapeHtml(b.title)}</h3>
+        <div class="blog-excerpt">${escapeHtml(b.excerpt||'')}</div>
+        <div class="blog-meta">
+          ${b.date?`<span><i class="fas fa-calendar"></i> ${fmtDate(b.date)}</span>`:''}
+          ${b.readTime?`<span><i class="fas fa-clock"></i> ${escapeHtml(b.readTime)}</span>`:''}
+          <span style="margin-left:auto;color:var(--accent);font-weight:600;font-size:0.8rem">Oku →</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function fmtDate(d){ try{ return new Date(d).toLocaleDateString('tr-TR'); }catch(e){ return d||''; } }
+function openBlogModal(id){
+  const b = data.blog.find(x=>x.id===id); if(!b) return;
+  document.getElementById('bModalCat').textContent   = b.category||'';
+  document.getElementById('bModalTitle').textContent = b.title||'';
+  document.getElementById('bModalMeta').innerHTML    = `${b.date?`<span><i class="fas fa-calendar"></i> ${fmtDate(b.date)}</span>`:''} ${b.readTime?`<span><i class="fas fa-clock"></i> ${escapeHtml(b.readTime)}</span>`:''}`;
+  document.getElementById('bModalImg').innerHTML     = b.image ? `<img src="${b.image}" alt="" style="width:100%;border-radius:12px">` : '';
+  document.getElementById('bModalContent').textContent = b.content||b.excerpt||'İçerik girilmemiş.';
+  document.getElementById('blogModal').classList.add('active');
+}
+function closeBlogModal(){ document.getElementById('blogModal').classList.remove('active'); }
+
+/* ── CONTACT ── */
+function renderContact(){
+  const c = data.contact;
+  document.getElementById('contactGrid').innerHTML = `
+    <div class="contact-info">
+      <h3>İletişim Bilgileri</h3>
+      ${c.address?`<div class="contact-row"><i class="fas fa-map-marker-alt"></i><span>${escapeHtml(c.address)}</span></div>`:''}
+      ${c.email?`<div class="contact-row"><i class="fas fa-envelope"></i><a href="mailto:${escapeHtml(c.email)}">${escapeHtml(c.email)}</a></div>`:''}
+      ${c.phone?`<div class="contact-row"><i class="fas fa-phone"></i><span>${escapeHtml(c.phone)}</span></div>`:''}
+      ${c.hours?`<div class="contact-row"><i class="fas fa-clock"></i><span>${escapeHtml(c.hours)}</span></div>`:''}
+    </div>
+    <div class="contact-form">
+      <h3>Mesaj Gönder</h3>
+      <form onsubmit="handleContact(event)">
+        <input type="text" placeholder="Adınız" required>
+        <input type="email" placeholder="E-posta" required>
+        <input type="text" placeholder="Konu">
+        <textarea rows="4" placeholder="Mesajınız"></textarea>
+        <button type="submit" class="btn" style="width:100%"><i class="fas fa-paper-plane"></i> Gönder</button>
+      </form>
+    </div>`;
+}
+function handleContact(e){ e.preventDefault(); showToast('Mesajınız alındı (demo)'); e.target.reset(); }
+
+/* ═══════════════════════════════════════════════
+   FILE UPLOAD
+═══════════════════════════════════════════════ */
+function fileToBase64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
+async function handleImageUpload(file,maxMB=5){
+  if(!file.type.startsWith('image/')){ showToast('Lütfen bir resim dosyası seçin'); return null; }
+  if(file.size>maxMB*1024*1024){ showToast(`Dosya ${maxMB}MB'dan büyük`); return null; }
+  return await fileToBase64(file);
+}
+function createUploadArea(currentSrc, onUpload, clearFn, width=200){
+  const div=document.createElement('div'); div.className='image-upload-area';
+  const previewId='up_'+uid();
+  div.innerHTML=`<div id="${previewId}">${currentSrc?`<img src="${currentSrc}" style="max-width:${width}px;border-radius:8px">`:'<i class="fas fa-cloud-upload-alt fa-2x" style="color:var(--text3)"></i><p style="font-size:0.84rem;color:var(--text3);margin-top:8px">Resmi sürükleyin veya tıklayın</p>'}</div>${clearFn?'<button type="button" class="btn btn-danger btn-sm" style="margin-top:8px" onclick="('+clearFn+')()"><i class="fas fa-trash"></i> Fotoğrafı Kaldır</button>':''}`;
+  const fileInput=document.createElement('input'); fileInput.type='file'; fileInput.accept='image/*'; fileInput.style.display='none'; div.appendChild(fileInput);
+  const preview=()=>div.querySelector('#'+previewId);
+  div.addEventListener('click',e=>{ if(e.target.tagName==='BUTTON') return; fileInput.click(); });
+  fileInput.addEventListener('change',async e=>{ const f=e.target.files[0]; if(!f) return; const b64=await handleImageUpload(f); if(b64){ preview().innerHTML=`<img src="${b64}" style="max-width:${width}px;border-radius:8px">`; onUpload(b64); } });
+  div.addEventListener('dragover',e=>{ e.preventDefault(); div.classList.add('drag-over'); });
+  div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
+  div.addEventListener('drop',async e=>{ e.preventDefault(); div.classList.remove('drag-over'); const f=e.dataTransfer.files[0]; if(f){ const b64=await handleImageUpload(f); if(b64){ preview().innerHTML=`<img src="${b64}" style="max-width:${width}px;border-radius:8px">`; onUpload(b64); } } });
+  return div;
+}
+
+/* ═══════════════════════════════════════════════
+   ADMIN PANELİ
+═══════════════════════════════════════════════ */
+const ADMIN_TABS = [
+  {id:'hero',      icon:'fa-id-card',            label:'Profil & Hero'},
+  {id:'about',     icon:'fa-user',               label:'Ben Kimim'},
+  {id:'publications',icon:'fa-book',             label:'Yayınlar'},
+  {id:'announcements',icon:'fa-bullhorn',        label:'Duyurular'},
+  {id:'links',     icon:'fa-link',               label:'Faydalı Linkler'},
+  {id:'blog',      icon:'fa-pen-nib',            label:'Blog'},
+  {id:'contact',   icon:'fa-envelope',           label:'İletişim'},
+  {id:'settings',  icon:'fa-cog',                label:'Ayarlar'},
+];
+let currentAdminTab = 'hero';
+function buildAdminSidebar(){
+  document.getElementById('adminSidebar').innerHTML = ADMIN_TABS.map(t=>`
+    <button data-tab="${t.id}" onclick="showAdminTab('${t.id}')" class="${currentAdminTab===t.id?'active':''}">
+      <i class="fas ${t.icon}"></i>${t.label}
+    </button>`).join('');
+}
+function showAdminTab(tab){
+  currentAdminTab=tab; buildAdminSidebar();
+  const c=document.getElementById('adminContent');
+  if(tab==='hero')          heroAdminForm(c);
+  else if(tab==='about')    aboutAdminForm(c);
+  else if(tab==='publications') pubAdminForm(c);
+  else if(tab==='announcements') annAdminForm(c);
+  else if(tab==='links')    linkAdminForm(c);
+  else if(tab==='blog')     blogAdminForm(c);
+  else if(tab==='contact')  contactAdminForm(c);
+  else if(tab==='settings') settingsAdminForm(c);
+}
+
+/* ── HERO ADMIN ── */
+function heroAdminForm(c){
+  c.innerHTML=`<h3>Profil & Hero</h3>
+  <div class="add-form-section">
+    <h4><i class="fas fa-image"></i> Profil Fotoğrafı</h4>
+    <div id="heroPhotoUpload"></div>
+  </div>
+  <div class="admin-form">
+    <div class="form-grid-2">
+      <div class="form-group"><label>Ad Soyad *</label><input id="hName" value="${escapeHtml(data.hero.name)}"></div>
+      <div class="form-group"><label>Akademik Unvan</label><input id="hTitle" value="${escapeHtml(data.hero.title)}"></div>
+      <div class="form-group"><label>Kurum / Üniversite</label><input id="hInst" value="${escapeHtml(data.hero.institution)}"></div>
+    </div>
+    <div class="form-group"><label>Kısa Biyografi</label><textarea id="hBio" rows="3">${escapeHtml(data.hero.bio)}</textarea></div>
+    <div class="form-grid-2" style="margin-bottom:14px">
+      <div class="form-group"><label>Yayın Sayısı</label><input id="sPubs" type="number" value="${data.hero.stats.pubs||0}"></div>
+      <div class="form-group"><label>Toplam Atıf</label><input id="sCites" type="number" value="${data.hero.stats.cites||0}"></div>
+      <div class="form-group"><label>Proje Sayısı</label><input id="sProjs" type="number" value="${data.hero.stats.projects||0}"></div>
+      <div class="form-group"><label>Akademik Yıl</label><input id="sYears" type="number" value="${data.hero.stats.years||0}"></div>
+    </div>
+    <h4 style="font-size:0.88rem;font-weight:700;color:var(--primary);margin-bottom:12px"><i class="fas fa-share-alt"></i> Sosyal Medya & Profiller</h4>
+    <div class="form-grid-2">
+      ${Object.entries(SOCIAL_DEFS).map(([k,d])=>`<div class="form-group"><label><i class="${d.icon}" style="color:${d.color};width:16px"></i> ${d.label}</label><input id="soc_${k}" value="${escapeHtml((data.hero.social||{})[k]||'')}" placeholder="${k==='email'?'email@domain.com':'https://...'}"></div>`).join('')}
+    </div>
+    <div class="form-group">
+      <label>CV (PDF)</label>
+      <div id="heroCvUpload"></div>
+      ${data.hero.cv?`<button type="button" class="btn btn-danger btn-sm" onclick="data.hero.cv='';saveData(true);showAdminTab('hero')"><i class="fas fa-trash"></i> CV'yi Kaldır</button>`:''}
+    </div>
+    <button class="btn" onclick="saveHero()"><i class="fas fa-save"></i> Kaydet</button>
+  </div>`;
+  // Photo upload with remove
+  document.getElementById('heroPhotoUpload').appendChild(
+    createUploadArea(data.hero.image, b64=>{data.hero.image=b64;saveData(true);showAdminTab('hero');}, 'function(){data.hero.image="";saveData(true);showAdminTab("hero")}')
+  );
+  // CV upload
+  const cvDiv=document.getElementById('heroCvUpload');
+  const cvInp=document.createElement('input'); cvInp.type='file'; cvInp.accept='.pdf'; cvInp.style.cssText='display:block;margin-bottom:8px;font-size:0.84rem';
+  cvInp.onchange=async e=>{ const f=e.target.files[0]; if(!f)return; if(f.size>10*1024*1024){showToast('PDF 10MB\'dan büyük');return;} data.hero.cv=await fileToBase64(f); saveData(true); showAdminTab('hero'); };
+  cvDiv.appendChild(cvInp);
+}
+function saveHero(){
+  data.hero.name        = document.getElementById('hName').value.trim();
+  data.hero.title       = document.getElementById('hTitle').value.trim();
+  data.hero.institution = document.getElementById('hInst').value.trim();
+  data.hero.bio         = document.getElementById('hBio').value.trim();
+  data.hero.stats.pubs     = parseInt(document.getElementById('sPubs').value)||0;
+  data.hero.stats.cites    = parseInt(document.getElementById('sCites').value)||0;
+  data.hero.stats.projects = parseInt(document.getElementById('sProjs').value)||0;
+  data.hero.stats.years    = parseInt(document.getElementById('sYears').value)||0;
+  if(!data.hero.social) data.hero.social={};
+  Object.keys(SOCIAL_DEFS).forEach(k=>{data.hero.social[k]=(document.getElementById('soc_'+k)||{}).value||'';});
+  saveData();
+}
+
+/* ── ABOUT ADMIN ── */
+function aboutAdminForm(c){
+  c.innerHTML=`<h3>Ben Kimim</h3>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showAboutTab('education',this)">Eğitim</button>
+    <button class="admin-tab" onclick="showAboutTab('experience',this)">Deneyim</button>
+    <button class="admin-tab" onclick="showAboutTab('research',this)">Araştırma</button>
+    <button class="admin-tab" onclick="showAboutTab('awards',this)">Ödüller</button>
+    <button class="admin-tab" onclick="showAboutTab('courses',this)">Dersler</button>
+    <button class="admin-tab" onclick="showAboutTab('memberships',this)">Üyelikler</button>
+  </div>
+  <div id="aboutSubArea"></div>`;
+  showAboutTab('education', c.querySelector('.admin-tab.active'));
+}
+window.showAboutTab = function(key, btn){
+  if(btn){ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+  const sub = document.getElementById('aboutSubArea');
+  if(key==='research'||key==='memberships') renderTagForm(sub, key);
+  else renderListForm(sub, key);
+};
+function renderListForm(sub, key){
+  const defs = {
+    education: {fields:[{id:'degree',label:'Derece',ph:'Doktora'},{id:'field',label:'Alan',ph:'İşletme'},{id:'inst',label:'Kurum *',ph:'Üniversite'},{id:'year',label:'Yıl',ph:'2022'},{id:'note',label:'Not',ph:'Tez konusu vb.'}], title:'Eğitim Girişi'},
+    experience:{fields:[{id:'title',label:'Pozisyon *',ph:'Dr. Öğr. Üyesi'},{id:'org',label:'Kurum',ph:'Üniversite'},{id:'period',label:'Dönem',ph:'2023 – devam'},{id:'desc',label:'Açıklama',ph:''}], title:'Deneyim Girişi'},
+    awards:    {fields:[{id:'title',label:'Ödül Adı *',ph:'En İyi Makale Ödülü'},{id:'org',label:'Kurum',ph:'IEEE'},{id:'year',label:'Yıl',ph:'2024'}], title:'Ödül Girişi'},
+    courses:   {fields:[{id:'code',label:'Ders Kodu',ph:'UTİ301'},{id:'title',label:'Ders Adı *',ph:'Tedarik Zinciri'},{id:'level',label:'Seviye',ph:'Lisans / YL'},{id:'desc',label:'Açıklama',ph:''}], title:'Ders Girişi'},
+  };
+  const def = defs[key]; if(!def) return;
+  const items = data.about[key]||[];
+  sub.innerHTML=`
+    <div class="add-form-section">
+      <h4><i class="fas fa-plus-circle"></i> Yeni ${def.title}</h4>
+      <div class="form-grid-2">
+        ${def.fields.map(f=>`<div class="form-group"><label>${f.label}</label><input id="af_${f.id}" placeholder="${f.ph||''}"></div>`).join('')}
+      </div>
+      <button class="btn btn-success btn-sm" onclick="addAboutItem('${key}')"><i class="fas fa-plus"></i> Ekle</button>
+    </div>
+    <div class="admin-list" id="aboutItemList_${key}">
+      ${renderAboutItemList(key, items, def)}
+    </div>`;
+}
+function renderAboutItemList(key, items, def){
+  if(!def){ const defs2={education:{fields:[{id:'degree'},{id:'field'},{id:'inst'},{id:'year'},{id:'note'}]},experience:{fields:[{id:'title'},{id:'org'},{id:'period'},{id:'desc'}]},awards:{fields:[{id:'title'},{id:'org'},{id:'year'}]},courses:{fields:[{id:'code'},{id:'title'},{id:'level'},{id:'desc'}]}}; def=defs2[key]||{fields:[]}; }
+  if(!items.length) return '<div class="empty-state">Henüz kayıt yok.</div>';
+  return items.map((item,i)=>`
+    <div class="admin-item" id="ait_${item.id}">
+      <div class="admin-item-body">
+        <div class="admin-item-title">${escapeHtml(item.title||item.degree||item.pos||'—')} ${item.year||item.period?'<span style="color:var(--text3);font-size:0.75rem">('+escapeHtml(item.year||item.period||'')+')</span>':''}</div>
+        <div class="admin-item-sub">${escapeHtml(item.inst||item.org||item.level||'')}</div>
+      </div>
+      <div class="admin-item-acts">
+        <button class="btn btn-sm btn-outline" onclick="editAboutItem('${key}','${item.id}')"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-sm btn-danger" onclick="delAboutItem('${key}','${item.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`).join('');
+}
+window.addAboutItem = function(key){
+  const defs={education:['degree','field','inst','year','note'],experience:['title','org','period','desc'],awards:['title','org','year'],courses:['code','title','level','desc']};
+  const fields=defs[key]||[]; const item={id:uid()};
+  fields.forEach(f=>{ const el=document.getElementById('af_'+f); if(el) item[f]=el.value.trim(); });
+  const required={education:'inst',experience:'title',awards:'title',courses:'title'};
+  if(required[key]&&!item[required[key]]){ showToast('Zorunlu alan boş bırakılamaz'); return; }
+  if(!data.about[key]) data.about[key]=[];
+  data.about[key].push(item);
+  saveData(true);
+  // Reset form fields (don't change tab)
+  fields.forEach(f=>{ const el=document.getElementById('af_'+f); if(el) el.value=''; });
+  // Refresh list only
+  const defs2={education:{fields:[{id:'degree'},{id:'field'},{id:'inst'},{id:'year'},{id:'note'}]},experience:{fields:[{id:'title'},{id:'org'},{id:'period'},{id:'desc'}]},awards:{fields:[{id:'title'},{id:'org'},{id:'year'}]},courses:{fields:[{id:'code'},{id:'title'},{id:'level'},{id:'desc'}]}};
+  const listEl=document.getElementById('aboutItemList_'+key);
+  if(listEl) listEl.innerHTML=renderAboutItemList(key, data.about[key], defs2[key]);
+  showToast('Eklendi ✓');
+};
+window.delAboutItem = function(key, id){
+  if(!confirm('Bu kayıt silinsin mi?')) return;
+  data.about[key]=data.about[key].filter(x=>x.id!==id);
+  saveData(true);
+  const el=document.getElementById('ait_'+id); if(el) el.remove();
+  showToast('Silindi');
+};
+window.editAboutItem = function(key, id){
+  const item=data.about[key].find(x=>x.id===id); if(!item) return;
+  const el=document.getElementById('ait_'+id); if(!el) return;
+  const defs={education:[{id:'degree',label:'Derece'},{id:'field',label:'Alan'},{id:'inst',label:'Kurum'},{id:'year',label:'Yıl'},{id:'note',label:'Not'}],experience:[{id:'title',label:'Pozisyon'},{id:'org',label:'Kurum'},{id:'period',label:'Dönem'},{id:'desc',label:'Açıklama'}],awards:[{id:'title',label:'Ödül'},{id:'org',label:'Kurum'},{id:'year',label:'Yıl'}],courses:[{id:'code',label:'Kod'},{id:'title',label:'Ders Adı'},{id:'level',label:'Seviye'},{id:'desc',label:'Açıklama'}]};
+  const fields=defs[key]||[];
+  el.innerHTML=`<div style="flex:1"><div class="form-grid-2">${fields.map(f=>`<div class="form-group"><label>${f.label}</label><input id="edit_${f.id}_${id}" class="fi" value="${escapeHtml(item[f.id]||'')}"></div>`).join('')}</div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-success btn-sm" onclick="updateAboutItem('${key}','${id}')"><i class="fas fa-check"></i> Güncelle</button><button class="btn btn-outline btn-sm" onclick="cancelEditAbout('${key}','${id}')"><i class="fas fa-times"></i> İptal</button></div></div>`;
+};
+window.updateAboutItem = function(key, id){
+  const item=data.about[key].find(x=>x.id===id); if(!item) return;
+  const defs={education:['degree','field','inst','year','note'],experience:['title','org','period','desc'],awards:['title','org','year'],courses:['code','title','level','desc']};
+  (defs[key]||[]).forEach(f=>{ const el=document.getElementById('edit_'+f+'_'+id); if(el) item[f]=el.value.trim(); });
+  saveData(true); showAdminTab('about'); showToast('Güncellendi ✓');
+};
+window.cancelEditAbout = function(key){ showAdminTab('about'); };
+
+function renderTagForm(sub, key){
+  const items = data.about[key]||[];
+  const lbl = key==='research'?'Araştırma Alanı (virgülle birden fazla ekleyin)':'Üyelik';
+  sub.innerHTML=`
+    <div class="add-form-section">
+      <h4><i class="fas fa-tag"></i> Yeni ${lbl}</h4>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input class="fi" id="tagInput" placeholder="Örn: Zaman Serisi, R, Makine Öğrenmesi" style="flex:1;min-width:200px">
+        <button class="btn btn-success btn-sm" onclick="addTags('${key}')"><i class="fas fa-plus"></i> Ekle</button>
+      </div>
+    </div>
+    <div id="tagList_${key}" class="tag-list" style="margin-bottom:10px">
+      ${items.map((t,i)=>`<span class="tag-pill" style="display:inline-flex;align-items:center;gap:5px">${escapeHtml(t)} <button onclick="delTag('${key}',${i})" style="background:none;border:none;cursor:pointer;color:#e74c3c;font-size:0.85rem;padding:0;line-height:1">×</button></span>`).join('')}
+    </div>`;
+}
+window.addTags = function(key){
+  const val=document.getElementById('tagInput').value;
+  val.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
+    if(!data.about[key].includes(t)) data.about[key].push(t);
+  });
+  saveData(true); renderTagForm(document.getElementById('aboutSubArea'), key); showToast('Eklendi ✓');
+};
+window.delTag = function(key, i){
+  data.about[key].splice(i,1); saveData(true);
+  renderTagForm(document.getElementById('aboutSubArea'), key);
+};
+
+/* ── PUBLICATIONS ADMIN ── */
+function pubAdminForm(c){
+  c.innerHTML=`<h3>Yayınlar</h3>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showPubSub('list',this)">Liste (${data.publications.length})</button>
+    <button class="admin-tab" onclick="showPubSub('add',this)">+ Yeni Ekle</button>
+    <button class="admin-tab" onclick="showPubSub('csv',this)">CSV Yükle</button>
+  </div>
+  <div id="pubSubArea">${renderPubList()}</div>`;
+}
+window.showPubSub = function(t,btn){
+  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+  const sub=document.getElementById('pubSubArea');
+  if(t==='list') sub.innerHTML=renderPubList();
+  else if(t==='add') sub.innerHTML=renderPubAddForm();
+  else if(t==='csv') sub.innerHTML=renderCsvForm();
+};
+function renderPubList(){
+  if(!data.publications.length) return '<div class="empty-state">Yayın yok</div>';
+  return `<div class="admin-list">${data.publications.map((p,i)=>`
+    <div class="admin-item"><div class="admin-item-body">
+      <div class="admin-item-title">${escapeHtml(p.title)}</div>
+      <div class="admin-item-sub">${escapeHtml(p.authors)} · ${p.year} · ${p.type||''}</div>
+    </div><div class="admin-item-acts">
+      <button class="btn btn-sm btn-outline" onclick="editPub(${i})"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-sm btn-danger" onclick="deletePub(${i})"><i class="fas fa-trash"></i></button>
+    </div></div>`).join('')}</div>`;
+}
+function renderPubAddForm(p,i){
+  const isEdit = p!==undefined;
+  return `<div class="add-form-section">
+    <h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Yayın Düzenle':'Yeni Yayın'}</h4>
+    <div class="form-group"><label>Başlık *</label><input id="pTitle" value="${escapeHtml(p?p.title:'')}"></div>
+    <div class="form-group"><label>Yazarlar *</label><input id="pAuthors" value="${escapeHtml(p?p.authors:'')}"></div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>Dergi / Kitap *</label><input id="pJournal" value="${escapeHtml(p?p.journal:'')}"></div>
+      <div class="form-group"><label>Yıl *</label><input id="pYear" type="number" value="${p?p.year:''}"></div>
+      <div class="form-group"><label>Tür</label><select id="pType">${PUB_TYPES.map(t=>`<option ${p&&p.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    </div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>DOI</label><input id="pDoi" value="${escapeHtml(p?p.doi:'')}"></div>
+      <div class="form-group"><label>Atıf Sayısı</label><input id="pCites" type="number" value="${p?p.cites:''}"></div>
+      <div class="form-group"><label>PDF URL</label><input id="pPdf" value="${escapeHtml(p?p.pdf:'')}"></div>
+    </div>
+    <div class="form-group"><label>Özet</label><textarea id="pAbstract">${escapeHtml(p?p.abstract:'')}</textarea></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="${isEdit?`updatePub(${i})`:'savePub()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
+      ${isEdit?`<button class="btn btn-outline" onclick="showPubSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
+    </div>
+  </div>`;
+}
+function renderCsvForm(){
+  return `<div class="add-form-section">
+    <h4><i class="fas fa-file-csv"></i> CSV ile Toplu Yayın Yükle</h4>
+    <p style="font-size:0.82rem;color:var(--text2);margin-bottom:10px">Format: <code>başlık,yazarlar,dergi,yıl,tür,doi,pdf</code></p>
+    <input type="file" id="csvInput" accept=".csv" style="display:block;margin-bottom:10px">
+    <button class="btn" onclick="processCsv()"><i class="fas fa-upload"></i> Yükle</button>
+    <div id="csvResult"></div>
+  </div>`;
+}
+window.savePub = function(){
+  const title=document.getElementById('pTitle').value.trim(),authors=document.getElementById('pAuthors').value.trim(),journal=document.getElementById('pJournal').value.trim(),year=document.getElementById('pYear').value;
+  if(!title||!authors||!journal){ showToast('Zorunlu alanları doldurun'); return; }
+  data.publications.unshift({id:uid(),title,authors,journal,year,type:document.getElementById('pType').value,doi:document.getElementById('pDoi').value.trim(),cites:document.getElementById('pCites').value,pdf:document.getElementById('pPdf').value.trim(),abstract:document.getElementById('pAbstract').value.trim()});
+  saveData(true);
+  // Reset form, stay on add tab
+  ['pTitle','pAuthors','pJournal','pYear','pDoi','pCites','pPdf','pAbstract'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.querySelector('#pubSubArea .add-form-section h4').insertAdjacentHTML('afterend','<div class="notif notif-ok"><i class="fas fa-check"></i> Eklendi! Yeni yayın girebilirsiniz.</div>');
+  setTimeout(()=>{ const n=document.querySelector('.notif-ok'); if(n)n.remove(); },3000);
+};
+window.editPub = function(i){
+  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pubSubArea').innerHTML=renderPubAddForm(data.publications[i], i);
+};
+window.updatePub = function(i){
+  data.publications[i]={id:data.publications[i].id,title:document.getElementById('pTitle').value.trim(),authors:document.getElementById('pAuthors').value.trim(),journal:document.getElementById('pJournal').value.trim(),year:document.getElementById('pYear').value,type:document.getElementById('pType').value,doi:document.getElementById('pDoi').value.trim(),cites:document.getElementById('pCites').value,pdf:document.getElementById('pPdf').value.trim(),abstract:document.getElementById('pAbstract').value.trim()};
+  saveData(); showAdminTab('publications');
+};
+window.deletePub = function(i){ if(confirm('Silinsin mi?')){ data.publications.splice(i,1); saveData(); showAdminTab('publications'); } };
+window.processCsv = function(){
+  const inp=document.getElementById('csvInput'); if(!inp||!inp.files[0])return;
+  const reader=new FileReader(); reader.onload=e=>{
+    const lines=e.target.result.split(/\r?\n/); let added=0,skip=0;
+    lines.forEach(line=>{ line=line.trim(); if(!line)return;
+      const parts=parseCsvLine(line);
+      if(parts.length<4){skip++;return;}
+      const [title,authors,journal,year,type='Uluslararası Makale',doi='',pdf='']=parts.map(s=>s.replace(/^"|"$/g,'').trim());
+      if(title&&authors&&journal&&year){ data.publications.push({id:uid(),title,authors,journal,year,type,doi,pdf,abstract:'',cites:''}); added++; }
+      else skip++;
+    });
+    saveData(true);
+    document.getElementById('csvResult').innerHTML=`<div class="notif notif-ok" style="margin-top:10px">${added} yayın eklendi, ${skip} satır atlandı.</div>`;
+  }; reader.readAsText(inp.files[0],'UTF-8');
+};
+function parseCsvLine(line){ const parts=[]; let q=false,cur=''; for(const c of line){ if(c==='"'){q=!q;}else if(c===','&&!q){parts.push(cur);cur='';}else cur+=c; } parts.push(cur); return parts; }
+
+/* ── ANNOUNCEMENTS ADMIN ── */
+function annAdminForm(c){
+  c.innerHTML=`<h3>Duyurular</h3>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showAnnSub('list',this)">Liste (${data.announcements.length})</button>
+    <button class="admin-tab" onclick="showAnnSub('add',this)">+ Yeni Ekle</button>
+  </div>
+  <div id="annSubArea">${renderAnnList()}</div>`;
+  window.showAnnSub = (t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const sub=document.getElementById('annSubArea'); if(t==='list') sub.innerHTML=renderAnnList(); else sub.innerHTML=renderAnnAddForm(); };
+}
+function renderAnnList(){
+  if(!data.announcements.length) return '<div class="empty-state">Duyuru yok</div>';
+  return `<div class="admin-list">${data.announcements.map((a,i)=>`
+    <div class="admin-item"><div class="admin-item-body">
+      <div class="admin-item-title">${a.pinned?'📌 ':''}${escapeHtml(a.title)}</div>
+      <div class="admin-item-sub">${a.date||''} ${a.endDate?'· Bitiş: '+a.endDate:''}</div>
+    </div><div class="admin-item-acts">
+      <button class="btn btn-sm btn-outline" onclick="editAnn(${i})"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-sm btn-danger" onclick="deleteAnn(${i})"><i class="fas fa-trash"></i></button>
+    </div></div>`).join('')}</div>`;
+}
+function renderAnnAddForm(a,i){
+  const isEdit=a!==undefined;
+  return `<div class="add-form-section">
+    <h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Duyuru Düzenle':'Yeni Duyuru'}</h4>
+    <div class="form-group"><label>Başlık *</label><input id="anTitle" value="${escapeHtml(a?a.title:'')}"></div>
+    <div class="form-group"><label>İçerik *</label><textarea id="anContent">${escapeHtml(a?a.content:'')}</textarea></div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Tarih</label><input type="date" id="anDate" value="${a?a.date:''}"></div>
+      <div class="form-group"><label>Bitiş Tarihi (opsiyonel)</label><input type="date" id="anEnd" value="${a?a.endDate||'':''}"></div>
+    </div>
+    <div class="form-group"><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="anPinned" ${a&&a.pinned?'checked':''}> Sabit (öne çıkar)</label></div>
+    <div class="form-group"><label>Görsel (opsiyonel)</label><div id="annImageUpload"></div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="${isEdit?`updateAnn(${i})`:'saveAnn()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
+      ${isEdit?`<button class="btn btn-outline" onclick="showAnnSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
+    </div>
+  </div>`;
+}
+window.saveAnn = function(){
+  const title=document.getElementById('anTitle').value.trim(), content=document.getElementById('anContent').value.trim();
+  if(!title||!content){showToast('Başlık ve içerik zorunlu'); return;}
+  data.announcements.unshift({id:uid(),title,content,date:document.getElementById('anDate').value||new Date().toISOString().split('T')[0],endDate:document.getElementById('anEnd').value,pinned:document.getElementById('anPinned').checked,image:window._tempAnnImg||''});
+  window._tempAnnImg=''; saveData(); showAdminTab('announcements');
+};
+window.editAnn = function(i){
+  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active'));
+  const sub=document.getElementById('annSubArea'); sub.innerHTML=renderAnnAddForm(data.announcements[i],i);
+  const upDiv=document.getElementById('annImageUpload'); if(upDiv) upDiv.appendChild(createUploadArea(data.announcements[i].image||'', b64=>{ data.announcements[i].image=b64; }));
+};
+window.updateAnn = function(i){
+  data.announcements[i]={...data.announcements[i],title:document.getElementById('anTitle').value.trim(),content:document.getElementById('anContent').value.trim(),date:document.getElementById('anDate').value,endDate:document.getElementById('anEnd').value,pinned:document.getElementById('anPinned').checked};
+  saveData(); showAdminTab('announcements');
+};
+window.deleteAnn = function(i){ if(confirm('Silinsin mi?')){ data.announcements.splice(i,1); saveData(); showAdminTab('announcements'); } };
+window._tempAnnImg='';
+
+/* ── LINKS ADMIN ── */
+function linkAdminForm(c){
+  c.innerHTML=`<h3>Faydalı Linkler</h3>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showLinkSub('list',this)">Liste (${data.links.length})</button>
+    <button class="admin-tab" onclick="showLinkSub('add',this)">+ Ekle</button>
+  </div>
+  <div id="linkSubArea">${renderLinkList()}</div>`;
+  window.showLinkSub=(t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.getElementById('linkSubArea').innerHTML=t==='list'?renderLinkList():renderLinkAddForm(); };
+}
+function renderLinkList(){
+  if(!data.links.length) return '<div class="empty-state">Link yok</div>';
+  return `<div class="admin-list">${data.links.map((l,i)=>`
+    <div class="admin-item"><div class="admin-item-body"><div class="admin-item-title">${escapeHtml(l.title)}</div><div class="admin-item-sub">${escapeHtml(l.url)}</div></div>
+    <div class="admin-item-acts"><button class="btn btn-sm btn-outline" onclick="editLink(${i})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteLink(${i})"><i class="fas fa-trash"></i></button></div>
+    </div>`).join('')}</div>`;
+}
+function renderLinkAddForm(l,i){
+  const isEdit=l!==undefined;
+  return `<div class="add-form-section"><h4><i class="fas fa-plus-circle"></i> ${isEdit?'Düzenle':'Yeni Link'}</h4>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Başlık *</label><input id="lTitle" value="${escapeHtml(l?l.title:'')}"></div>
+      <div class="form-group"><label>URL *</label><input id="lUrl" value="${escapeHtml(l?l.url:'')}"></div>
+      <div class="form-group"><label>Açıklama</label><input id="lDesc" value="${escapeHtml(l?l.description:'')}"></div>
+      <div class="form-group"><label>İkon (Font Awesome sınıfı)</label><input id="lIcon" value="${escapeHtml(l?l.icon:'fas fa-link')}" placeholder="fas fa-link"></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="${isEdit?`updateLink(${i})`:'saveLink()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
+      ${isEdit?`<button class="btn btn-outline" onclick="showLinkSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
+    </div></div>`;
+}
+window.saveLink = function(){
+  const title=document.getElementById('lTitle').value.trim(), url=document.getElementById('lUrl').value.trim();
+  if(!title||!url){showToast('Başlık ve URL zorunlu'); return;}
+  data.links.push({id:uid(),title,url,description:document.getElementById('lDesc').value.trim(),icon:document.getElementById('lIcon').value.trim()||'fas fa-link'});
+  saveData(true);
+  document.getElementById('linkSubArea').innerHTML=renderLinkList();
+  showToast('Link eklendi ✓');
+};
+window.editLink=(i)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); document.getElementById('linkSubArea').innerHTML=renderLinkAddForm(data.links[i],i); };
+window.updateLink=function(i){ data.links[i]={id:data.links[i].id,title:document.getElementById('lTitle').value.trim(),url:document.getElementById('lUrl').value.trim(),description:document.getElementById('lDesc').value.trim(),icon:document.getElementById('lIcon').value.trim()||'fas fa-link'}; saveData(); showAdminTab('links'); };
+window.deleteLink=(i)=>{ if(confirm('Silinsin mi?')){ data.links.splice(i,1); saveData(); showAdminTab('links'); } };
+
+/* ── BLOG ADMIN ── */
+function blogAdminForm(c){
+  c.innerHTML=`<h3>Blog Yazıları</h3>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="showBlogSub('list',this)">Liste (${data.blog.filter(b=>b.published!==false).length} yayımlandı)</button>
+    <button class="admin-tab" onclick="showBlogSub('add',this)">+ Yeni Yazı</button>
+  </div>
+  <div id="blogSubArea">${renderBlogList()}</div>`;
+  window.showBlogSub=(t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const sub=document.getElementById('blogSubArea'); if(t==='list') sub.innerHTML=renderBlogList(); else sub.innerHTML=renderBlogAddForm(); };
+}
+function renderBlogList(){
+  if(!data.blog.length) return '<div class="empty-state">Yazı yok</div>';
+  return `<div class="admin-list">${data.blog.map((b,i)=>`
+    <div class="admin-item"><div class="admin-item-body">
+      <div class="admin-item-title"><span style="background:${b.published!==false?'#d4edda':'#f8d7da'};color:${b.published!==false?'#155724':'#721c24'};border-radius:50px;padding:2px 8px;font-size:0.72rem;font-weight:700;margin-right:6px">${b.published!==false?'YAYINDA':'TASLAK'}</span>${escapeHtml(b.title)}</div>
+      <div class="admin-item-sub">${b.date||''} · ${b.category||'Kategori yok'}</div>
+    </div><div class="admin-item-acts">
+      <button class="btn btn-sm ${b.published!==false?'btn-outline':'btn-success'}" onclick="toggleBlogPub(${i})" title="${b.published!==false?'Taslağa Al':'Yayımla'}">${b.published!==false?'⏸':'▶'}</button>
+      <button class="btn btn-sm btn-outline" onclick="editBlog(${i})"><i class="fas fa-edit"></i></button>
+      <button class="btn btn-sm btn-danger" onclick="deleteBlog(${i})"><i class="fas fa-trash"></i></button>
+    </div></div>`).join('')}</div>`;
+}
+function renderBlogAddForm(b,i){
+  const isEdit=b!==undefined;
+  return `<div class="add-form-section"><h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Yazı Düzenle':'Yeni Blog Yazısı'}</h4>
+    <div class="form-group"><label>Başlık *</label><input id="blTitle" value="${escapeHtml(b?b.title:'')}"></div>
+    <div class="form-group"><label>Özet (kart görünümü için)</label><textarea id="blExcerpt" rows="2">${escapeHtml(b?b.excerpt:'')}</textarea></div>
+    <div class="form-group"><label>İçerik (tam yazı) *</label><textarea id="blContent" rows="8" placeholder="Blog yazısının tam içeriği...">${escapeHtml(b?b.content||b.excerpt:'')}</textarea></div>
+    <div class="form-grid-3">
+      <div class="form-group"><label>Kategori</label><input id="blCat" value="${escapeHtml(b?b.category:'')}"></div>
+      <div class="form-group"><label>Tarih</label><input type="date" id="blDate" value="${b?b.date:''}"></div>
+      <div class="form-group"><label>Okuma Süresi</label><input id="blRead" value="${escapeHtml(b?b.readTime:'5 dk')}" placeholder="5 dk"></div>
+    </div>
+    <div class="form-group"><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="blPub" ${(!b||b.published!==false)?'checked':''}> Hemen yayımla</label></div>
+    <div class="form-group"><label>Kapak Görseli</label><div id="blogImgUpload"></div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" onclick="${isEdit?`updateBlog(${i})`:'saveBlog()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
+      ${isEdit?`<button class="btn btn-outline" onclick="showBlogSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
+    </div></div>`;
+}
+window.saveBlog = function(){
+  const title=document.getElementById('blTitle').value.trim(), content=document.getElementById('blContent').value.trim();
+  if(!title||!content){showToast('Başlık ve içerik zorunlu'); return;}
+  data.blog.unshift({id:uid(),title,excerpt:document.getElementById('blExcerpt').value.trim(),content,category:document.getElementById('blCat').value.trim(),date:document.getElementById('blDate').value||new Date().toISOString().split('T')[0],readTime:document.getElementById('blRead').value.trim()||'5 dk',published:document.getElementById('blPub').checked,image:window._tempBlogImg||''});
+  window._tempBlogImg=''; saveData(); showAdminTab('blog');
+};
+window.editBlog=(i)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); const sub=document.getElementById('blogSubArea'); sub.innerHTML=renderBlogAddForm(data.blog[i],i); const up=document.getElementById('blogImgUpload'); if(up) up.appendChild(createUploadArea(data.blog[i].image||'', b64=>{ data.blog[i].image=b64; window._tempBlogImg=b64; })); };
+window.updateBlog=function(i){ data.blog[i]={...data.blog[i],title:document.getElementById('blTitle').value.trim(),excerpt:document.getElementById('blExcerpt').value.trim(),content:document.getElementById('blContent').value.trim(),category:document.getElementById('blCat').value.trim(),date:document.getElementById('blDate').value,readTime:document.getElementById('blRead').value.trim(),published:document.getElementById('blPub').checked}; if(window._tempBlogImg) data.blog[i].image=window._tempBlogImg; window._tempBlogImg=''; saveData(); showAdminTab('blog'); };
+window.toggleBlogPub=function(i){ data.blog[i].published=!data.blog[i].published; saveData(true); showAdminTab('blog'); };
+window.deleteBlog=(i)=>{ if(confirm('Silinsin mi?')){ data.blog.splice(i,1); saveData(); showAdminTab('blog'); } };
+window._tempBlogImg='';
+
+/* ── CONTACT ADMIN ── */
+function contactAdminForm(c){
+  c.innerHTML=`<h3>İletişim Bilgileri</h3>
+  <div class="admin-form">
+    <div class="form-group"><label>Adres / Ofis</label><textarea id="ctAddr" rows="2">${escapeHtml(data.contact.address||'')}</textarea></div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>E-posta</label><input id="ctEmail" type="email" value="${escapeHtml(data.contact.email||'')}"></div>
+      <div class="form-group"><label>Telefon</label><input id="ctPhone" value="${escapeHtml(data.contact.phone||'')}"></div>
+    </div>
+    <div class="form-group"><label>Mesai Saatleri</label><input id="ctHours" value="${escapeHtml(data.contact.hours||'')}"></div>
+    <button class="btn" onclick="saveContact()"><i class="fas fa-save"></i> Kaydet</button>
+  </div>`;
+}
+function saveContact(){ data.contact={address:document.getElementById('ctAddr').value.trim(),email:document.getElementById('ctEmail').value.trim(),phone:document.getElementById('ctPhone').value.trim(),hours:document.getElementById('ctHours').value.trim()}; saveData(); }
+
+/* ── SETTINGS ADMIN ── */
+function settingsAdminForm(c){
+  c.innerHTML=`<h3>Genel Ayarlar</h3>
+  <div class="admin-form">
+    <div class="form-grid-2">
+      <div class="form-group"><label>Site Adı (Navbar)</label><input id="stName" value="${escapeHtml(data.settings.siteName||'')}"></div>
+      <div class="form-group"><label>Footer Metni</label><input id="stFooter" value="${escapeHtml(data.settings.footerText||'')}"></div>
+    </div>
+    <button class="btn" onclick="saveSettings()"><i class="fas fa-save"></i> Kaydet</button>
+    <hr style="margin:20px 0;border:none;border-top:1px solid var(--border)">
+    <h4 style="margin-bottom:14px;color:var(--primary)">🔐 Admin Hesabı</h4>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Kullanıcı Adı</label><input id="stUser" value="${escapeHtml(data.admin.username||'')}"></div>
+      <div class="form-group"><label>Yeni Şifre (boş = değişmez)</label><input id="stPass" type="password" autocomplete="new-password"></div>
+    </div>
+    <div class="form-group"><label>Şifre Tekrar</label><input id="stPass2" type="password" autocomplete="new-password"></div>
+    <button class="btn" onclick="saveAdminCreds()"><i class="fas fa-key"></i> Şifreyi Güncelle</button>
+    <hr style="margin:20px 0;border:none;border-top:1px solid var(--border)">
+    <h4 style="margin-bottom:14px;color:#e74c3c">⚠ Veri Yönetimi</h4>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-download"></i> JSON Dışa Aktar</button>
+      <label class="btn btn-outline" style="cursor:pointer"><i class="fas fa-upload"></i> JSON İçe Aktar<input type="file" accept=".json" style="display:none" onchange="importData(event)"></label>
+      <button class="btn btn-danger" onclick="resetAllData()"><i class="fas fa-trash"></i> Tüm Veriyi Sıfırla</button>
+    </div>
+  </div>`;
+}
+function saveSettings(){ data.settings.siteName=document.getElementById('stName').value.trim(); data.settings.footerText=document.getElementById('stFooter').value.trim(); saveData(); }
+function saveAdminCreds(){ const u=document.getElementById('stUser').value.trim(), p1=document.getElementById('stPass').value, p2=document.getElementById('stPass2').value; if(!u){showToast('Kullanıcı adı boş olamaz');return;} if(p1){ if(p1!==p2){showToast('Şifreler uyuşmuyor');return;} if(p1.length<4){showToast('En az 4 karakter');return;} data.admin.password=p1; } data.admin.username=u; saveData(); showToast('Admin bilgileri güncellendi'); }
+function exportData(){ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='akademik_veri.json'; a.click(); }
+function importData(e){ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ try{ const p=JSON.parse(ev.target.result); if(!p.admin)p.admin=data.admin; data=p; saveData(); showAdminTab('settings'); showToast('Veri içe aktarıldı ✓'); }catch(e2){showToast('Geçersiz dosya');} }; r.readAsText(f); }
+function resetAllData(){ if(confirm('TÜM VERİLER SİLİNECEK. Emin misiniz?')){ localStorage.removeItem('academicData'); location.reload(); } }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION & AUTH
+═══════════════════════════════════════════════ */
+function openLogin(){ document.getElementById('loginModal').classList.add('active'); document.getElementById('loginErr').innerHTML=''; }
+function closeLogin(){ document.getElementById('loginModal').classList.remove('active'); }
+function handleLogin(e){
+  e.preventDefault();
+  const u=document.getElementById('loginUser').value, p=document.getElementById('loginPass').value;
+  if(u===data.admin.username && p===data.admin.password){ closeLogin(); openAdmin(); }
+  else { document.getElementById('loginErr').innerHTML='<div class="notif notif-err">Kullanıcı adı veya şifre hatalı</div>'; }
+}
+function openAdmin(){ document.getElementById('adminOverlay').classList.add('active'); currentAdminTab='hero'; buildAdminSidebar(); showAdminTab('hero'); }
+function closeAdmin(){ document.getElementById('adminOverlay').classList.remove('active'); }
+function toggleMobileMenu(){ document.getElementById('navLinks').classList.toggle('active'); }
+window.addEventListener('scroll',()=>{ document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300); });
+loadData();
 </script>
 </body>
-</html>
+</html>'''
