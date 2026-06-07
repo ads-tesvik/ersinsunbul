@@ -222,7 +222,7 @@ img{max-width:100%;display:block}
     <a href="#hero" class="nav-logo"><i class="fas fa-graduation-cap"></i><span id="navName">Akademisyen</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#hero">Ana Sayfa</a></li>
-      <li><a href="#about">Ben Kimim</a></li>
+      <li><a href="#about">Hakkında</a></li>
       <li><a href="#publications">Yayınlar</a></li>
       <li><a href="#announcements">Duyurular</a></li>
       <li><a href="#links">Linkler</a></li>
@@ -254,7 +254,7 @@ img{max-width:100%;display:block}
 
 <!-- BEN KİMİM -->
 <section class="section" id="about" style="background:white">
-  <div class="section-header"><h2>Ben Kimim</h2><div class="section-divider"></div></div>
+  <div class="section-header"><h2>Hakkında</h2><div class="section-divider"></div></div>
   <div class="card-grid" id="aboutCards"></div>
 </section>
 
@@ -612,7 +612,7 @@ function createUploadArea(currentSrc, onUpload, clearFn, width=200){
 ═══════════════════════════════════════════════ */
 const ADMIN_TABS = [
   {id:'hero',      icon:'fa-id-card',            label:'Profil & Hero'},
-  {id:'about',     icon:'fa-user',               label:'Ben Kimim'},
+  {id:'about',     icon:'fa-user',               label:'Hakkında'},
   {id:'publications',icon:'fa-book',             label:'Yayınlar'},
   {id:'announcements',icon:'fa-bullhorn',        label:'Duyurular'},
   {id:'links',     icon:'fa-link',               label:'Faydalı Linkler'},
@@ -697,7 +697,7 @@ function saveHero(){
 
 /* ── ABOUT ADMIN ── */
 function aboutAdminForm(c){
-  c.innerHTML=`<h3>Ben Kimim</h3>
+  c.innerHTML=`<h3>Hakkında</h3>
   <div class="admin-tabs">
     <button class="admin-tab active" onclick="showAboutTab('education',this)">Eğitim</button>
     <button class="admin-tab" onclick="showAboutTab('experience',this)">Deneyim</button>
