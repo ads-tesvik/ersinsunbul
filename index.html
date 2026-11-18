@@ -1,1133 +1,1001 @@
-<html lang="tr">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="docTitle">Akademisyen Profil</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary:#2c3e50;--primary-light:#34495e;--accent:#3498db;
-  --bg:#f8f9fa;--white:#ffffff;--border:#e9ecef;
-  --text:#2c3e50;--text2:#5d6d7e;--text3:#95a5a6;
-  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.06);--shadow-md:0 4px 20px rgba(0,0,0,0.10);
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dr. Ersin Sünbül | International Trade, Financial Econometrics and Logistics</title>
+<meta name="description" content="Academic website of Dr. Ersin Sünbül: time-series econometrics and AI-based forecasting; publications, projects, teaching and CV in international trade, finance and logistics.">
+<meta name="author" content="Dr. Ersin Sünbül">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ads-tesvik.github.io/ersinsunbul/en/">
+<link rel="alternate" hreflang="tr" href="https://ads-tesvik.github.io/ersinsunbul/">
+<link rel="alternate" hreflang="en" href="https://ads-tesvik.github.io/ersinsunbul/en/">
+<link rel="alternate" hreflang="x-default" href="https://ads-tesvik.github.io/ersinsunbul/">
+<link rel="me" href="https://orcid.org/0000-0001-6187-2038">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f141b" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:site_name" content="Dr. Ersin Sünbül">
+<meta property="og:title" content="Dr. Ersin Sünbül | Academic Website">
+<meta property="og:description" content="Time-series econometrics and AI-based forecasting; publications, projects and teaching in international trade, finance and logistics.">
+<meta property="og:url" content="https://ads-tesvik.github.io/ersinsunbul/en/">
+<meta property="og:image" content="https://ads-tesvik.github.io/ersinsunbul/profil.jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="Portrait of Dr. Ersin Sünbül">
+<meta property="profile:first_name" content="Ersin">
+<meta property="profile:last_name" content="Sünbül">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317202e'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23fbfaf7'%3EES%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&amp;display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ersin Sünbül",
+  "honorificPrefix": "Dr.",
+  "jobTitle": "Independent Researcher",
+  "url": "https://ads-tesvik.github.io/ersinsunbul/en/",
+  "image": "https://ads-tesvik.github.io/ersinsunbul/profil.jpg",
+  "sameAs": ["https://orcid.org/0000-0001-6187-2038"],
+  "identifier": {"@type": "PropertyValue", "propertyID": "ORCID", "value": "0000-0001-6187-2038"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Ankara", "addressCountry": "TR"},
+  "alumniOf": [
+    {"@type": "CollegeOrUniversity", "name": "Ankara Hacı Bayram Veli University"},
+    {"@type": "CollegeOrUniversity", "name": "Ankara Yıldırım Beyazıt University"},
+    {"@type": "CollegeOrUniversity", "name": "Anadolu University"}
+  ],
+  "knowsAbout": ["Time-series econometrics", "Machine-learning forecasting", "International trade", "Trade finance", "Exchange rates and inflation", "Crypto-assets", "Logistics and supply chain management", "Disaster logistics"],
+  "knowsLanguage": ["tr", "en"]
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-/* ── NAVBAR ── */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-container{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;height:64px}
-.nav-logo{font-weight:700;color:var(--primary);text-decoration:none;display:flex;gap:10px;align-items:center;font-size:1rem}
-.nav-links{display:flex;gap:4px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--text2);padding:7px 13px;border-radius:8px;font-size:0.85rem;font-weight:500;transition:0.2s;display:flex;gap:6px;align-items:center}
-.nav-links a:hover,.nav-links a.active{background:var(--bg);color:var(--primary)}
-.admin-btn{background:var(--primary)!important;color:white!important;border-radius:8px!important}
-.admin-btn:hover{background:var(--primary-light)!important}
-.mobile-menu-btn{display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--primary)}
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 60px;background:linear-gradient(135deg,#f8f9fa 0%,#fff 100%)}
-.hero-content{max-width:1100px;width:100%;display:grid;grid-template-columns:340px 1fr;gap:60px;align-items:center}
-.hero-image{display:flex;justify-content:center}
-.image-placeholder{width:300px;height:300px;border-radius:50%;background:#e9ecef;display:flex;align-items:center;justify-content:center;border:4px solid white;box-shadow:0 20px 60px rgba(0,0,0,0.12);overflow:hidden;position:relative;flex-shrink:0}
-.image-placeholder img{width:100%;height:100%;object-fit:cover}
-.image-placeholder i{color:var(--text3);font-size:4rem}
-.hero-info h1{font-size:2.5rem;font-weight:700;color:var(--primary);line-height:1.2;margin-bottom:6px}
-.hero-info .title{font-size:1.1rem;color:var(--text2);margin-bottom:4px}
-.hero-info .institution{font-size:0.95rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.hero-info .bio{font-size:0.92rem;color:var(--text2);line-height:1.75;margin-bottom:20px;max-width:520px}
-/* ── STATS ── */
-.hero-stats{display:flex;gap:28px;margin:20px 0;flex-wrap:wrap}
-.stat-item{text-align:center;min-width:60px}
-.stat-number{font-size:1.7rem;font-weight:700;color:var(--primary);display:block;line-height:1}
-.stat-label{font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px}
-/* ── SOCIAL BUTTONS ── */
-.hero-social{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
-.social-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;background:white;border:1.5px solid var(--border);color:var(--primary);text-decoration:none;font-size:0.83rem;font-weight:600;transition:0.2s;white-space:nowrap}
-.social-btn:hover{background:var(--primary);color:white;border-color:var(--primary);transform:translateY(-1px);box-shadow:var(--shadow)}
-.social-btn i{font-size:0.95rem;width:14px;text-align:center}
-/* ── SECTIONS ── */
-.section{padding:80px 24px;max-width:1100px;margin:0 auto}
-.section-bg{background:white}
-.section-header{text-align:center;margin-bottom:50px}
-.section-header h2{font-size:2rem;font-weight:700;color:var(--primary)}
-.section-divider{width:50px;height:3px;background:var(--accent);margin:12px auto 0;border-radius:2px}
-/* ── CARDS ── */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
-.card{background:white;border-radius:var(--radius);padding:24px;border:1px solid var(--border);transition:0.2s;box-shadow:var(--shadow)}
-.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.card-icon{width:42px;height:42px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--primary);font-size:1.1rem}
-.card h3{font-size:1.05rem;font-weight:700;margin-bottom:12px;color:var(--primary)}
-/* About list items inside cards */
-.about-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.about-list li{display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text2);padding:8px 10px;border-radius:8px;background:var(--bg)}
-.about-list li .al-icon{color:var(--accent);flex-shrink:0;margin-top:2px;font-size:0.85rem}
-.about-list li .al-body strong{display:block;font-weight:600;color:var(--primary);font-size:0.9rem}
-.about-list li .al-meta{font-size:0.75rem;color:var(--text3);margin-top:2px}
-.tag-list{display:flex;flex-wrap:wrap;gap:7px}
-.tag-pill{background:var(--bg);border:1px solid var(--border);color:var(--primary);border-radius:50px;padding:4px 12px;font-size:0.8rem;font-weight:500}
-/* ── PUBLICATIONS ── */
-.pub-list{display:flex;flex-direction:column;gap:16px}
-.pub-item{background:white;border-radius:var(--radius);padding:22px 24px;border:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;transition:0.2s}
-.pub-item:hover{box-shadow:var(--shadow-md)}
-.pub-number{width:32px;height:32px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;margin-top:2px}
-.pub-body h4{font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:5px;line-height:1.4}
-.pub-body .pub-authors{font-size:0.84rem;color:var(--text2);margin-bottom:3px}
-.pub-body .pub-journal{font-size:0.84rem;color:var(--text3)}
-.pub-body .pub-links{display:flex;gap:10px;margin-top:8px}
-.pub-body .pub-links a{font-size:0.78rem;font-weight:600;color:var(--accent);background:#ebf5fb;padding:3px 10px;border-radius:50px}
-.pub-badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:2px 9px;border-radius:50px;margin-left:8px;vertical-align:middle}
-.b-intl{background:#dbeafe;color:#1e40af}.b-tr{background:#dcfce7;color:#166534}.b-book{background:#fef3c7;color:#92400e}.b-conf{background:#f3e8ff;color:#6b21a8}
-/* ── ANNOUNCEMENTS ── */
-.announcement-item{background:white;border-radius:var(--radius);padding:22px;margin-bottom:14px;border:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;border-left:4px solid var(--primary);transition:0.2s}
-.announcement-item:hover{box-shadow:var(--shadow-md)}
-.announcement-item.pinned{border-left-color:#e67e22}
-.ann-date-badge{background:var(--bg);border-radius:10px;padding:8px 12px;text-align:center;flex-shrink:0;min-width:60px}
-.ann-date-badge .day{font-size:1.5rem;font-weight:700;color:var(--primary);line-height:1}
-.ann-date-badge .mon{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em}
-.ann-body h4{font-size:1rem;font-weight:700;margin-bottom:6px;color:var(--primary)}
-.ann-body p{font-size:0.88rem;color:var(--text2);line-height:1.65;white-space:pre-wrap}
-.ann-body img{max-height:120px;border-radius:8px;margin-top:10px}
-/* ── LINKS ── */
-.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.link-item{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;transition:0.2s;text-decoration:none;color:var(--text)}
-.link-item:hover{box-shadow:var(--shadow-md);border-color:var(--accent);transform:translateY(-2px)}
-.link-item .link-icon-wrap{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--primary)}
-.link-item .link-title{font-size:0.9rem;font-weight:700;color:var(--primary)}
-.link-item .link-desc{font-size:0.78rem;color:var(--text3);line-height:1.4}
-/* ── BLOG ── */
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-.blog-card{background:white;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:0.2s;cursor:pointer;display:flex;flex-direction:column}
-.blog-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
-.blog-image{height:190px;background:linear-gradient(135deg,#e9ecef,#f0f3f4);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--text3)}
-.blog-image img{width:100%;height:100%;object-fit:cover}
-.blog-body{padding:20px;flex:1;display:flex;flex-direction:column}
-.blog-category{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:8px}
-.blog-body h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:8px;line-height:1.4}
-.blog-excerpt{font-size:0.85rem;color:var(--text2);line-height:1.6;flex:1}
-.blog-meta{display:flex;gap:14px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:0.77rem;color:var(--text3)}
-/* ── BLOG MODAL ── */
-.blog-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:3000;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
-.blog-modal.active{display:flex}
-.blog-modal-box{background:white;border-radius:16px;max-width:760px;width:100%;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;margin:auto}
-.blog-modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--text3);line-height:1;transition:0.2s}
-.blog-modal-close:hover{color:var(--primary)}
-.blog-modal-cat{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:10px}
-.blog-modal-title{font-size:1.8rem;font-weight:700;color:var(--primary);line-height:1.3;margin-bottom:10px}
-.blog-modal-meta{font-size:0.82rem;color:var(--text3);margin-bottom:24px;display:flex;gap:14px}
-.blog-modal-img{border-radius:12px;overflow:hidden;margin-bottom:24px;max-height:360px}
-.blog-modal-img img{width:100%;height:100%;object-fit:cover}
-.blog-modal-content{font-size:0.95rem;line-height:1.85;color:var(--text);white-space:pre-wrap}
-/* ── CONTACT ── */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.contact-info{background:white;border-radius:var(--radius);padding:28px;border:1px solid var(--border)}
-.contact-info h3{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:var(--primary)}
-.contact-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:0.9rem;color:var(--text2)}
-.contact-row i{color:var(--accent);width:18px;margin-top:3px;flex-shrink:0}
-.contact-form{background:white;border-radius:var(--radius);padding:28px;border:1px solid var(--border)}
-.contact-form h3{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:var(--primary)}
-.contact-form input,.contact-form textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.88rem;margin-bottom:12px;transition:border-color 0.2s}
-.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent)}
-.contact-form textarea{resize:vertical;min-height:100px}
-/* ── FOOTER ── */
-.footer{background:var(--primary);color:rgba(255,255,255,0.7);text-align:center;padding:40px 24px;font-size:0.85rem}
-/* ── BUTTONS ── */
-.btn{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;background:var(--primary);color:white;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;display:inline-flex;gap:8px;align-items:center;transition:0.2s}
-.btn:hover{background:var(--primary-light)}
-.btn-sm{padding:6px 14px;font-size:0.78rem}
-.btn-outline{background:transparent!important;border:1.5px solid var(--border)!important;color:var(--primary)!important}
-.btn-outline:hover{border-color:var(--primary)!important;background:var(--bg)!important}
-.btn-danger{background:#e74c3c!important;color:white!important}
-.btn-danger:hover{background:#c0392b!important}
-.btn-success{background:#27ae60!important;color:white!important}
-.btn-success:hover{background:#229954!important}
-/* ── TOAST & SCROLL ── */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--primary);color:white;padding:12px 24px;border-radius:40px;transition:0.3s;z-index:9999;font-size:0.88rem;font-weight:500}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:white;border:none;cursor:pointer;opacity:0;visibility:hidden;transition:0.3s;font-size:1rem;z-index:500}
-.scroll-top.visible{opacity:1;visibility:visible}
-/* ── LOGIN MODAL ── */
-.login-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.login-modal.active{display:flex}
-.login-box{background:white;border-radius:16px;padding:36px 32px;width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
-.login-box h2{font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:6px}
-.login-box p{font-size:0.82rem;color:var(--text3);margin-bottom:24px}
-.login-box input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;margin-bottom:12px;font-size:0.88rem}
-.login-box input:focus{outline:none;border-color:var(--primary)}
-/* ── ADMIN PANEL ── */
-.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:stretch;backdrop-filter:blur(4px)}
-.admin-overlay.active{display:flex}
-.admin-panel{background:white;border-radius:0;width:90%;max-width:1060px;max-height:100vh;display:flex;flex-direction:column;overflow:hidden;margin:auto;border-radius:16px;max-height:92vh}
-.admin-header{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--primary);color:white;border-radius:16px 16px 0 0}
-.admin-header h2{font-size:1.1rem;font-weight:700}
-.admin-close{background:rgba(255,255,255,0.15);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:0.2s}
-.admin-close:hover{background:rgba(255,255,255,0.3)}
-.admin-body{display:flex;flex:1;overflow:hidden}
-.admin-sidebar{width:200px;background:var(--bg);border-right:1px solid var(--border);padding:12px 0;overflow-y:auto;flex-shrink:0}
-.admin-sidebar button{width:100%;padding:11px 18px;text-align:left;background:none;border:none;border-left:3px solid transparent;display:flex;gap:10px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:500;color:var(--text2);transition:0.2s}
-.admin-sidebar button:hover{background:white;color:var(--primary)}
-.admin-sidebar button.active{background:white;color:var(--primary);font-weight:700;border-left-color:var(--primary)}
-.admin-sidebar .sidebar-group{padding:8px 18px 4px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3)}
-.admin-content{flex:1;padding:24px;overflow-y:auto}
-.admin-content h3{font-size:1.15rem;font-weight:700;color:var(--primary);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border)}
-/* Admin form styles */
-.admin-form .form-group{margin-bottom:14px}
-.admin-form label,.form-label{display:block;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text2);margin-bottom:5px}
-.admin-form input,.admin-form textarea,.admin-form select,.fi{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.87rem;color:var(--text);background:var(--bg);transition:border-color 0.2s}
-.admin-form input:focus,.admin-form textarea:focus,.admin-form select:focus,.fi:focus{outline:none;border-color:var(--primary);background:white}
-.admin-form textarea{resize:vertical;min-height:70px}
-.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.form-row-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-/* Admin tabs (sub-tabs inside a panel) */
-.admin-tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:2px solid var(--border);padding-bottom:8px}
-.admin-tab{background:none;border:none;padding:7px 16px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.84rem;font-weight:600;cursor:pointer;color:var(--text2);transition:0.2s}
-.admin-tab.active,.admin-tab:hover{background:var(--primary);color:white}
-/* Admin list items */
-.admin-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
-.admin-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
-.admin-item-body{flex:1;min-width:0}
-.admin-item-title{font-size:0.88rem;font-weight:600;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.admin-item-sub{font-size:0.77rem;color:var(--text3);margin-top:2px}
-.admin-item-acts{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
-.admin-table{width:100%;border-collapse:collapse;font-size:0.85rem}
-.admin-table th{background:var(--bg);padding:10px 12px;text-align:left;font-weight:700;font-size:0.77rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);border-bottom:1px solid var(--border)}
-.admin-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
-.admin-table tr:hover td{background:#fafbfc}
-/* Add form section inside admin panel */
-.add-form-section{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:20px}
-.add-form-section h4{font-size:0.88rem;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-/* Upload area */
-.image-upload-area{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:0.2s;margin-bottom:14px;background:white}
-.image-upload-area:hover,.image-upload-area.drag-over{background:var(--bg);border-color:var(--primary)}
-.image-preview{max-width:200px;margin:10px auto;border-radius:10px;overflow:hidden}
-.image-preview img{width:100%;height:auto}
-.empty-state{text-align:center;padding:32px;color:var(--text3);font-size:0.88rem}
-.notif{padding:10px 14px;border-radius:8px;font-size:0.84rem;font-weight:500;margin-bottom:12px}
-.notif-ok{background:#d4edda;color:#155724}.notif-err{background:#f8d7da;color:#721c24}.notif-info{background:#d1ecf1;color:#0c5460}
-/* CV download btn */
-.cv-download-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--accent);color:white;border-radius:10px;font-size:0.88rem;font-weight:600;transition:0.2s;text-decoration:none;border:none;cursor:pointer}
-.cv-download-btn:hover{opacity:0.88;transform:translateY(-1px)}
-/* Responsive */
-@media(max-width:900px){.hero-content{grid-template-columns:1fr;text-align:center}.hero-social{justify-content:center}.hero-stats{justify-content:center}}
-@media(max-width:768px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;flex-direction:column;padding:12px;border-bottom:1px solid var(--border)}.nav-links.active{display:flex}.mobile-menu-btn{display:block}.contact-grid{grid-template-columns:1fr}.admin-body{flex-direction:column}.admin-sidebar{width:100%;display:flex;flex-wrap:wrap;padding:8px}.admin-sidebar button{width:auto}.hero-content{gap:32px}.form-grid-2,.form-grid-3{grid-template-columns:1fr}}
+</script>
+
+<script>
+  /* Apply the saved theme before first paint. */
+  document.documentElement.classList.add('js');
+  try { var t = localStorage.getItem('tema'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+
+<style>
+/* ===================== Renk ve tipografi değişkenleri ===================== */
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --surface-2:#f3f1ec; --band:#f5f3ee;
+  --ink:#17202e; --ink-2:#4a5466; --ink-3:#5f6878;
+  --line:#e4e0d8; --line-2:#d3cec3;
+  --accent:#8a2432; --accent-soft:#f6e9eb;
+  --link:#1d4f7a; --focus:#1d4f7a;
+  --wos-bg:#efe9f7; --wos:#56378a;
+  --sco-bg:#fbeee1; --sco:#7f4510;
+  --tr-bg:#e5f2e9;  --tr:#1f6a3b;
+  --pr-bg:#e6eef7;  --pr:#1d4f7a;
+  --shadow:0 1px 2px rgba(23,32,46,.06),0 10px 28px rgba(23,32,46,.07);
+  --radius:14px; --header-h:64px;
+  --serif:"Source Serif 4","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f141b; --surface:#151c25; --surface-2:#1c2531; --band:#121922;
+    --ink:#e8ebf0; --ink-2:#b9c2cf; --ink-3:#97a2b3;
+    --line:#263140; --line-2:#344256;
+    --accent:#e58a95; --accent-soft:#2b1b21;
+    --link:#93c5f4; --focus:#93c5f4;
+    --wos-bg:#2a2140; --wos:#cdb8f2; --sco-bg:#33240f; --sco:#f3c58f;
+    --tr-bg:#15291d; --tr:#9fd8b2; --pr-bg:#172537; --pr:#a9cdf3;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.28);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#151c25; --surface-2:#1c2531; --band:#121922;
+  --ink:#e8ebf0; --ink-2:#b9c2cf; --ink-3:#97a2b3;
+  --line:#263140; --line-2:#344256;
+  --accent:#e58a95; --accent-soft:#2b1b21;
+  --link:#93c5f4; --focus:#93c5f4;
+  --wos-bg:#2a2140; --wos:#cdb8f2; --sco-bg:#33240f; --sco:#f3c58f;
+  --tr-bg:#15291d; --tr:#9fd8b2; --pr-bg:#172537; --pr:#a9cdf3;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+
+/* ===================== Temel ===================== */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 16px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-80px;z-index:100;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+.skip:focus{top:12px;color:var(--bg)}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 16px}
+@media (min-width:480px){.wrap{padding:0 24px}}
+@media (min-width:768px){.wrap{padding:0 32px}}
+.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic-fill{stroke:none}
+.print-only{display:none}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* ===================== Üst bar ===================== */
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;gap:10px;height:var(--header-h)}
+.brand{font-family:var(--serif);font-weight:600;font-size:1.15rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none;margin-right:auto;white-space:nowrap}
+.brand:hover{color:var(--ink)}
+.menu{list-style:none;margin:0;padding:0;display:flex;gap:2px}
+.menu a{display:block;padding:8px 11px;border-radius:8px;color:var(--ink-2);text-decoration:none;font-size:.92rem;font-weight:500}
+.menu a:hover{color:var(--ink);background:var(--surface-2)}
+.menu a[aria-current]{color:var(--accent);background:var(--accent-soft)}
+.icon-btn{display:inline-grid;place-items:center;width:40px;height:40px;padding:0;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.icon-btn:hover{border-color:var(--line-2)}
+.lang{display:inline-grid;place-items:center;min-width:40px;height:40px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem/1 var(--sans);letter-spacing:.05em;text-decoration:none}
+.lang:hover{border-color:var(--line-2);color:var(--ink)}
+.nav-toggle{display:none}
+.theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:block}
+:root[data-theme="dark"] .theme-toggle .moon{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-toggle .sun{display:block}
+  :root:not([data-theme="light"]) .theme-toggle .moon{display:none}
+}
+@media (max-width:1000px){
+  .nav-toggle{display:inline-grid}
+  .menu{display:none;position:absolute;left:0;right:0;top:var(--header-h);flex-direction:column;gap:0;padding:8px 16px 16px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .menu.open{display:flex}
+  .menu a{padding:12px 10px;font-size:1rem}
+}
+
+/* ===================== Giriş (profil) ===================== */
+.hero{padding:56px 0 52px}
+.hero-grid{display:grid;gap:28px;grid-template-columns:1fr;align-items:start}
+@media (min-width:820px){.hero-grid{grid-template-columns:232px 1fr;gap:56px}}
+.portrait{margin:0}
+.portrait img{width:168px;height:168px;border-radius:50%;object-fit:cover;background:var(--surface-2);box-shadow:0 0 0 6px var(--surface),0 0 0 7px var(--line),var(--shadow)}
+@media (min-width:820px){.portrait img{width:224px;height:224px}}
+.kicker{margin:0 0 8px;font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.1rem,4.4vw,3.05rem);line-height:1.08;letter-spacing:-.015em;margin:0}
+.tagline{margin:10px 0 22px;font-family:var(--serif);font-size:1.22rem;line-height:1.4;color:var(--ink-2)}
+.bio p{margin:0 0 14px;max-width:70ch}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:500 .95rem/1.1 var(--sans);text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--ink-3);color:var(--ink)}
+.btn-primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-sm{padding:8px 12px;font-size:.88rem}
+.facts{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 30px;color:var(--ink-2);font-size:.92rem}
+.facts li{display:flex;align-items:baseline;gap:7px}
+.facts strong{font-family:var(--serif);font-size:1.55rem;font-weight:600;line-height:1;color:var(--ink);font-variant-numeric:lining-nums}
+
+/* ===================== Bölümler ===================== */
+.section{padding:64px 0}
+.band{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:28px}
+.sec-title{position:relative;margin:0;padding-bottom:12px;font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,2.6vw,2rem);letter-spacing:-.01em;line-height:1.2}
+.sec-title::after{content:"";position:absolute;left:0;bottom:0;width:44px;height:3px;border-radius:2px;background:var(--accent)}
+.sec-note{margin:0;color:var(--ink-3);font-size:.92rem;max-width:56ch}
+.sub{font-family:var(--serif);font-weight:600;font-size:1.25rem;line-height:1.3;margin:40px 0 14px}
+.lead{margin:0 0 22px;color:var(--ink-2);max-width:70ch}
+.plain-list{margin:0;padding-left:1.15em}
+.plain-list li{margin:0 0 9px}
+.plain-list li::marker{color:var(--ink-3)}
+
+/* Araştırma alanları */
+.areas{list-style:none;margin:0;padding:0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.areas li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.areas h3{margin:0 0 6px;font-size:1rem;font-weight:600;line-height:1.35}
+.areas p{margin:0;color:var(--ink-2);font-size:.93rem}
+
+/* Güncel */
+.news{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.news li{display:grid;grid-template-columns:128px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.news time{color:var(--accent);font-weight:600;font-size:.9rem;padding-top:1px}
+.news p{margin:0;max-width:75ch}
+@media (max-width:560px){.news li{grid-template-columns:1fr;gap:4px}}
+
+/* ===================== Yayınlar ===================== */
+.pub-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+@media (min-width:768px){.pub-tools{position:sticky;top:calc(var(--header-h) + 10px);z-index:5;box-shadow:var(--shadow)}}
+html:not(.js) .pub-tools{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line-2);background:transparent;color:var(--ink-2);border-radius:999px;padding:7px 13px;font:500 .88rem/1 var(--sans);cursor:pointer}
+.chip:hover{color:var(--ink);border-color:var(--ink-3)}
+.chip .n{color:var(--ink-3);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.72}
+.search{display:flex;align-items:center;gap:8px;flex:1 1 240px;max-width:360px;padding:0 12px;border:1px solid var(--line-2);border-radius:10px;background:var(--bg);color:var(--ink-3)}
+.search:focus-within{border-color:var(--focus)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:400 1rem/1 var(--sans);padding:10px 0}
+.search input::placeholder{color:var(--ink-3);opacity:1}
+.pub-group{margin-top:36px}
+.pub-group h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:0 0 4px;font-family:var(--serif);font-weight:600;font-size:1.3rem}
+.pub-group h3 .count{font:500 .85rem var(--sans);color:var(--ink-3)}
+.pubs{list-style:none;margin:0;padding:0}
+.pub{display:grid;grid-template-columns:3.4rem 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.pub:last-child{border-bottom:0}
+.pub-year{padding-top:1px;color:var(--ink-3);font-weight:600;font-size:.92rem;font-variant-numeric:tabular-nums}
+.cite{margin:0;color:var(--ink-2);overflow-wrap:anywhere}
+.cite .t{color:var(--ink);font-weight:500}
+.cite .me{color:var(--ink);font-weight:600}
+.pub-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px;font-size:.82rem;color:var(--ink-3)}
+.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:.75rem;font-weight:600;line-height:1.3;white-space:nowrap}
+.t-wos{background:var(--wos-bg);color:var(--wos)}
+.t-sco{background:var(--sco-bg);color:var(--sco)}
+.t-tr{background:var(--tr-bg);color:var(--tr)}
+.t-pr{background:var(--pr-bg);color:var(--pr)}
+.copy{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border:1px solid transparent;border-radius:8px;background:none;color:var(--ink-3);font:500 .82rem/1 var(--sans);cursor:pointer}
+.copy:hover{color:var(--ink);border-color:var(--line-2)}
+.copy.done{color:var(--tr)}
+html:not(.js) .copy{display:none}
+.pub-empty{margin:28px 0 0;padding:18px;border:1px dashed var(--line-2);border-radius:var(--radius);color:var(--ink-2);text-align:center}
+@media (max-width:600px){.pub{grid-template-columns:1fr;gap:4px}.pub-year{display:none}}
+
+.fold{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.fold>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;font-weight:600;cursor:pointer;list-style:none}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:"";flex:none;width:9px;height:9px;margin-right:4px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .2s}
+.fold[open]>summary::after{transform:rotate(-135deg)}
+.fold-body{padding:0 20px 18px}
+.fold-body>p{margin:0 0 12px;color:var(--ink-3);font-size:.9rem}
+.fold ol{margin:0;padding-left:1.5em;color:var(--ink-2)}
+.fold ol li{padding:7px 0;border-bottom:1px dashed var(--line)}
+.fold ol li:last-child{border-bottom:0}
+.fold ul{margin:0;padding-left:1.15em;color:var(--ink-2)}
+.fold ul li{margin:0 0 8px}
+
+/* ===================== Projeler ===================== */
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.card{display:flex;flex-direction:column;gap:10px;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.card-kicker{margin:0;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.card h3{margin:0;font-family:var(--serif);font-weight:600;font-size:1.15rem;line-height:1.3}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:2px 0 0;font-size:.9rem}
+.kv div{display:contents}
+.kv dt{color:var(--ink-3)}
+.kv dd{margin:0}
+.card-note{margin:auto 0 0;padding-top:6px;font-size:.82rem;color:var(--ink-3);overflow-wrap:anywhere}
+.mat-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.mat-link{flex:none;padding:2px 9px;border:1px solid var(--line-2);border-radius:999px;font-size:.72rem;font-weight:600;color:var(--link);text-decoration:none;white-space:nowrap}
+a.mat-link:hover{border-color:var(--accent);color:var(--accent)}
+.mat-grid .card h3{font-size:1.08rem}
+.mat-grid .btn{align-self:flex-start;margin-top:auto}
+.more{margin:22px 0 0;font-weight:500}
+.apps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.apps li{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.apps .prog{display:block;font-weight:600}
+.apps .desc{color:var(--ink-2)}
+.apps .role{color:var(--ink-3);font-size:.9rem;white-space:nowrap}
+@media (max-width:640px){.apps li{grid-template-columns:1fr}.apps .role{white-space:normal}}
+
+/* ===================== Dersler ===================== */
+.course-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.course-col{padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.course-col h3{margin:0 0 8px;font-size:.98rem;font-weight:600;line-height:1.35}
+.course-col ul{list-style:none;margin:0;padding:0}
+.course-col li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:.93rem}
+.course-col li:first-child{border-top:0}
+.lvl{flex:none;padding:2px 8px;border-radius:999px;background:var(--pr-bg);color:var(--pr);font-size:.72rem;font-weight:600}
+
+/* ===================== Özgeçmiş ===================== */
+.cv-grid{display:grid;gap:8px 56px;grid-template-columns:1fr}
+@media (min-width:900px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid.three{grid-template-columns:1.25fr 1fr 1fr}}
+.cv-grid .sub{margin-top:28px}
+.timeline{list-style:none;margin:0 0 0 6px;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 22px 22px}
+.timeline li:last-child{padding-bottom:4px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.when{display:block;font-size:.82rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.what{margin:2px 0 0;font-weight:600}
+.where{margin:0;color:var(--ink-2)}
+.detail{margin:6px 0 0;color:var(--ink-3);font-size:.9rem}
+
+/* ===================== İletişim ve alt bilgi ===================== */
+.contact{display:grid;gap:24px 56px;grid-template-columns:1fr}
+@media (min-width:820px){.contact{grid-template-columns:1fr 1fr;align-items:center}}
+.contact-list{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.contact-list li{display:grid;grid-template-columns:22px 76px 1fr;align-items:center;gap:12px;padding:14px 18px;border-top:1px solid var(--line)}
+.contact-list li:first-child{border-top:0}
+.contact-list .label{color:var(--ink-3);font-size:.88rem}
+.contact-list a,.contact-list span{overflow-wrap:anywhere}
+.site-footer{padding:28px 0 40px;color:var(--ink-3);font-size:.88rem}
+.footer-inner{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between}
+.footer-inner p{margin:0}
+
+/* ===================== Yazdırma / PDF (özgeçmiş çıktısı) ===================== */
+@media print{
+  @page{size:A4;margin:15mm 14mm}
+  :root{--bg:#fff!important;--surface:#fff!important;--surface-2:#fff!important;--band:#fff!important;--ink:#000!important;--ink-2:#1d1d1d!important;--ink-3:#444!important;--line:#d0d0d0!important;--line-2:#bbb!important;--accent:#000!important;--link:#000!important;--shadow:none!important}
+  html{scroll-padding-top:0}
+  body{font-size:10.2pt;line-height:1.42}
+  .site-header,.skip,.lang,.actions,.pub-tools,.copy,.pub-empty,#news,#materials,.mat-link,.site-footer .to-top{display:none!important}
+  .print-only{display:block!important}
+  .hero{padding:0 0 8pt}
+  .hero-grid{grid-template-columns:86pt 1fr;gap:16pt}
+  .portrait img{width:80pt;height:80pt;box-shadow:none}
+  .section{padding:10pt 0}
+  .band{background:none;border:0}
+  .sec-title{font-size:14pt;padding-bottom:3pt;border-bottom:1px solid #999}
+  .sec-title::after{display:none}
+  .areas,.cards,.course-grid{display:block}
+  .areas li,.card,.course-col{border:0;padding:3pt 0;background:none}
+  .pub,.card,.timeline li,.areas li,.course-col,.apps li{break-inside:avoid}
+  .fold{border:0;margin-top:12pt}
+  .fold>summary{padding:0 0 4pt}
+  .fold>summary::after{display:none}
+  .fold-body{padding:0}
+  a{color:inherit;text-decoration:none}
+  .tag{border:1px solid #999;background:none!important;color:#000!important}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#content">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.6A8.2 8.2 0 0 1 9.4 4a8.2 8.2 0 1 0 10.6 10.6z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3.5h10V9"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#A6CE39" stroke="none"/><circle cx="8.2" cy="7.3" r="1.15" fill="#fff" stroke="none"/><rect x="7.25" y="9.3" width="1.9" height="7.9" fill="#fff" stroke="none"/><path fill="#fff" fill-rule="evenodd" stroke="none" d="M10.9 9.3h3c2.6 0 4.2 1.7 4.2 3.95s-1.6 3.95-4.2 3.95h-3zm1.85 1.6v4.7h1.05c1.55 0 2.4-.95 2.4-2.35s-.85-2.35-2.4-2.35z"/></symbol>
+</svg>
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="#hero" class="nav-logo"><i class="fas fa-graduation-cap"></i><span id="navName">Akademisyen</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#hero">Ana Sayfa</a></li>
-      <li><a href="#about">Hakkında</a></li>
-      <li><a href="#publications">Yayınlar</a></li>
-      <li><a href="#announcements">Duyurular</a></li>
-      <li><a href="#links">Linkler</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#contact">İletişim</a></li>
-      <li><a href="#" onclick="openLogin();return false" class="admin-btn"><i class="fas fa-lock"></i> Admin</a></li>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#about">Dr. Ersin Sünbül</a>
+    <nav class="nav" aria-label="Main menu">
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="menu">
+        <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg><span class="sr-only">Open menu</span>
+      </button>
+      <ul class="menu" id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="../" hreflang="tr" lang="tr" title="Türkçe sürüm" aria-label="Türkçe sürüm">TR</a>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark theme" title="Theme">
+      <svg class="ic moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="ic sun" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="content">
+
+<!-- ========== ABOUT ========== -->
+<section class="hero" id="about" aria-labelledby="name">
+  <div class="wrap hero-grid">
+    <figure class="portrait">
+      <img src="../profil.jpg" width="600" height="600" alt="Portrait of Dr. Ersin Sünbül" decoding="async">
+    </figure>
+    <div class="hero-text">
+      <p class="kicker">Independent Researcher · Ankara</p>
+      <h1 id="name">Dr. Ersin Sünbül</h1>
+      <p class="tagline">International trade, financial econometrics and logistics</p>
+      <p class="print-only">Email: <a class="js-mail" data-u="ersinsunbul" data-d="hotmail.com" data-show href="#contact">ersinsunbul [at] hotmail.com</a> · ORCID: 0000-0001-6187-2038 · ads-tesvik.github.io/ersinsunbul/en</p>
+      <div class="bio">
+        <p>Dr. Ersin Sünbül is a researcher who applies time-series econometrics and machine-learning forecasting methods to problems in international trade, finance and logistics. The main research topics are exchange rates, inflation and monetary policy, crypto-assets, tourism receipts, card payments and trade finance. Most of the studies compare classical econometric models with artificial neural networks on the same data, testing which method yields more accurate forecasts under which conditions.</p>
+        <p>Dr. Sünbül completed a Ph.D. in International Trade at Ankara Hacı Bayram Veli University in 2022. A second doctoral thesis, in Business Administration at Kırıkkale University, develops a scale that measures leaders’ power distance preferences in the context of Turkish culture. From 2023 to 2025, Dr. Sünbül taught artificial intelligence, international finance and logistics as an Assistant Professor at Istanbul Nişantaşı University, and is the author of the books <i lang="tr">Uluslararası Ticaretin Finansmanı</i> [International Trade Finance] (2026) and <i lang="tr">Proje Lojistiği</i> [Project Logistics] (2024). Currently based in Ankara as an independent researcher, Dr. Sünbül also contributes to project development for national and international funding programmes.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary js-mail" data-u="ersinsunbul" data-d="hotmail.com" href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Email</a>
+        <a class="btn" href="https://orcid.org/0000-0001-6187-2038" target="_blank" rel="me noopener"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-orcid"/></svg>ORCID</a>
+        <button class="btn js-print" type="button"><svg class="ic" aria-hidden="true"><use href="#i-print"/></svg>CV (PDF)</button>
+      </div>
+      <ul class="facts" aria-label="Publication summary">
+        <li><strong data-count="makale">14</strong> peer-reviewed articles</li>
+        <li><strong data-count="kitap">3</strong> books</li>
+        <li><strong data-count="bolum">6</strong> book chapters and encyclopedia entries</li>
+        <li><strong data-count="bildiri">6</strong> conference papers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RESEARCH INTERESTS ========== -->
+<section class="section band" id="research" aria-labelledby="research-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="sec-title" id="research-title">Research interests</h2></div>
+    <ul class="areas">
+      <li><h3>Time-series econometrics</h3><p>Linear and nonlinear models: ARDL, VAR/VECM, NARDL, Toda–Yamamoto causality, quantile regression and panel methods.</p></li>
+      <li><h3>Forecasting with artificial intelligence</h3><p>Artificial neural networks, LSTM, GRU and RNN; hybrid ARIMA–ANN and MIDAS–LSTM models; natural language processing.</p></li>
+      <li><h3>Money, finance and markets</h3><p>Exchange rates, inflation and monetary policy, crypto-assets, card payments and financial inclusion.</p></li>
+      <li><h3>International trade and trade finance</h3><p>Foreign trade, the trade finance gap, global value chains and tourism receipts.</p></li>
+      <li><h3>Logistics and supply chains</h3><p>Disaster logistics and location–allocation optimisation, green supply chains, project logistics.</p></li>
+      <li><h3>Management and leadership</h3><p>Strategic management and planning; personality, leadership and power distance in cultural context.</p></li>
     </ul>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
   </div>
-</nav>
+</section>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="hero-image">
-      <div class="image-placeholder" id="heroImagePreview"><i class="fas fa-user"></i></div>
+<!-- ========== NEWS ========== -->
+<section class="section" id="news" aria-labelledby="news-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="sec-title" id="news-title">News</h2></div>
+    <ol class="news">
+      <li><time datetime="2026-10-29">October 2026</time><p>The article “Forecasting Türkiye’s GDP” was published in <i lang="tr">Gazi İktisat ve İşletme Dergisi</i> (Vol. 12, No. 3, pp. 659–672). <a href="https://doi.org/10.30855/gjeb.2026.12.3.004">Read the article</a></p></li>
+      <li><time datetime="2026-09-22">September 2026</time><p>An article modelling disaster logistics for a potential Marmara earthquake was accepted for publication in <i lang="tr">Türk Deprem Araştırma Dergisi</i>; it will appear in the December 2026 issue (Vol. 8, No. 3).</p></li>
+      <li><time datetime="2026-02">February 2026</time><p>The book <i lang="tr">Uluslararası Ticaretin Finansmanı (Güncel Eğilimler ve Vaka Çalışmaları)</i> [International Trade Finance: Current Trends and Case Studies] was published by Nobel Akademik Yayıncılık.</p></li>
+      <li><time datetime="2026">2026</time><p>A study on Islamic social finance and monetary policy coordination, prepared with C. Korkut, was presented at Bank Indonesia Institute (Jakarta).</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== PUBLICATIONS ========== -->
+<section class="section band" id="publications" aria-labelledby="pub-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title" id="pub-title">Publications</h2>
+      <p class="sec-note">APA 7 style, most recent first. Turkish titles are followed by an English translation in square brackets; index information appears under each entry.</p>
     </div>
-    <div class="hero-info">
-      <h1 id="heroName">Ad Soyad</h1>
-      <div class="title" id="heroTitle">Akademik Unvan</div>
-      <div class="institution" id="heroInstitution"><i class="fas fa-university"></i><span>Üniversite</span></div>
-      <p class="bio" id="heroBio"></p>
-      <div class="hero-stats" id="heroStats"></div>
-      <div class="hero-social" id="heroSocial"></div>
-      <a id="heroCvBtn" href="#" download="cv.pdf" class="cv-download-btn" style="display:none;margin-top:16px"><i class="fas fa-file-pdf"></i> CV İndir</a>
+
+    <div class="pub-tools">
+      <div class="chips" role="group" aria-label="Filter by publication type">
+        <button type="button" class="chip" data-filter="hepsi" aria-pressed="true">All<span class="n"></span></button>
+        <button type="button" class="chip" data-filter="makale" aria-pressed="false">Articles<span class="n"></span></button>
+        <button type="button" class="chip" data-filter="kitap" aria-pressed="false">Books<span class="n"></span></button>
+        <button type="button" class="chip" data-filter="bolum" aria-pressed="false">Chapters<span class="n"></span></button>
+        <button type="button" class="chip" data-filter="bildiri" aria-pressed="false">Conference papers<span class="n"></span></button>
+      </div>
+      <label class="search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search publications</span><input type="search" id="pub-q" placeholder="Title, journal, method or year" autocomplete="off" spellcheck="false"></label>
     </div>
+    <p class="sr-only" id="pub-status" aria-live="polite"></p>
+
+    <section class="pub-group" aria-labelledby="g-articles">
+      <h3 id="g-articles">Peer-reviewed journal articles <span class="count">(14)</span></h3>
+      <ol class="pubs">
+        <li class="pub" data-type="makale"><span class="pub-year">2026</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (in press). <span class="t" lang="tr">Olası bir Marmara depreminde afet lojistiği (gece senaryosu, Mw 7,5): İstanbul ilçe ölçeğinde talep tahmini ve kapasiteli konum-tahsis optimizasyonuna dayalı hibrit bir model önerisi</span> [Disaster logistics in a potential Marmara earthquake (night scenario, Mw 7.5): A hybrid model based on district-level demand forecasting and capacitated location–allocation optimisation in Istanbul]. <i lang="tr">Türk Deprem Araştırma Dergisi, 8</i>(3).</p>
+          <div class="pub-meta"><span class="tag t-pr">In press</span><span class="tag t-sco">Scopus</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2026</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2026). <span class="t" lang="tr">Türkiye’nin GSYİH öngörüsü: Doğrusal (SARIMA) ve doğrusal olmayan (Holt-Winters) zaman serisi yöntemleriyle bir uygulama</span> [Forecasting Türkiye’s GDP: An application with linear (SARIMA) and nonlinear (Holt-Winters) time-series methods]. <i lang="tr">Gazi İktisat ve İşletme Dergisi, 12</i>(3), 659–672. <a href="https://doi.org/10.30855/gjeb.2026.12.3.004">https://doi.org/10.30855/gjeb.2026.12.3.004</a></p>
+          <div class="pub-meta"><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2025). <span class="t" lang="tr">Yeşil tedarik zinciri yönetimi ve sürdürülebilir lojistik: Literatür taraması ve kavramsal değerlendirme</span> [Green supply chain management and sustainable logistics: A literature review and conceptual assessment]. <i lang="tr">Ege Üniversitesi Ulaştırma Yönetimi Araştırmaları Dergisi, 2</i>(2), 93–112.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b>, &amp; Keskin Benli, Y. (2025). <span class="t" lang="tr">Döviz kurunu belirleyen değişkenlerin tahmini: Doğrusal zaman serisi ve doğrusal olmayan yapay sinir ağı (YSA) ile bir model önerisi</span> [Forecasting the determinants of the exchange rate: A model proposal using linear time series and a nonlinear artificial neural network (ANN)]. <i lang="tr">Bankacılık ve Finansal Araştırmalar Dergisi, 12</i>(2), 192–209. <a href="https://dergipark.org.tr/tr/pub/jobaf/article/1680301">https://dergipark.org.tr/tr/pub/jobaf/article/1680301</a></p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2025). <span class="t" lang="tr">Kripto varlıklar arasındaki doğrusal olmayan nedensellik ilişkisi</span> [Nonlinear causality among crypto-assets]. <i lang="tr">Erciyes Akademi, 39</i>(1), 152–179. <a href="https://doi.org/10.48070/erciyesakademi.1586676">https://doi.org/10.48070/erciyesakademi.1586676</a></p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2025). <span class="t" lang="tr">Türkiye’de toplam para arzı ve nominal faiz oranlarının tüketici fiyat enflasyonu üzerindeki etkileri: Johansen eşbütünleşme testi ve vektör hata düzeltme modeliyle bir değerlendirme</span> [Effects of aggregate money supply and nominal interest rates on consumer price inflation in Türkiye: An assessment with the Johansen cointegration test and a vector error correction model]. <i lang="tr">Gaziantep Üniversitesi Sosyal Bilimler Dergisi, 24</i>(1), 312–336. <a href="https://doi.org/10.21547/jss.1468139">https://doi.org/10.21547/jss.1468139</a></p>
+          <div class="pub-meta"><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b>, &amp; Özyürek, H. (2025). <span class="t">BITCOIN crypto-asset prediction: With an application of linear autoregressive integrated moving average method, and non-linear multi-layered and feedback artificial neural network models</span>. <i>Ege Academic Review, 25</i>(1), 157–174. <a href="https://doi.org/10.21121/eab.20250110">https://doi.org/10.21121/eab.20250110</a></p>
+          <div class="pub-meta"><span class="tag t-wos">WoS</span><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2024</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2024). <span class="t">Bitcoin’s effect on selected crypto assets: Quantitative evidence</span>. <i>Alanya Academic Review Journal, 8</i>(3), 735–750. <a href="https://doi.org/10.29023/alanyaakademik.1422810">https://doi.org/10.29023/alanyaakademik.1422810</a></p>
+          <div class="pub-meta"><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t">The effect of linear data preprocessing processes on the forecast performance of the flexible method: ANN application with exchange rate data</span>. <i lang="tr">Nişantaşı Üniversitesi Sosyal Bilimler Dergisi, 11</i>(Special issue), 33–49. <a href="https://doi.org/10.52122/nisantasisbd.1346658">https://doi.org/10.52122/nisantasisbd.1346658</a></p>
+          <div class="pub-meta"><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t">Linear and nonlinear relationship between real exchange rate, real interest rate and consumer price index: An empirical application for countries with different levels of development</span>. <i>Scientific Annals of Economics and Business, 70</i>(1), 1–14. <a href="https://doi.org/10.47743/saeb-2023-0008">https://doi.org/10.47743/saeb-2023-0008</a></p>
+          <div class="pub-meta"><span class="tag t-wos">WoS</span><span class="tag t-sco">Scopus</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2022</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2022). <span class="t" lang="tr">Maliyet yönetiminde güncel yaklaşımlar: Lojistik işletmelerinde maliyet yerlerinin incelenmesi</span> [Current approaches in cost management: An examination of cost centres in logistics enterprises]. <i>SBedergi, 6</i>(11), 438–449. <a href="https://doi.org/10.29228/sbe.67472">https://doi.org/10.29228/sbe.67472</a></p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2022</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2022). <span class="t">VAR analysis on the relationship between consumer price index, real interest and exchange rate: The case of Turkey</span>. <i>International Journal of Empirical Economics, 1</i>(2), Article 2250008. <a href="https://doi.org/10.1142/S2810943022500081">https://doi.org/10.1142/S2810943022500081</a></p>
+          <div class="pub-meta"><span class="tag t-sco">Scopus</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2021</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2021). <span class="t" lang="tr">Dış ticaret hacmi ve döviz kuru ilişkisinin ARDL sınır testi ile analizi (Türkiye örneği)</span> [Analysis of the relationship between foreign trade volume and the exchange rate with the ARDL bounds test (the case of Türkiye)]. <i lang="tr">Bankacılık ve Finansal Araştırmalar Dergisi, 8</i>(1), 1–16. <a href="https://dergipark.org.tr/en/pub/jobaf/issue/59603/802918">https://dergipark.org.tr/en/pub/jobaf/issue/59603/802918</a></p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="makale"><span class="pub-year">2020</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b>, &amp; Şener, H. E. (2020). <span class="t" lang="tr">Yöneticilerin kişilik özelliklerinin liderlik davranışlarına etkisi: Kamu güvenliği alanında görgül bir araştırma</span> [The effect of managers’ personality traits on leadership behaviours: An empirical study in the field of public security]. <i lang="tr">Organizasyon ve Yönetim Bilimleri Dergisi, 12</i>(2), 98–115. <a href="https://dergipark.org.tr/en/pub/oybd/issue/56743/701841">https://dergipark.org.tr/en/pub/oybd/issue/56743/701841</a></p>
+          <div class="pub-meta"><span class="tag t-tr">TR Dizin</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+      </ol>
+    </section>
+
+    <section class="pub-group" aria-labelledby="g-books">
+      <h3 id="g-books">Books <span class="count">(3)</span></h3>
+      <ol class="pubs">
+        <li class="pub" data-type="kitap"><span class="pub-year">2026</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (in press). <i class="t" lang="tr">Uluslararası ticarete giriş: Güncel küresel ekonomi, eğilimler ve sürdürülebilirlik</i> [Introduction to international trade: Current global economy, trends and sustainability]. Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><span class="tag t-pr">In press</span><span>Single-authored</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="kitap"><span class="pub-year">2026</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2026). <i class="t" lang="tr">Uluslararası ticaretin finansmanı (Güncel eğilimler ve vaka çalışmaları)</i> [International trade finance: Current trends and case studies]. Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><span>Single-authored · xviii + 382 pp. · ISBN 978-625-386-968-7 · e-ISBN 978-625-386-969-4</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="kitap"><span class="pub-year">2024</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2024). <i class="t" lang="tr">Proje lojistiği</i> [Project logistics]. Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><span>Single-authored · ISBN 978-625-371-748-3</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+      </ol>
+    </section>
+
+    <section class="pub-group" aria-labelledby="g-chapters">
+      <h3 id="g-chapters">Book chapters and encyclopedia entries <span class="count">(6)</span></h3>
+      <ol class="pubs">
+        <li class="pub" data-type="bolum"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t" lang="tr">Türkiye’de döviz kurunu belirleyen makroekonomik değişkenler</span> [Macroeconomic determinants of the exchange rate in Türkiye]. In M. Bulut (Ed.), <i lang="tr">Sosyal bilimlerde güncel tartışmalar 14</i> [Current debates in social sciences 14] (pp. 1775–1796). BİDGE Yayınları. <a href="https://www.bidgeyayinlari.com.tr/wp-content/uploads/2023/10/Sosyal-Bilimlerde-Guncel-Tartismalar-14-2-2.pdf">https://www.bidgeyayinlari.com.tr/wp-content/uploads/2023/10/Sosyal-Bilimlerde-Guncel-Tartismalar-14-2-2.pdf</a></p>
+          <div class="pub-meta"><span>ISBN 978-625-6488-27-4</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bolum"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t" lang="tr">Kripto varlıklar arasındaki ilişkinin ampirik yöntemlerle araştırılması</span> [An empirical investigation of the relationship among crypto-assets]. In H. Özyürek &amp; Z. Baysal (Eds.), <i lang="tr">Blok zincir ve kripto varlıklar</i> [Blockchain and crypto-assets] (pp. 121–140). Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><span>ISBN 978-625-398-478-6</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bolum"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t">Gwei, Hash, Private Keys, and Wei</span> [Encyclopedia entries]. In M. Polat, H. Özyürek, &amp; Z. Baysal (Eds.), <i lang="tr">Blok zincir ansiklopedisi</i> [Blockchain encyclopedia]. Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><span>4 entries · ISBN 978-625-397-686-6</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bolum"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t" lang="tr">Birleşmiş Milletlerin sürdürülebilir kalkınma hedefleri, Endüstri 5.0 ve sanayi işletmelerinden beklenenler</span> [The United Nations Sustainable Development Goals, Industry 5.0 and expectations from industrial enterprises]. In T. Oğuzhan &amp; Ş. Ok (Eds.), <i lang="tr">Sanayi yönetiminde gelecek yaklaşımları, dijitalleşme ve yetenekler</i> [Future approaches, digitalisation and talent in industrial management] (pp. 385–402). Nobel Akademik Yayıncılık.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bolum"><span class="pub-year">2021</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2021). <span class="t" lang="tr">Finansal para krizi teorileri (Kapitalist sistemin aksaklıkları)</span> [Theories of financial and currency crises (Dysfunctions of the capitalist system)]. In Ö. F. Aslan &amp; B. Erden (Eds.), <i lang="tr">Güncel finansal yönetim yaklaşımları</i> [Current approaches in financial management] (Vol. 1, pp. 167–188). Efe Akademi Yayınları.</p>
+          <div class="pub-meta"><span>ISBN 978-625-7450-69-0</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bolum"><span class="pub-year">2021</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b>, &amp; Keskin Benli, Y. (2021). <span class="t" lang="tr">Döviz kuru ve BİST 100 endeksi arasındaki eşbütünleşme ve nedensellik: R programı ile bir uygulama</span> [Cointegration and causality between the exchange rate and the BIST 100 index: An application with R]. In E. Alsu &amp; M. Karahan (Eds.), <i lang="tr">Muhasebe ve finans çalışmaları üzerine güncel araştırmalar</i> [Current research in accounting and finance] (pp. 103–132). İKSAD Yayınevi.</p>
+          <div class="pub-meta"><span>ISBN 978-625-8061-04-8</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+      </ol>
+    </section>
+
+    <section class="pub-group" aria-labelledby="g-papers">
+      <h3 id="g-papers">Papers presented at international scientific meetings <span class="count">(6)</span></h3>
+      <ol class="pubs">
+        <li class="pub" data-type="bildiri"><span class="pub-year">2026</span><div class="pub-main">
+          <p class="cite">Korkut, C., &amp; <b class="me">Sünbül, E.</b> (2026). <span class="t">Islamic social finance and monetary policy coordination: Evidence from a sample of ten OIC economies</span> [Paper presentation]. Journal of Islamic Monetary Economics and Finance (JIMF), Bank Indonesia Institute, Jakarta, Indonesia.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bildiri"><span class="pub-year">2025</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b>, &amp; Yavuz, F. (2025). <span class="t">The relationship between foreign trade, technology transfer, and economic growth: A theoretical and comparative literature review on developed and developing countries</span> [Paper presentation]. 3rd International Ionia Scientific Research Congress, İzmir, Türkiye.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bildiri"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t" lang="tr">Uluslararası turistlerin harcama eğilimlerinin geldikleri kıta coğrafyası özelinde araştırılması</span> [An investigation of international tourists’ spending tendencies by continent of origin] [Paper presentation]. 5th International Congress on Multidisciplinary Scientific Studies and Global Applications.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bildiri"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t" lang="tr">Bitcoin’in kripto varlıklar piyasasındaki etkileri: Ekonometrik zaman serisi uygulaması</span> [Effects of Bitcoin on the crypto-asset market: An econometric time-series application] [Paper presentation]. 8th International Social Sciences and Innovation Congress, Ankara, Türkiye.</p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bildiri"><span class="pub-year">2023</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2023). <span class="t">Determination of variables related to exchange rate level in Turkey with Toda-Yamamoto causality analysis</span> [Abstract]. 5th International Congress on Multidisciplinary Social Sciences (ICMUSS-2023), Ankara, Türkiye.</p>
+          <div class="pub-meta"><span>Abstract booklet, p. 165</span><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+        <li class="pub" data-type="bildiri"><span class="pub-year">2020</span><div class="pub-main">
+          <p class="cite"><b class="me">Sünbül, E.</b> (2020). <span class="t">The volume of foreign trade and relation of currency ARDL bound testing analysis (Turkey example)</span> [Paper presentation]. Third Economics, Business and Organization Research (EBOR) Conference, Proceedings (pp. 466–477). <a href="https://dergipark.org.tr/en/pub/ebor/issue/58610/850941">https://dergipark.org.tr/en/pub/ebor/issue/58610/850941</a></p>
+          <div class="pub-meta"><button class="copy" type="button" aria-label="Copy APA citation"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy citation</span></button></div>
+        </div></li>
+      </ol>
+    </section>
+
+    <p class="pub-empty" hidden>No publications match your search.</p>
+
+    <details class="fold">
+      <summary>Manuscripts under review and work in progress (26)</summary>
+      <div class="fold-body">
+        <p>Manuscripts that are under review or have been submitted and are not yet published. Journal names are omitted while review is ongoing.</p>
+        <ol>
+          <li><b class="me">Sünbül, E.</b> The relationship between monetary policy tools and consumer price inflation in fragile economies after COVID-19: A multiple correlation analysis.</li>
+          <li><b class="me">Sünbül, E.</b> Stock market–cryptocurrency nexus across development tiers: Evidence from developed, developing, and frontier economies.</li>
+          <li><b class="me">Sünbül, E.</b> International trade finance and payments: A holistic view from traditional methods to digital applications and geopolitical transformation.</li>
+          <li><b class="me">Sünbül, E.</b> Determinants of Islamic bank profitability: A cross-country panel analysis of twelve economies.</li>
+          <li><b class="me">Sünbül, E.</b> Technological diffusion, global value chains, and carbon emissions: Panel evidence from 40 GVC-integrated economies with CBAM as a structural break.</li>
+          <li><b class="me">Sünbül, E.</b> Tourism volume versus value: Panel evidence from Mediterranean economies on per-capita receipt determinants, economic complementarity and structural shocks (1995–2022).</li>
+          <li><b class="me">Sünbül, E.</b> Stock market returns, financial inclusion, and sovereign debt: A cross-country panel investigation, 2004–2024.</li>
+          <li><b class="me">Sünbül, E.</b> Market composition, macroeconomic fundamentals, and structural breaks in Turkey’s per-capita tourism receipts: Evidence from annual time-series data (1995–2024).</li>
+          <li><b class="me">Sünbül, E.</b> Measuring Türkiye’s trade finance gap: An independent bottom-up estimate and methodological comparison with Asian Development Bank data (2014–2024).</li>
+          <li><b class="me">Sünbül, E.</b> <span lang="tr">ABD/İsrail–İran eksenli jeopolitik şok senaryosunda Türkiye’nin tedarik zinciri yeniden yapılanmasındaki stratejik rolü</span> [Türkiye’s strategic role in supply chain restructuring under a US/Israel–Iran geopolitical shock scenario].</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Korkut, C. When to trust AI in bank transaction forecasting: A conditional model selection framework.</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Korkut, C. E-commerce and POS payment digitalisation under macroeconomic stress: Panel evidence from eight emerging economies.</li>
+          <li>Korkut, C., &amp; <b class="me">Sünbül, E.</b> Nowcasting emerging-market household consumption with high-frequency card payments: A MIDAS-LSTM hybrid panel approach.</li>
+          <li>Korkut, C., &amp; <b class="me">Sünbül, E.</b> Does e-commerce strengthen card-based payment resilience under macroeconomic stress? Evidence from Türkiye.</li>
+          <li>Korkut, C., &amp; <b class="me">Sünbül, E.</b> Islamic social finance and monetary policy coordination in OIC economies.</li>
+          <li>Korkut, C., &amp; <b class="me">Sünbül, E.</b> Macroeconomic vulnerability, sustainable transition, and the resilience of Islamic equity markets: Global evidence from Shariah-compliant indices.</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Yavuz, F. <span lang="tr">Uluslararası ticaret finansmanında yapay zekâ etiği: Algoritmik önyargı, şeffaflık ve hesap verebilirlik üzerine nitel bir inceleme</span> [Artificial intelligence ethics in international trade finance: A qualitative examination of algorithmic bias, transparency, and accountability].</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Yavuz, F. <span lang="tr">Türkiye’de kart ödemelerinin dinamiği: Yüksek enflasyon ortamında e-ticaretin asimetrik etkileri — NARDL ve Toda–Yamamoto yaklaşımları (2015–2024)</span> [The dynamics of card payments in Türkiye: Asymmetric effects of e-commerce in a high-inflation environment — NARDL and Toda–Yamamoto approaches (2015–2024)].</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Yavuz, F. Foreign trade as a channel for technology transfer and economic growth: A theoretical synthesis and comparative analysis of developed and developing countries.</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Özyürek, H. Effects of monetary policy tools on consumer price inflation in fragile economies: A quantile regression analysis (extended model).</li>
+          <li><b class="me">Sünbül, E.</b>, &amp; Özyürek, H. Application of hybrid ARIMA-ANN model for risk management and portfolio optimization of NFT, DeFi, and metaverse assets.</li>
+          <li>Özyürek, H., &amp; <b class="me">Sünbül, E.</b> Evaluating deep learning approaches for cryptocurrency price prediction: LSTM, GRU and RNN models.</li>
+          <li>Etlioğlu, M., &amp; <b class="me">Sünbül, E.</b> <span lang="tr">Pazarlama ve promosyon giderlerinin gelir etkilerinin açıklanması: Türk Hava Yolları üzerine bir zaman serisi analizi</span> [Explaining the revenue effects of marketing and promotion expenditures: A time-series analysis of Turkish Airlines].</li>
+          <li>Etlioğlu, M., &amp; <b class="me">Sünbül, E.</b> Algorithmic tightening and the narrowing brand frontier: How digital trade platforms reshape SME export intensity.</li>
+          <li>Etlioğlu, M., &amp; <b class="me">Sünbül, E.</b> Navigating turbulence: The impact of geopolitical risks on the internationalization strategies of SMEs through digital B2B platforms.</li>
+          <li>Yavuz, F., &amp; <b class="me">Sünbül, E.</b> The geopolitical security paradox in trade finance: A quantitative analysis of SME decision-making in emerging markets.</li>
+        </ol>
+      </div>
+    </details>
   </div>
 </section>
 
-<!-- BEN KİMİM -->
-<section class="section" id="about" style="background:white">
-  <div class="section-header"><h2>Hakkında</h2><div class="section-divider"></div></div>
-  <div class="card-grid" id="aboutCards"></div>
-</section>
-
-<!-- YAYINLAR -->
-<section class="section" id="publications">
-  <div class="section-header"><h2>Yayınlar</h2><div class="section-divider"></div></div>
-  <div id="pubFilters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px"></div>
-  <div class="pub-list" id="pubList"></div>
-</section>
-
-<!-- DUYURULAR -->
-<section class="section" id="announcements" style="background:white">
-  <div class="section-header"><h2>Duyurular</h2><div class="section-divider"></div></div>
-  <div id="announcementList"></div>
-</section>
-
-<!-- LİNKLER -->
-<section class="section" id="links">
-  <div class="section-header"><h2>Faydalı Linkler</h2><div class="section-divider"></div></div>
-  <div class="links-grid" id="linksGrid"></div>
-</section>
-
-<!-- BLOG -->
-<section class="section" id="blog" style="background:white">
-  <div class="section-header"><h2>Blog</h2><div class="section-divider"></div></div>
-  <div class="blog-grid" id="blogGrid"></div>
-</section>
-
-<!-- İLETİŞİM -->
-<section class="section" id="contact">
-  <div class="section-header"><h2>İletişim</h2><div class="section-divider"></div></div>
-  <div class="contact-grid" id="contactGrid"></div>
-</section>
-
-<footer class="footer"><p id="footerText">© 2025 Akademisyen Profil</p></footer>
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
-<div class="toast" id="toast"></div>
-
-<!-- BLOG MODAL -->
-<div class="blog-modal" id="blogModal" onclick="if(event.target===this)closeBlogModal()">
-  <div class="blog-modal-box">
-    <button class="blog-modal-close" onclick="closeBlogModal()">×</button>
-    <div class="blog-modal-cat" id="bModalCat"></div>
-    <div class="blog-modal-title" id="bModalTitle"></div>
-    <div class="blog-modal-meta" id="bModalMeta"></div>
-    <div class="blog-modal-img" id="bModalImg"></div>
-    <div class="blog-modal-content" id="bModalContent"></div>
-  </div>
-</div>
-
-<!-- LOGIN -->
-<div class="login-modal" id="loginModal" onclick="if(event.target===this)closeLogin()">
-  <div class="login-box">
-    <h2><i class="fas fa-shield-alt" style="color:var(--accent)"></i> Admin Girişi</h2>
-    <p>Yönetim paneline erişmek için giriş yapın</p>
-    <div id="loginErr"></div>
-    <form onsubmit="handleLogin(event)">
-      <input type="text" id="loginUser" placeholder="Kullanıcı adı" required autocomplete="username">
-      <input type="password" id="loginPass" placeholder="Şifre" required autocomplete="current-password">
-      <button type="submit" class="btn" style="width:100%"><i class="fas fa-sign-in-alt"></i> Giriş Yap</button>
-    </form>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:12px;text-align:center">Varsayılan: admin / admin123</p>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-overlay" id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <h2><i class="fas fa-cog"></i> Yönetim Paneli</h2>
-      <button class="admin-close" onclick="closeAdmin()">×</button>
+<!-- ========== PROJECTS ========== -->
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="sec-title" id="projects-title">Projects</h2></div>
+    <div class="cards">
+      <article class="card">
+        <p class="card-kicker">Erasmus+ KA154 · Youth Participation</p>
+        <h3>Health and Cancer Studies for Young People</h3>
+        <dl class="kv">
+          <div><dt>Role</dt><dd>Researcher</dd></div>
+          <div><dt>Year</dt><dd>2023</dd></div>
+          <div><dt>Status</dt><dd>Completed</dd></div>
+        </dl>
+        <p class="card-note">Project no. 2023-1-TR01-KA154-YOU-000144965 · European Union Erasmus+ Programme</p>
+      </article>
+      <article class="card">
+        <p class="card-kicker">TÜBİTAK 1501 · Industrial R&amp;D Projects</p>
+        <h3>Artificial Intelligence Ecosystem and Industrial Applications</h3>
+        <dl class="kv">
+          <div><dt>Role</dt><dd>Advisor, project developer</dd></div>
+          <div><dt>Period</dt><dd>2023–2025</dd></div>
+          <div><dt>Organisation</dt><dd>CF Danışmanlık</dd></div>
+        </dl>
+      </article>
+      <article class="card">
+        <p class="card-kicker">KOSGEB · SEGEM Support Programme</p>
+        <h3>AI-Supported SME Consultancy and Digital Transformation Platform</h3>
+        <dl class="kv">
+          <div><dt>Role</dt><dd>Project lead</dd></div>
+          <div><dt>Year</dt><dd>2026</dd></div>
+          <div><dt>Status</dt><dd>Passed evaluation</dd></div>
+        </dl>
+        <p class="card-note">CF Danışmanlık</p>
+      </article>
     </div>
-    <div class="admin-body">
-      <div class="admin-sidebar" id="adminSidebar"></div>
-      <div class="admin-content" id="adminContent"></div>
-    </div>
+
+    <h3 class="sub">Applications under evaluation (2026)</h3>
+    <ul class="apps">
+      <li><div><span class="prog">Horizon Europe · COP-PILOT call</span><span class="desc">AgriEdge PRO++: AI-driven multi-role precision agriculture decision support platform based on FIWARE NGSI-LD and edge computing</span></div><span class="role">Project coordinator</span></li>
+      <li><div><span class="prog">UNDP · Business and Human Rights Grant Programme (Lot 1 and Lot 2)</span><span class="desc">Strengthening civil society capacity to monitor and implement business and human rights in Türkiye</span></div><span class="role">Project coordinator</span></li>
+      <li><div><span class="prog">UNDP · Technical support and platform projects</span><span class="desc">Technical Support Project for Sustainable Development and Institutional Capacity Building; Digital Career Counselling Platform Development Project</span></div><span class="role">Technical expert, proposal developer</span></li>
+      <li><div><span class="prog">UN Women · Consultancy services</span><span class="desc">Technical support and training programmes on gender equality and women’s empowerment</span></div><span class="role">Project coordinator</span></li>
+    </ul>
   </div>
-</div>
+</section>
+
+<!-- ========== TEACHING ========== -->
+<section class="section band" id="teaching" aria-labelledby="teaching-title">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="sec-title" id="teaching-title">Teaching</h2></div>
+    <p class="lead">Courses taught at undergraduate and graduate level. The <span class="lvl">Grad</span> label marks graduate courses; all others are undergraduate courses. The <span class="mat-link">Materials</span> label marks courses with an interactive question bank (in Turkish).</p>
+    <div class="course-grid">
+      <div class="course-col">
+        <h3>Quantitative methods, AI and data</h3>
+        <ul>
+          <li>Artificial Intelligence <span class="lvl">UG · Grad</span></li>
+          <li>Big Data Analysis and Management <span class="lvl">Grad</span></li>
+          <li>Financial Forecasting and Data Visualisation Techniques (with R)</li>
+          <li>Blockchain and Crypto Assets</li>
+        </ul>
+      </div>
+      <div class="course-col">
+        <h3>International trade and finance</h3>
+        <ul>
+          <li>International Trade and Finance <span class="lvl">Grad</span></li>
+          <li>International Trade Finance <a class="mat-link" href="../materyaller/uluslararasi-ticaretin-finansmani.html" aria-label="Question bank (in Turkish)">Materials</a></li>
+          <li>International Finance</li>
+          <li>Introduction to International Trade <a class="mat-link" href="../materyaller/uluslararasi-ticarete-giris.html" aria-label="Question bank (in Turkish)">Materials</a></li>
+          <li>International Trade and Business</li>
+          <li>History of International Trade</li>
+          <li>Customs Legislation</li>
+        </ul>
+      </div>
+      <div class="course-col">
+        <h3>International business and management</h3>
+        <ul>
+          <li>International Marketing</li>
+          <li>International Business Management</li>
+          <li>Leadership in International Businesses</li>
+          <li>Leadership and Leadership Analysis</li>
+          <li>Fundamentals of Business</li>
+        </ul>
+      </div>
+      <div class="course-col">
+        <h3>Logistics and supply chain</h3>
+        <ul>
+          <li>Supply Chain Management</li>
+          <li>Project Logistics <a class="mat-link" href="../materyaller/proje-lojistigi.html" aria-label="Question bank (in Turkish)">Materials</a></li>
+          <li>International Transportation</li>
+        </ul>
+      </div>
+    </div>
+    <h3 class="sub">Student supervision</h3>
+    <ul class="plain-list">
+      <li>Undergraduate student project supervision — Istanbul Nişantaşı University, Department of International Trade and Business (2024, completed).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== COURSE MATERIALS ========== -->
+<section class="section" id="materials" aria-labelledby="materials-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title" id="materials-title">Course materials</h2>
+      <p class="sec-note">Interactive question banks with unit quizzes and midterm/final practice tests that draw 25 different questions each time. The programmes are in Turkish; no registration is required.</p>
+    </div>
+    <div class="cards mat-grid">
+      <article class="card"><p class="card-kicker">12 units · 240 questions</p><h3>AI and Demand Forecasting in Logistics</h3><a class="btn btn-sm" href="../materyaller/yapay-zeka-talep-tahminleme.html" hreflang="tr">Open question bank →</a></article>
+      <article class="card"><p class="card-kicker">11 units · 88 questions</p><h3>Logistics Data Analytics with R</h3><a class="btn btn-sm" href="../materyaller/lojistik-veri-analitigi.html" hreflang="tr">Open question bank →</a></article>
+      <article class="card"><p class="card-kicker">13 units · 215 questions</p><h3>Introduction to International Trade</h3><a class="btn btn-sm" href="../materyaller/uluslararasi-ticarete-giris.html" hreflang="tr">Open question bank →</a></article>
+      <article class="card"><p class="card-kicker">12 units · 270 questions</p><h3>International Trade Finance</h3><a class="btn btn-sm" href="../materyaller/uluslararasi-ticaretin-finansmani.html" hreflang="tr">Open question bank →</a></article>
+      <article class="card"><p class="card-kicker">14 units · 140 questions</p><h3>Project Logistics</h3><a class="btn btn-sm" href="../materyaller/proje-lojistigi.html" hreflang="tr">Open question bank →</a></article>
+      <article class="card"><p class="card-kicker">12 units · 240 questions</p><h3>Carbon Management and CBAM in Exports</h3><a class="btn btn-sm" href="../materyaller/karbon-yonetimi-cbam.html" hreflang="tr">Open question bank →</a></article>
+    </div>
+    <p class="more"><a href="../materyaller/" hreflang="tr">All course materials and user guide (in Turkish) →</a></p>
+  </div>
+</section>
+
+<!-- ========== CV ========== -->
+<section class="section band" id="cv" aria-labelledby="cv-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title" id="cv-title">Curriculum vitae</h2>
+      <button class="btn btn-sm js-print" type="button"><svg class="ic" aria-hidden="true"><use href="#i-print"/></svg>Save as PDF</button>
+    </div>
+    <div class="cv-grid">
+      <div>
+        <h3 class="sub">Education</h3>
+        <ol class="timeline">
+          <li><span class="when">2026</span><p class="what">Ph.D., Business Administration</p><p class="where">Kırıkkale University · thesis defence stage</p><p class="detail">Thesis: <i lang="tr">Liderin güç mesafesi tercihleri üzerine Türk kültürü ekseninde bir ölçek geliştirme çalışması</i> [A scale development study on leaders’ power distance preferences in the context of Turkish culture]. Supervisor: Prof. Dr. İhsan Yüksel.</p></li>
+          <li><span class="when">2022</span><p class="what">Ph.D., International Trade</p><p class="where">Ankara Hacı Bayram Veli University</p><p class="detail">Thesis: <i lang="tr">Döviz kurunu belirleyen değişkenlerin konvansiyonel zaman serisi ve yapay sinir ağlarına dayalı melez bir yöntem ile analizi</i> [Analysis of the variables determining the exchange rate with a hybrid method based on conventional time series and artificial neural networks]. Supervisor: Prof. Dr. Yasemin Keskin Benli.</p></li>
+          <li><span class="when">2017</span><p class="what">Master’s degree, Business Administration</p><p class="where">Ankara Yıldırım Beyazıt University</p><p class="detail">Thesis: <i lang="tr">Yöneticilerin kişilik özelliklerinin liderlik davranışlarına etkisi üzerine ampirik bir araştırma</i> [An empirical study on the effect of managers’ personality traits on leadership behaviours]. Supervisor: Prof. Dr. Hasan Engin Şener.</p></li>
+          <li><span class="when">2004</span><p class="what">Bachelor’s degree, Business Administration</p><p class="where">Anadolu University</p></li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="sub">Appointments</h3>
+        <ol class="timeline">
+          <li><span class="when">2026 – present</span><p class="what">Project Manager</p><p class="where">CF Eğitim Danışmanlığı</p></li>
+          <li><span class="when">2025 – present</span><p class="what">Chief Executive Officer (CEO)</p><p class="where">ADS Teşvik Danışmanlığı</p></li>
+          <li><span class="when">April 2023 – February 2026</span><p class="what">Advisor, Economics, Finance and International Trade</p><p class="where">ANKASAM, Ankara</p></li>
+          <li><span class="when">2023 – 2025</span><p class="what">Assistant Professor (Dr. Öğr. Üyesi)</p><p class="where">Istanbul Nişantaşı University, School of Applied Sciences, Department of International Trade and Business</p></li>
+          <li><span class="when">1993 – 2020</span><p class="what">Non-commissioned officer (retired)</p><p class="where">Turkish Armed Forces</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="cv-grid three">
+      <div>
+        <h3 class="sub">Methods and software</h3>
+        <ul class="plain-list">
+          <li><b>R</b> — advanced in time-series analysis and machine-learning applications; basic in text mining.</li>
+          <li><b>EViews</b> and <b>SPSS</b> basic; <b>Microsoft Office</b> advanced.</li>
+          <li>ARDL bounds testing, VAR, Johansen cointegration and VECM, Toda–Yamamoto causality, NARDL, quantile regression, panel data; SARIMA, ARIMA and Holt-Winters; ANN, LSTM, GRU, RNN and MIDAS-LSTM.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub">Languages</h3>
+        <ul class="plain-list">
+          <li>Turkish — native</li>
+          <li>English — reading, writing and speaking B2</li>
+          <li>YÖKDİL (Turkish higher-education foreign language exam): 64</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="sub">Reviewing</h3>
+        <ul class="plain-list">
+          <li><i>Journal of the Knowledge Economy</i> (Springer)</li>
+          <li><i lang="tr">Alanya Akademik Bakış Dergisi</i></li>
+          <li><i lang="tr">İstanbul Gelişim Üniversitesi Sosyal Bilimler Dergisi</i></li>
+          <li><i lang="tr">Pamukkale Üniversitesi Sosyal Bilimler Enstitüsü Dergisi</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <details class="fold">
+      <summary>Certificates and training</summary>
+      <div class="fold-body">
+        <ul>
+          <li>KOSGEB Entrepreneurship Certificate; KOSGEB Advanced Entrepreneurship Certificate</li>
+          <li>Training in project management, risk analysis, documentation, leadership, communication techniques and time management</li>
+          <li>Child Rights Toolkit — UNICEF and UN Human Rights (2026)</li>
+          <li>Gender-Based Violence (GBV) Initial Support — UNICEF (2026)</li>
+          <li>School-Related Gender-Based Violence (SRGBV) — UNICEF and UNGEI (2026)</li>
+          <li>Education in Emergencies Global Course — UNICEF and INEE (2026)</li>
+          <li>Ethics and Integrity at UNICEF — UNICEF (2026)</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact">
+    <div>
+      <div class="sec-head"><h2 class="sec-title" id="contact-title">Contact</h2></div>
+      <p class="lead">For academic collaboration, joint projects and speaking invitations, please get in touch by email.</p>
+    </div>
+    <ul class="contact-list">
+      <li><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span class="label">Email</span><a class="js-mail" data-u="ersinsunbul" data-d="hotmail.com" data-show href="#contact">ersinsunbul [at] hotmail.com</a></li>
+      <li><svg class="ic ic-fill" aria-hidden="true"><use href="#i-orcid"/></svg><span class="label">ORCID</span><a href="https://orcid.org/0000-0001-6187-2038" target="_blank" rel="me noopener">0000-0001-6187-2038</a></li>
+      <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span class="label">Location</span><span>Ankara, Türkiye</span></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© 2026 Dr. Ersin Sünbül</p>
+    <p>Last updated: <time datetime="2026-11-18">18 November 2026</time></p>
+    <a class="to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
 
 <script>
-/* ═══════════════════════════════════════════════
-   VERİ MODELİ
-═══════════════════════════════════════════════ */
-function escapeHtml(s){if(!s)return '';return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function uid(){return Math.random().toString(36).slice(2,10)}
+(function () {
+  'use strict';
+  var doc = document, root = doc.documentElement;
+  function $all(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
 
-let data = {
-  hero:{ name:'', title:'', institution:'', bio:'', image:'', cv:'',
-    stats:{pubs:0,cites:0,projects:0,years:0},
-    social:{linkedin:'',twitter:'',scholar:'',researchgate:'',orcid:'',academia:'',email:'',website:''}
-  },
-  about:{
-    education:[],   // {id,degree,field,inst,year,note}
-    experience:[],  // {id,title,org,period,desc}
-    research:[],    // string tags
-    awards:[],      // {id,title,org,year}
-    courses:[],     // {id,code,title,level,desc}
-    memberships:[]  // string tags
-  },
-  publications:[], // {id,title,authors,journal,year,type,doi,pdf,abstract,cites}
-  announcements:[], // {id,title,content,category,date,pinned,image,startDate,endDate}
-  links:[], // {id,title,url,description,icon}
-  blog:[], // {id,title,excerpt,content,category,date,readTime,image,published}
-  contact:{address:'',email:'',phone:'',hours:''},
-  settings:{siteName:'Akademisyen',footerText:'© 2025'},
-  admin:{username:'admin',password:'admin123'}
-};
-
-let currentPubFilter = 'all';
-
-/* ═══════════════════════════════════════════════
-   STORAGE & MİGRASYON
-═══════════════════════════════════════════════ */
-function loadData(){
-  const raw = localStorage.getItem('academicData');
-  if(raw){ try{
-    let p = JSON.parse(raw);
-    if(!p.admin) p.admin = {username:'admin',password:'admin123'};
-    // Migrate old string-based about to array format
-    if(p.about && typeof p.about.education === 'string'){
-      const old = p.about;
-      p.about = {education:[],experience:[],research:[],awards:[],courses:[],memberships:[]};
-      if(old.education) p.about.education.push({id:uid(),degree:'',field:'',inst:old.education,year:'',note:''});
-      if(old.experience) p.about.experience.push({id:uid(),title:'',org:old.experience,period:'',desc:''});
-      if(old.research) old.research.split(',').map(s=>s.trim()).filter(Boolean).forEach(r=>p.about.research.push(r));
-      if(old.awards) p.about.awards.push({id:uid(),title:old.awards,org:'',year:''});
-      if(old.courses) p.about.courses.push({id:uid(),code:'',title:old.courses,level:'',desc:''});
-      if(old.memberships) old.memberships.split(',').map(s=>s.trim()).filter(Boolean).forEach(m=>p.about.memberships.push(m));
-    }
-    // Ensure blog has published flag
-    if(p.blog) p.blog = p.blog.map(b=>({published:true,...b}));
-    data = p;
-  } catch(e){} }
-  renderAll();
-}
-function saveData(silent){
-  localStorage.setItem('academicData', JSON.stringify(data));
-  renderAll();
-  if(!silent) showToast('Kaydedildi ✓');
-}
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2600);
-}
-
-/* ═══════════════════════════════════════════════
-   RENDER
-═══════════════════════════════════════════════ */
-function renderAll(){
-  renderHero(); renderAbout(); renderPublications();
-  renderAnnouncements(); renderLinks(); renderBlog(); renderContact();
-  document.getElementById('navName').textContent = data.settings.siteName||'Akademisyen';
-  document.getElementById('footerText').textContent = data.settings.footerText||'© 2025';
-  document.title = data.settings.siteName||'Akademisyen';
-}
-
-/* ── HERO ── */
-const SOCIAL_DEFS = {
-  linkedin:    {icon:'fab fa-linkedin-in',    label:'LinkedIn',         color:'#0077b5'},
-  twitter:     {icon:'fab fa-twitter',        label:'Twitter / X',      color:'#1da1f2'},
-  scholar:     {icon:'fas fa-graduation-cap', label:'Google Scholar',   color:'#4285f4'},
-  researchgate:{icon:'fab fa-researchgate',   label:'ResearchGate',     color:'#00d0af'},
-  orcid:       {icon:'fas fa-id-badge',       label:'ORCID',            color:'#a6ce39'},
-  academia:    {icon:'fas fa-book-open',      label:'Academia.edu',     color:'#333'},
-  email:       {icon:'fas fa-envelope',       label:'E-posta',          color:'#e74c3c'},
-  website:     {icon:'fas fa-globe',          label:'Web Sitesi',       color:'#27ae60'}
-};
-function renderHero(){
-  document.getElementById('heroName').textContent        = data.hero.name||'Ad Soyad';
-  document.getElementById('heroTitle').textContent       = data.hero.title||'Akademik Unvan';
-  document.getElementById('heroInstitution').innerHTML   = `<i class="fas fa-university"></i><span>${escapeHtml(data.hero.institution||'Üniversite')}</span>`;
-  document.getElementById('heroBio').textContent         = data.hero.bio||'';
-  document.getElementById('heroImagePreview').innerHTML  = data.hero.image ? `<img src="${data.hero.image}" alt="Profil">` : '<i class="fas fa-user" style="font-size:4rem;color:#adb5bd"></i>';
-  // Stats
-  const s = data.hero.stats||{};
-  const statDefs = [{v:s.pubs,l:'Yayın'},{v:s.cites,l:'Atıf'},{v:s.projects,l:'Proje'},{v:s.years,l:'Yıl'}];
-  document.getElementById('heroStats').innerHTML = statDefs.filter(x=>x.v).map(x=>`<div class="stat-item"><span class="stat-number">${x.v}</span><div class="stat-label">${x.l}</div></div>`).join('');
-  // Social
-  const soc = data.hero.social||{};
-  let socialHtml = '';
-  Object.entries(SOCIAL_DEFS).forEach(([k, def])=>{
-    const url = soc[k]; if(!url) return;
-    const href = k==='email' ? `mailto:${url}` : url;
-    socialHtml += `<a href="${escapeHtml(href)}" target="${k==='email'?'_self':'_blank'}" class="social-btn"><i class="${def.icon}" style="color:${def.color}"></i>${def.label}</a>`;
-  });
-  document.getElementById('heroSocial').innerHTML = socialHtml;
-  // CV
-  const cvBtn = document.getElementById('heroCvBtn');
-  if(data.hero.cv){ cvBtn.href=data.hero.cv; cvBtn.style.display='inline-flex'; }
-  else cvBtn.style.display='none';
-}
-
-/* ── ABOUT ── */
-function renderAbout(){
-  const a = data.about;
-  const cards = [
-    { key:'education', icon:'fa-graduation-cap', title:'Eğitim', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-graduation-cap al-icon"></i><div class="al-body"><strong>${escapeHtml(e.degree)}${e.field?' – '+escapeHtml(e.field):''}</strong><div class="al-meta">${escapeHtml(e.inst)}${e.year?' · '+escapeHtml(e.year):''}${e.note?' · '+escapeHtml(e.note):''}</div></div></li>`).join('') },
-    { key:'experience', icon:'fa-briefcase',     title:'Deneyim', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-briefcase al-icon"></i><div class="al-body"><strong>${escapeHtml(e.title)}</strong><div class="al-meta">${escapeHtml(e.org)}${e.period?' · '+escapeHtml(e.period):''}</div>${e.desc?`<div style="font-size:0.78rem;color:var(--text3);margin-top:3px">${escapeHtml(e.desc)}</div>`:''}</div></li>`).join('') },
-    { key:'research',   icon:'fa-flask',          title:'Araştırma Alanları', renderFn: (items)=> `<div class="tag-list">${items.map(t=>`<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>`, isTags:true },
-    { key:'awards',     icon:'fa-award',          title:'Ödüller & Başarılar', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-award al-icon" style="color:#f39c12"></i><div class="al-body"><strong>${escapeHtml(e.title)}</strong><div class="al-meta">${escapeHtml(e.org)}${e.year?' · '+escapeHtml(e.year):''}</div></div></li>`).join('') },
-    { key:'courses',    icon:'fa-chalkboard-teacher', title:'Verdiği Dersler', renderFn: (items)=> items.map(e=>`<li><i class="fas fa-chalkboard-teacher al-icon"></i><div class="al-body"><strong>${e.code?`<span style="font-family:monospace;font-size:0.78rem;color:var(--accent)">${escapeHtml(e.code)}</span> `:''}${escapeHtml(e.title)}</strong><div class="al-meta">${e.level?escapeHtml(e.level):''}${e.desc?' – '+escapeHtml(e.desc):''}</div></div></li>`).join('') },
-    { key:'memberships',icon:'fa-users',          title:'Üyelikler', renderFn: (items)=> `<div class="tag-list">${items.map(t=>`<span class="tag-pill">${escapeHtml(t)}</span>`).join('')}</div>`, isTags:true }
-  ];
-  const container = document.getElementById('aboutCards');
-  let html = '';
-  cards.forEach(card=>{
-    const items = a[card.key]||[];
-    if(!items.length) return;
-    const inner = card.isTags ? card.renderFn(items) : `<ul class="about-list">${card.renderFn(items)}</ul>`;
-    html += `<div class="card"><div class="card-icon"><i class="fas ${card.icon}"></i></div><h3>${card.title}</h3>${inner}</div>`;
-  });
-  container.innerHTML = html || '<div class="empty-state"><i class="fas fa-user-edit fa-2x" style="margin-bottom:12px"></i><p>Hakkında bilgisi henüz eklenmedi.</p></div>';
-}
-
-/* ── PUBLICATIONS ── */
-const PUB_TYPES = ['Uluslararası Makale','TR Dizin Makale','Kitap / Bölüm','Bildiri'];
-const PUB_BADGE = {'Uluslararası Makale':'b-intl','TR Dizin Makale':'b-tr','Kitap / Bölüm':'b-book','Bildiri':'b-conf'};
-function renderPublications(){
-  const filters = document.getElementById('pubFilters');
-  filters.innerHTML = ['Tümü',...PUB_TYPES].map(t=>`<button class="btn btn-sm ${(currentPubFilter===t||(t==='Tümü'&&currentPubFilter==='all'))?'':'btn-outline'}" onclick="setPubFilter('${t}')">${t}</button>`).join('');
-  let items = currentPubFilter==='all' ? data.publications : data.publications.filter(p=>p.type===currentPubFilter);
-  const list = document.getElementById('pubList');
-  if(!items.length){ list.innerHTML='<div class="empty-state"><i class="fas fa-book fa-2x" style="margin-bottom:12px"></i><p>Yayın bulunamadı.</p></div>'; return; }
-  list.innerHTML = items.map((p,i)=>{
-    const bc = PUB_BADGE[p.type]||'b-intl';
-    return `<div class="pub-item"><div class="pub-number">${i+1}</div><div class="pub-body">
-      <h4>${escapeHtml(p.title)}${p.type?`<span class="pub-badge ${bc}">${p.type}</span>`:''}</h4>
-      <div class="pub-authors">${escapeHtml(p.authors)}</div>
-      <div class="pub-journal"><i>${escapeHtml(p.journal)}</i>${p.year?' ('+p.year+')':''}${p.cites?' · <strong>'+p.cites+' atıf</strong>':''}</div>
-      ${p.abstract?`<details style="margin-top:8px"><summary style="font-size:0.8rem;cursor:pointer;color:var(--accent);font-weight:600">Özeti göster</summary><p style="font-size:0.82rem;color:var(--text2);margin-top:6px;line-height:1.65;padding:8px 0">${escapeHtml(p.abstract)}</p></details>`:''}
-      <div class="pub-links">${p.doi?`<a href="https://doi.org/${escapeHtml(p.doi)}" target="_blank"><i class="fas fa-external-link-alt"></i> DOI</a>`:''}${p.pdf?`<a href="${escapeHtml(p.pdf)}" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>`:''}</div>
-    </div></div>`;
-  }).join('');
-}
-function setPubFilter(t){ currentPubFilter = t==='Tümü'?'all':t; renderPublications(); }
-
-/* ── ANNOUNCEMENTS ── */
-function renderAnnouncements(){
-  const now = new Date();
-  let items = data.announcements.filter(a=>{
-    const s=a.startDate?new Date(a.startDate):null, e=a.endDate?new Date(a.endDate):null;
-    if(s&&now<s)return false; if(e&&now>e)return false; return true;
-  }).sort((a,b)=>(b.pinned-a.pinned)||new Date(b.date)-new Date(a.date));
-  const list = document.getElementById('announcementList');
-  if(!items.length){ list.innerHTML='<div class="empty-state"><i class="fas fa-bullhorn fa-2x" style="margin-bottom:12px"></i><p>Henüz duyuru yok.</p></div>'; return; }
-  list.innerHTML = items.map(a=>{
-    const d = a.date ? new Date(a.date) : new Date();
-    const day = isNaN(d)?'--':d.getDate();
-    const mon = isNaN(d)?'--':d.toLocaleString('tr',{month:'short'}).toUpperCase();
-    return `<div class="announcement-item ${a.pinned?'pinned':''}">
-      <div class="ann-date-badge"><div class="day">${day}</div><div class="mon">${mon}</div></div>
-      <div class="ann-body">
-        <h4>${a.pinned?'<i class="fas fa-thumbtack" style="color:#e67e22;margin-right:6px"></i>':''}${escapeHtml(a.title)}</h4>
-        <p>${escapeHtml(a.content)}</p>
-        ${a.image?`<img src="${a.image}" style="max-height:140px;border-radius:8px;margin-top:10px" alt="">`:''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-/* ── LINKS ── */
-function renderLinks(){
-  const grid = document.getElementById('linksGrid');
-  if(!data.links.length){ grid.innerHTML='<div class="empty-state"><i class="fas fa-link fa-2x" style="margin-bottom:12px"></i><p>Henüz link eklenmedi.</p></div>'; return; }
-  grid.innerHTML = data.links.map(l=>`
-    <a href="${escapeHtml(l.url)}" target="_blank" class="link-item">
-      <div class="link-icon-wrap"><i class="${escapeHtml(l.icon||'fas fa-link')}"></i></div>
-      <div class="link-title">${escapeHtml(l.title)}</div>
-      ${l.description?`<div class="link-desc">${escapeHtml(l.description)}</div>`:''}
-    </a>`).join('');
-}
-
-/* ── BLOG ── */
-function renderBlog(){
-  const grid = document.getElementById('blogGrid');
-  const posts = data.blog.filter(b=>b.published!==false);
-  if(!posts.length){ grid.innerHTML='<div class="empty-state"><i class="fas fa-pen-nib fa-2x" style="margin-bottom:12px"></i><p>Henüz blog yazısı yayımlanmadı.</p></div>'; return; }
-  grid.innerHTML = posts.map(b=>`
-    <div class="blog-card" onclick="openBlogModal('${b.id}')">
-      <div class="blog-image">${b.image?`<img src="${b.image}" alt="">`:'<i class="fas fa-pen-nib fa-2x"></i>'}</div>
-      <div class="blog-body">
-        ${b.category?`<div class="blog-category">${escapeHtml(b.category)}</div>`:''}
-        <h3>${escapeHtml(b.title)}</h3>
-        <div class="blog-excerpt">${escapeHtml(b.excerpt||'')}</div>
-        <div class="blog-meta">
-          ${b.date?`<span><i class="fas fa-calendar"></i> ${fmtDate(b.date)}</span>`:''}
-          ${b.readTime?`<span><i class="fas fa-clock"></i> ${escapeHtml(b.readTime)}</span>`:''}
-          <span style="margin-left:auto;color:var(--accent);font-weight:600;font-size:0.8rem">Oku →</span>
-        </div>
-      </div>
-    </div>`).join('');
-}
-function fmtDate(d){ try{ return new Date(d).toLocaleDateString('tr-TR'); }catch(e){ return d||''; } }
-function openBlogModal(id){
-  const b = data.blog.find(x=>x.id===id); if(!b) return;
-  document.getElementById('bModalCat').textContent   = b.category||'';
-  document.getElementById('bModalTitle').textContent = b.title||'';
-  document.getElementById('bModalMeta').innerHTML    = `${b.date?`<span><i class="fas fa-calendar"></i> ${fmtDate(b.date)}</span>`:''} ${b.readTime?`<span><i class="fas fa-clock"></i> ${escapeHtml(b.readTime)}</span>`:''}`;
-  document.getElementById('bModalImg').innerHTML     = b.image ? `<img src="${b.image}" alt="" style="width:100%;border-radius:12px">` : '';
-  document.getElementById('bModalContent').textContent = b.content||b.excerpt||'İçerik girilmemiş.';
-  document.getElementById('blogModal').classList.add('active');
-}
-function closeBlogModal(){ document.getElementById('blogModal').classList.remove('active'); }
-
-/* ── CONTACT ── */
-function renderContact(){
-  const c = data.contact;
-  document.getElementById('contactGrid').innerHTML = `
-    <div class="contact-info">
-      <h3>İletişim Bilgileri</h3>
-      ${c.address?`<div class="contact-row"><i class="fas fa-map-marker-alt"></i><span>${escapeHtml(c.address)}</span></div>`:''}
-      ${c.email?`<div class="contact-row"><i class="fas fa-envelope"></i><a href="mailto:${escapeHtml(c.email)}">${escapeHtml(c.email)}</a></div>`:''}
-      ${c.phone?`<div class="contact-row"><i class="fas fa-phone"></i><span>${escapeHtml(c.phone)}</span></div>`:''}
-      ${c.hours?`<div class="contact-row"><i class="fas fa-clock"></i><span>${escapeHtml(c.hours)}</span></div>`:''}
-    </div>
-    <div class="contact-form">
-      <h3>Mesaj Gönder</h3>
-      <form onsubmit="handleContact(event)">
-        <input type="text" placeholder="Adınız" required>
-        <input type="email" placeholder="E-posta" required>
-        <input type="text" placeholder="Konu">
-        <textarea rows="4" placeholder="Mesajınız"></textarea>
-        <button type="submit" class="btn" style="width:100%"><i class="fas fa-paper-plane"></i> Gönder</button>
-      </form>
-    </div>`;
-}
-function handleContact(e){ e.preventDefault(); showToast('Mesajınız alındı (demo)'); e.target.reset(); }
-
-/* ═══════════════════════════════════════════════
-   FILE UPLOAD
-═══════════════════════════════════════════════ */
-function fileToBase64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
-async function handleImageUpload(file,maxMB=5){
-  if(!file.type.startsWith('image/')){ showToast('Lütfen bir resim dosyası seçin'); return null; }
-  if(file.size>maxMB*1024*1024){ showToast(`Dosya ${maxMB}MB'dan büyük`); return null; }
-  return await fileToBase64(file);
-}
-function createUploadArea(currentSrc, onUpload, clearFn, width=200){
-  const div=document.createElement('div'); div.className='image-upload-area';
-  const previewId='up_'+uid();
-  div.innerHTML=`<div id="${previewId}">${currentSrc?`<img src="${currentSrc}" style="max-width:${width}px;border-radius:8px">`:'<i class="fas fa-cloud-upload-alt fa-2x" style="color:var(--text3)"></i><p style="font-size:0.84rem;color:var(--text3);margin-top:8px">Resmi sürükleyin veya tıklayın</p>'}</div>${clearFn?'<button type="button" class="btn btn-danger btn-sm" style="margin-top:8px" onclick="('+clearFn+')()"><i class="fas fa-trash"></i> Fotoğrafı Kaldır</button>':''}`;
-  const fileInput=document.createElement('input'); fileInput.type='file'; fileInput.accept='image/*'; fileInput.style.display='none'; div.appendChild(fileInput);
-  const preview=()=>div.querySelector('#'+previewId);
-  div.addEventListener('click',e=>{ if(e.target.tagName==='BUTTON') return; fileInput.click(); });
-  fileInput.addEventListener('change',async e=>{ const f=e.target.files[0]; if(!f) return; const b64=await handleImageUpload(f); if(b64){ preview().innerHTML=`<img src="${b64}" style="max-width:${width}px;border-radius:8px">`; onUpload(b64); } });
-  div.addEventListener('dragover',e=>{ e.preventDefault(); div.classList.add('drag-over'); });
-  div.addEventListener('dragleave',()=>div.classList.remove('drag-over'));
-  div.addEventListener('drop',async e=>{ e.preventDefault(); div.classList.remove('drag-over'); const f=e.dataTransfer.files[0]; if(f){ const b64=await handleImageUpload(f); if(b64){ preview().innerHTML=`<img src="${b64}" style="max-width:${width}px;border-radius:8px">`; onUpload(b64); } } });
-  return div;
-}
-
-/* ═══════════════════════════════════════════════
-   ADMIN PANELİ
-═══════════════════════════════════════════════ */
-const ADMIN_TABS = [
-  {id:'hero',      icon:'fa-id-card',            label:'Profil & Hero'},
-  {id:'about',     icon:'fa-user',               label:'Hakkında'},
-  {id:'publications',icon:'fa-book',             label:'Yayınlar'},
-  {id:'announcements',icon:'fa-bullhorn',        label:'Duyurular'},
-  {id:'links',     icon:'fa-link',               label:'Faydalı Linkler'},
-  {id:'blog',      icon:'fa-pen-nib',            label:'Blog'},
-  {id:'contact',   icon:'fa-envelope',           label:'İletişim'},
-  {id:'settings',  icon:'fa-cog',                label:'Ayarlar'},
-];
-let currentAdminTab = 'hero';
-function buildAdminSidebar(){
-  document.getElementById('adminSidebar').innerHTML = ADMIN_TABS.map(t=>`
-    <button data-tab="${t.id}" onclick="showAdminTab('${t.id}')" class="${currentAdminTab===t.id?'active':''}">
-      <i class="fas ${t.icon}"></i>${t.label}
-    </button>`).join('');
-}
-function showAdminTab(tab){
-  currentAdminTab=tab; buildAdminSidebar();
-  const c=document.getElementById('adminContent');
-  if(tab==='hero')          heroAdminForm(c);
-  else if(tab==='about')    aboutAdminForm(c);
-  else if(tab==='publications') pubAdminForm(c);
-  else if(tab==='announcements') annAdminForm(c);
-  else if(tab==='links')    linkAdminForm(c);
-  else if(tab==='blog')     blogAdminForm(c);
-  else if(tab==='contact')  contactAdminForm(c);
-  else if(tab==='settings') settingsAdminForm(c);
-}
-
-/* ── HERO ADMIN ── */
-function heroAdminForm(c){
-  c.innerHTML=`<h3>Profil & Hero</h3>
-  <div class="add-form-section">
-    <h4><i class="fas fa-image"></i> Profil Fotoğrafı</h4>
-    <div id="heroPhotoUpload"></div>
-  </div>
-  <div class="admin-form">
-    <div class="form-grid-2">
-      <div class="form-group"><label>Ad Soyad *</label><input id="hName" value="${escapeHtml(data.hero.name)}"></div>
-      <div class="form-group"><label>Akademik Unvan</label><input id="hTitle" value="${escapeHtml(data.hero.title)}"></div>
-      <div class="form-group"><label>Kurum / Üniversite</label><input id="hInst" value="${escapeHtml(data.hero.institution)}"></div>
-    </div>
-    <div class="form-group"><label>Kısa Biyografi</label><textarea id="hBio" rows="3">${escapeHtml(data.hero.bio)}</textarea></div>
-    <div class="form-grid-2" style="margin-bottom:14px">
-      <div class="form-group"><label>Yayın Sayısı</label><input id="sPubs" type="number" value="${data.hero.stats.pubs||0}"></div>
-      <div class="form-group"><label>Toplam Atıf</label><input id="sCites" type="number" value="${data.hero.stats.cites||0}"></div>
-      <div class="form-group"><label>Proje Sayısı</label><input id="sProjs" type="number" value="${data.hero.stats.projects||0}"></div>
-      <div class="form-group"><label>Akademik Yıl</label><input id="sYears" type="number" value="${data.hero.stats.years||0}"></div>
-    </div>
-    <h4 style="font-size:0.88rem;font-weight:700;color:var(--primary);margin-bottom:12px"><i class="fas fa-share-alt"></i> Sosyal Medya & Profiller</h4>
-    <div class="form-grid-2">
-      ${Object.entries(SOCIAL_DEFS).map(([k,d])=>`<div class="form-group"><label><i class="${d.icon}" style="color:${d.color};width:16px"></i> ${d.label}</label><input id="soc_${k}" value="${escapeHtml((data.hero.social||{})[k]||'')}" placeholder="${k==='email'?'email@domain.com':'https://...'}"></div>`).join('')}
-    </div>
-    <div class="form-group">
-      <label>CV (PDF)</label>
-      <div id="heroCvUpload"></div>
-      ${data.hero.cv?`<button type="button" class="btn btn-danger btn-sm" onclick="data.hero.cv='';saveData(true);showAdminTab('hero')"><i class="fas fa-trash"></i> CV'yi Kaldır</button>`:''}
-    </div>
-    <button class="btn" onclick="saveHero()"><i class="fas fa-save"></i> Kaydet</button>
-  </div>`;
-  // Photo upload with remove
-  document.getElementById('heroPhotoUpload').appendChild(
-    createUploadArea(data.hero.image, b64=>{data.hero.image=b64;saveData(true);showAdminTab('hero');}, 'function(){data.hero.image="";saveData(true);showAdminTab("hero")}')
-  );
-  // CV upload
-  const cvDiv=document.getElementById('heroCvUpload');
-  const cvInp=document.createElement('input'); cvInp.type='file'; cvInp.accept='.pdf'; cvInp.style.cssText='display:block;margin-bottom:8px;font-size:0.84rem';
-  cvInp.onchange=async e=>{ const f=e.target.files[0]; if(!f)return; if(f.size>10*1024*1024){showToast('PDF 10MB\'dan büyük');return;} data.hero.cv=await fileToBase64(f); saveData(true); showAdminTab('hero'); };
-  cvDiv.appendChild(cvInp);
-}
-function saveHero(){
-  data.hero.name        = document.getElementById('hName').value.trim();
-  data.hero.title       = document.getElementById('hTitle').value.trim();
-  data.hero.institution = document.getElementById('hInst').value.trim();
-  data.hero.bio         = document.getElementById('hBio').value.trim();
-  data.hero.stats.pubs     = parseInt(document.getElementById('sPubs').value)||0;
-  data.hero.stats.cites    = parseInt(document.getElementById('sCites').value)||0;
-  data.hero.stats.projects = parseInt(document.getElementById('sProjs').value)||0;
-  data.hero.stats.years    = parseInt(document.getElementById('sYears').value)||0;
-  if(!data.hero.social) data.hero.social={};
-  Object.keys(SOCIAL_DEFS).forEach(k=>{data.hero.social[k]=(document.getElementById('soc_'+k)||{}).value||'';});
-  saveData();
-}
-
-/* ── ABOUT ADMIN ── */
-function aboutAdminForm(c){
-  c.innerHTML=`<h3>Hakkında</h3>
-  <div class="admin-tabs">
-    <button class="admin-tab active" onclick="showAboutTab('education',this)">Eğitim</button>
-    <button class="admin-tab" onclick="showAboutTab('experience',this)">Deneyim</button>
-    <button class="admin-tab" onclick="showAboutTab('research',this)">Araştırma</button>
-    <button class="admin-tab" onclick="showAboutTab('awards',this)">Ödüller</button>
-    <button class="admin-tab" onclick="showAboutTab('courses',this)">Dersler</button>
-    <button class="admin-tab" onclick="showAboutTab('memberships',this)">Üyelikler</button>
-  </div>
-  <div id="aboutSubArea"></div>`;
-  showAboutTab('education', c.querySelector('.admin-tab.active'));
-}
-window.showAboutTab = function(key, btn){
-  if(btn){ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-  const sub = document.getElementById('aboutSubArea');
-  if(key==='research'||key==='memberships') renderTagForm(sub, key);
-  else renderListForm(sub, key);
-};
-function renderListForm(sub, key){
-  const defs = {
-    education: {fields:[{id:'degree',label:'Derece',ph:'Doktora'},{id:'field',label:'Alan',ph:'İşletme'},{id:'inst',label:'Kurum *',ph:'Üniversite'},{id:'year',label:'Yıl',ph:'2022'},{id:'note',label:'Not',ph:'Tez konusu vb.'}], title:'Eğitim Girişi'},
-    experience:{fields:[{id:'title',label:'Pozisyon *',ph:'Dr. Öğr. Üyesi'},{id:'org',label:'Kurum',ph:'Üniversite'},{id:'period',label:'Dönem',ph:'2023 – devam'},{id:'desc',label:'Açıklama',ph:''}], title:'Deneyim Girişi'},
-    awards:    {fields:[{id:'title',label:'Ödül Adı *',ph:'En İyi Makale Ödülü'},{id:'org',label:'Kurum',ph:'IEEE'},{id:'year',label:'Yıl',ph:'2024'}], title:'Ödül Girişi'},
-    courses:   {fields:[{id:'code',label:'Ders Kodu',ph:'UTİ301'},{id:'title',label:'Ders Adı *',ph:'Tedarik Zinciri'},{id:'level',label:'Seviye',ph:'Lisans / YL'},{id:'desc',label:'Açıklama',ph:''}], title:'Ders Girişi'},
-  };
-  const def = defs[key]; if(!def) return;
-  const items = data.about[key]||[];
-  sub.innerHTML=`
-    <div class="add-form-section">
-      <h4><i class="fas fa-plus-circle"></i> Yeni ${def.title}</h4>
-      <div class="form-grid-2">
-        ${def.fields.map(f=>`<div class="form-group"><label>${f.label}</label><input id="af_${f.id}" placeholder="${f.ph||''}"></div>`).join('')}
-      </div>
-      <button class="btn btn-success btn-sm" onclick="addAboutItem('${key}')"><i class="fas fa-plus"></i> Ekle</button>
-    </div>
-    <div class="admin-list" id="aboutItemList_${key}">
-      ${renderAboutItemList(key, items, def)}
-    </div>`;
-}
-function renderAboutItemList(key, items, def){
-  if(!def){ const defs2={education:{fields:[{id:'degree'},{id:'field'},{id:'inst'},{id:'year'},{id:'note'}]},experience:{fields:[{id:'title'},{id:'org'},{id:'period'},{id:'desc'}]},awards:{fields:[{id:'title'},{id:'org'},{id:'year'}]},courses:{fields:[{id:'code'},{id:'title'},{id:'level'},{id:'desc'}]}}; def=defs2[key]||{fields:[]}; }
-  if(!items.length) return '<div class="empty-state">Henüz kayıt yok.</div>';
-  return items.map((item,i)=>`
-    <div class="admin-item" id="ait_${item.id}">
-      <div class="admin-item-body">
-        <div class="admin-item-title">${escapeHtml(item.title||item.degree||item.pos||'—')} ${item.year||item.period?'<span style="color:var(--text3);font-size:0.75rem">('+escapeHtml(item.year||item.period||'')+')</span>':''}</div>
-        <div class="admin-item-sub">${escapeHtml(item.inst||item.org||item.level||'')}</div>
-      </div>
-      <div class="admin-item-acts">
-        <button class="btn btn-sm btn-outline" onclick="editAboutItem('${key}','${item.id}')"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-sm btn-danger" onclick="delAboutItem('${key}','${item.id}')"><i class="fas fa-trash"></i></button>
-      </div>
-    </div>`).join('');
-}
-window.addAboutItem = function(key){
-  const defs={education:['degree','field','inst','year','note'],experience:['title','org','period','desc'],awards:['title','org','year'],courses:['code','title','level','desc']};
-  const fields=defs[key]||[]; const item={id:uid()};
-  fields.forEach(f=>{ const el=document.getElementById('af_'+f); if(el) item[f]=el.value.trim(); });
-  const required={education:'inst',experience:'title',awards:'title',courses:'title'};
-  if(required[key]&&!item[required[key]]){ showToast('Zorunlu alan boş bırakılamaz'); return; }
-  if(!data.about[key]) data.about[key]=[];
-  data.about[key].push(item);
-  saveData(true);
-  // Reset form fields (don't change tab)
-  fields.forEach(f=>{ const el=document.getElementById('af_'+f); if(el) el.value=''; });
-  // Refresh list only
-  const defs2={education:{fields:[{id:'degree'},{id:'field'},{id:'inst'},{id:'year'},{id:'note'}]},experience:{fields:[{id:'title'},{id:'org'},{id:'period'},{id:'desc'}]},awards:{fields:[{id:'title'},{id:'org'},{id:'year'}]},courses:{fields:[{id:'code'},{id:'title'},{id:'level'},{id:'desc'}]}};
-  const listEl=document.getElementById('aboutItemList_'+key);
-  if(listEl) listEl.innerHTML=renderAboutItemList(key, data.about[key], defs2[key]);
-  showToast('Eklendi ✓');
-};
-window.delAboutItem = function(key, id){
-  if(!confirm('Bu kayıt silinsin mi?')) return;
-  data.about[key]=data.about[key].filter(x=>x.id!==id);
-  saveData(true);
-  const el=document.getElementById('ait_'+id); if(el) el.remove();
-  showToast('Silindi');
-};
-window.editAboutItem = function(key, id){
-  const item=data.about[key].find(x=>x.id===id); if(!item) return;
-  const el=document.getElementById('ait_'+id); if(!el) return;
-  const defs={education:[{id:'degree',label:'Derece'},{id:'field',label:'Alan'},{id:'inst',label:'Kurum'},{id:'year',label:'Yıl'},{id:'note',label:'Not'}],experience:[{id:'title',label:'Pozisyon'},{id:'org',label:'Kurum'},{id:'period',label:'Dönem'},{id:'desc',label:'Açıklama'}],awards:[{id:'title',label:'Ödül'},{id:'org',label:'Kurum'},{id:'year',label:'Yıl'}],courses:[{id:'code',label:'Kod'},{id:'title',label:'Ders Adı'},{id:'level',label:'Seviye'},{id:'desc',label:'Açıklama'}]};
-  const fields=defs[key]||[];
-  el.innerHTML=`<div style="flex:1"><div class="form-grid-2">${fields.map(f=>`<div class="form-group"><label>${f.label}</label><input id="edit_${f.id}_${id}" class="fi" value="${escapeHtml(item[f.id]||'')}"></div>`).join('')}</div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-success btn-sm" onclick="updateAboutItem('${key}','${id}')"><i class="fas fa-check"></i> Güncelle</button><button class="btn btn-outline btn-sm" onclick="cancelEditAbout('${key}','${id}')"><i class="fas fa-times"></i> İptal</button></div></div>`;
-};
-window.updateAboutItem = function(key, id){
-  const item=data.about[key].find(x=>x.id===id); if(!item) return;
-  const defs={education:['degree','field','inst','year','note'],experience:['title','org','period','desc'],awards:['title','org','year'],courses:['code','title','level','desc']};
-  (defs[key]||[]).forEach(f=>{ const el=document.getElementById('edit_'+f+'_'+id); if(el) item[f]=el.value.trim(); });
-  saveData(true); showAdminTab('about'); showToast('Güncellendi ✓');
-};
-window.cancelEditAbout = function(key){ showAdminTab('about'); };
-
-function renderTagForm(sub, key){
-  const items = data.about[key]||[];
-  const lbl = key==='research'?'Araştırma Alanı (virgülle birden fazla ekleyin)':'Üyelik';
-  sub.innerHTML=`
-    <div class="add-form-section">
-      <h4><i class="fas fa-tag"></i> Yeni ${lbl}</h4>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <input class="fi" id="tagInput" placeholder="Örn: Zaman Serisi, R, Makine Öğrenmesi" style="flex:1;min-width:200px">
-        <button class="btn btn-success btn-sm" onclick="addTags('${key}')"><i class="fas fa-plus"></i> Ekle</button>
-      </div>
-    </div>
-    <div id="tagList_${key}" class="tag-list" style="margin-bottom:10px">
-      ${items.map((t,i)=>`<span class="tag-pill" style="display:inline-flex;align-items:center;gap:5px">${escapeHtml(t)} <button onclick="delTag('${key}',${i})" style="background:none;border:none;cursor:pointer;color:#e74c3c;font-size:0.85rem;padding:0;line-height:1">×</button></span>`).join('')}
-    </div>`;
-}
-window.addTags = function(key){
-  const val=document.getElementById('tagInput').value;
-  val.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>{
-    if(!data.about[key].includes(t)) data.about[key].push(t);
-  });
-  saveData(true); renderTagForm(document.getElementById('aboutSubArea'), key); showToast('Eklendi ✓');
-};
-window.delTag = function(key, i){
-  data.about[key].splice(i,1); saveData(true);
-  renderTagForm(document.getElementById('aboutSubArea'), key);
-};
-
-/* ── PUBLICATIONS ADMIN ── */
-function pubAdminForm(c){
-  c.innerHTML=`<h3>Yayınlar</h3>
-  <div class="admin-tabs">
-    <button class="admin-tab active" onclick="showPubSub('list',this)">Liste (${data.publications.length})</button>
-    <button class="admin-tab" onclick="showPubSub('add',this)">+ Yeni Ekle</button>
-    <button class="admin-tab" onclick="showPubSub('csv',this)">CSV Yükle</button>
-  </div>
-  <div id="pubSubArea">${renderPubList()}</div>`;
-}
-window.showPubSub = function(t,btn){
-  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
-  const sub=document.getElementById('pubSubArea');
-  if(t==='list') sub.innerHTML=renderPubList();
-  else if(t==='add') sub.innerHTML=renderPubAddForm();
-  else if(t==='csv') sub.innerHTML=renderCsvForm();
-};
-function renderPubList(){
-  if(!data.publications.length) return '<div class="empty-state">Yayın yok</div>';
-  return `<div class="admin-list">${data.publications.map((p,i)=>`
-    <div class="admin-item"><div class="admin-item-body">
-      <div class="admin-item-title">${escapeHtml(p.title)}</div>
-      <div class="admin-item-sub">${escapeHtml(p.authors)} · ${p.year} · ${p.type||''}</div>
-    </div><div class="admin-item-acts">
-      <button class="btn btn-sm btn-outline" onclick="editPub(${i})"><i class="fas fa-edit"></i></button>
-      <button class="btn btn-sm btn-danger" onclick="deletePub(${i})"><i class="fas fa-trash"></i></button>
-    </div></div>`).join('')}</div>`;
-}
-function renderPubAddForm(p,i){
-  const isEdit = p!==undefined;
-  return `<div class="add-form-section">
-    <h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Yayın Düzenle':'Yeni Yayın'}</h4>
-    <div class="form-group"><label>Başlık *</label><input id="pTitle" value="${escapeHtml(p?p.title:'')}"></div>
-    <div class="form-group"><label>Yazarlar *</label><input id="pAuthors" value="${escapeHtml(p?p.authors:'')}"></div>
-    <div class="form-grid-3">
-      <div class="form-group"><label>Dergi / Kitap *</label><input id="pJournal" value="${escapeHtml(p?p.journal:'')}"></div>
-      <div class="form-group"><label>Yıl *</label><input id="pYear" type="number" value="${p?p.year:''}"></div>
-      <div class="form-group"><label>Tür</label><select id="pType">${PUB_TYPES.map(t=>`<option ${p&&p.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
-    </div>
-    <div class="form-grid-3">
-      <div class="form-group"><label>DOI</label><input id="pDoi" value="${escapeHtml(p?p.doi:'')}"></div>
-      <div class="form-group"><label>Atıf Sayısı</label><input id="pCites" type="number" value="${p?p.cites:''}"></div>
-      <div class="form-group"><label>PDF URL</label><input id="pPdf" value="${escapeHtml(p?p.pdf:'')}"></div>
-    </div>
-    <div class="form-group"><label>Özet</label><textarea id="pAbstract">${escapeHtml(p?p.abstract:'')}</textarea></div>
-    <div style="display:flex;gap:8px">
-      <button class="btn" onclick="${isEdit?`updatePub(${i})`:'savePub()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
-      ${isEdit?`<button class="btn btn-outline" onclick="showPubSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
-    </div>
-  </div>`;
-}
-function renderCsvForm(){
-  return `<div class="add-form-section">
-    <h4><i class="fas fa-file-csv"></i> CSV ile Toplu Yayın Yükle</h4>
-    <p style="font-size:0.82rem;color:var(--text2);margin-bottom:10px">Format: <code>başlık,yazarlar,dergi,yıl,tür,doi,pdf</code></p>
-    <input type="file" id="csvInput" accept=".csv" style="display:block;margin-bottom:10px">
-    <button class="btn" onclick="processCsv()"><i class="fas fa-upload"></i> Yükle</button>
-    <div id="csvResult"></div>
-  </div>`;
-}
-window.savePub = function(){
-  const title=document.getElementById('pTitle').value.trim(),authors=document.getElementById('pAuthors').value.trim(),journal=document.getElementById('pJournal').value.trim(),year=document.getElementById('pYear').value;
-  if(!title||!authors||!journal){ showToast('Zorunlu alanları doldurun'); return; }
-  data.publications.unshift({id:uid(),title,authors,journal,year,type:document.getElementById('pType').value,doi:document.getElementById('pDoi').value.trim(),cites:document.getElementById('pCites').value,pdf:document.getElementById('pPdf').value.trim(),abstract:document.getElementById('pAbstract').value.trim()});
-  saveData(true);
-  // Reset form, stay on add tab
-  ['pTitle','pAuthors','pJournal','pYear','pDoi','pCites','pPdf','pAbstract'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.querySelector('#pubSubArea .add-form-section h4').insertAdjacentHTML('afterend','<div class="notif notif-ok"><i class="fas fa-check"></i> Eklendi! Yeni yayın girebilirsiniz.</div>');
-  setTimeout(()=>{ const n=document.querySelector('.notif-ok'); if(n)n.remove(); },3000);
-};
-window.editPub = function(i){
-  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('pubSubArea').innerHTML=renderPubAddForm(data.publications[i], i);
-};
-window.updatePub = function(i){
-  data.publications[i]={id:data.publications[i].id,title:document.getElementById('pTitle').value.trim(),authors:document.getElementById('pAuthors').value.trim(),journal:document.getElementById('pJournal').value.trim(),year:document.getElementById('pYear').value,type:document.getElementById('pType').value,doi:document.getElementById('pDoi').value.trim(),cites:document.getElementById('pCites').value,pdf:document.getElementById('pPdf').value.trim(),abstract:document.getElementById('pAbstract').value.trim()};
-  saveData(); showAdminTab('publications');
-};
-window.deletePub = function(i){ if(confirm('Silinsin mi?')){ data.publications.splice(i,1); saveData(); showAdminTab('publications'); } };
-window.processCsv = function(){
-  const inp=document.getElementById('csvInput'); if(!inp||!inp.files[0])return;
-  const reader=new FileReader(); reader.onload=e=>{
-    const lines=e.target.result.split(/\r?\n/); let added=0,skip=0;
-    lines.forEach(line=>{ line=line.trim(); if(!line)return;
-      const parts=parseCsvLine(line);
-      if(parts.length<4){skip++;return;}
-      const [title,authors,journal,year,type='Uluslararası Makale',doi='',pdf='']=parts.map(s=>s.replace(/^"|"$/g,'').trim());
-      if(title&&authors&&journal&&year){ data.publications.push({id:uid(),title,authors,journal,year,type,doi,pdf,abstract:'',cites:''}); added++; }
-      else skip++;
+  /* 1. Tema (açık / koyu) */
+  var themeBtn = doc.querySelector('.theme-toggle');
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function theme() { return root.getAttribute('data-theme') || (mq && mq.matches ? 'dark' : 'light'); }
+  function syncTheme() { if (themeBtn) themeBtn.setAttribute('aria-label', theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'); }
+  if (themeBtn) {
+    syncTheme();
+    themeBtn.addEventListener('click', function () {
+      var next = theme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('tema', next); } catch (e) {}
+      syncTheme();
     });
-    saveData(true);
-    document.getElementById('csvResult').innerHTML=`<div class="notif notif-ok" style="margin-top:10px">${added} yayın eklendi, ${skip} satır atlandı.</div>`;
-  }; reader.readAsText(inp.files[0],'UTF-8');
-};
-function parseCsvLine(line){ const parts=[]; let q=false,cur=''; for(const c of line){ if(c==='"'){q=!q;}else if(c===','&&!q){parts.push(cur);cur='';}else cur+=c; } parts.push(cur); return parts; }
+    if (mq && mq.addEventListener) mq.addEventListener('change', syncTheme);
+  }
 
-/* ── ANNOUNCEMENTS ADMIN ── */
-function annAdminForm(c){
-  c.innerHTML=`<h3>Duyurular</h3>
-  <div class="admin-tabs">
-    <button class="admin-tab active" onclick="showAnnSub('list',this)">Liste (${data.announcements.length})</button>
-    <button class="admin-tab" onclick="showAnnSub('add',this)">+ Yeni Ekle</button>
-  </div>
-  <div id="annSubArea">${renderAnnList()}</div>`;
-  window.showAnnSub = (t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const sub=document.getElementById('annSubArea'); if(t==='list') sub.innerHTML=renderAnnList(); else sub.innerHTML=renderAnnAddForm(); };
-}
-function renderAnnList(){
-  if(!data.announcements.length) return '<div class="empty-state">Duyuru yok</div>';
-  return `<div class="admin-list">${data.announcements.map((a,i)=>`
-    <div class="admin-item"><div class="admin-item-body">
-      <div class="admin-item-title">${a.pinned?'📌 ':''}${escapeHtml(a.title)}</div>
-      <div class="admin-item-sub">${a.date||''} ${a.endDate?'· Bitiş: '+a.endDate:''}</div>
-    </div><div class="admin-item-acts">
-      <button class="btn btn-sm btn-outline" onclick="editAnn(${i})"><i class="fas fa-edit"></i></button>
-      <button class="btn btn-sm btn-danger" onclick="deleteAnn(${i})"><i class="fas fa-trash"></i></button>
-    </div></div>`).join('')}</div>`;
-}
-function renderAnnAddForm(a,i){
-  const isEdit=a!==undefined;
-  return `<div class="add-form-section">
-    <h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Duyuru Düzenle':'Yeni Duyuru'}</h4>
-    <div class="form-group"><label>Başlık *</label><input id="anTitle" value="${escapeHtml(a?a.title:'')}"></div>
-    <div class="form-group"><label>İçerik *</label><textarea id="anContent">${escapeHtml(a?a.content:'')}</textarea></div>
-    <div class="form-grid-2">
-      <div class="form-group"><label>Tarih</label><input type="date" id="anDate" value="${a?a.date:''}"></div>
-      <div class="form-group"><label>Bitiş Tarihi (opsiyonel)</label><input type="date" id="anEnd" value="${a?a.endDate||'':''}"></div>
-    </div>
-    <div class="form-group"><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="anPinned" ${a&&a.pinned?'checked':''}> Sabit (öne çıkar)</label></div>
-    <div class="form-group"><label>Görsel (opsiyonel)</label><div id="annImageUpload"></div></div>
-    <div style="display:flex;gap:8px">
-      <button class="btn" onclick="${isEdit?`updateAnn(${i})`:'saveAnn()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
-      ${isEdit?`<button class="btn btn-outline" onclick="showAnnSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
-    </div>
-  </div>`;
-}
-window.saveAnn = function(){
-  const title=document.getElementById('anTitle').value.trim(), content=document.getElementById('anContent').value.trim();
-  if(!title||!content){showToast('Başlık ve içerik zorunlu'); return;}
-  data.announcements.unshift({id:uid(),title,content,date:document.getElementById('anDate').value||new Date().toISOString().split('T')[0],endDate:document.getElementById('anEnd').value,pinned:document.getElementById('anPinned').checked,image:window._tempAnnImg||''});
-  window._tempAnnImg=''; saveData(); showAdminTab('announcements');
-};
-window.editAnn = function(i){
-  document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active'));
-  const sub=document.getElementById('annSubArea'); sub.innerHTML=renderAnnAddForm(data.announcements[i],i);
-  const upDiv=document.getElementById('annImageUpload'); if(upDiv) upDiv.appendChild(createUploadArea(data.announcements[i].image||'', b64=>{ data.announcements[i].image=b64; }));
-};
-window.updateAnn = function(i){
-  data.announcements[i]={...data.announcements[i],title:document.getElementById('anTitle').value.trim(),content:document.getElementById('anContent').value.trim(),date:document.getElementById('anDate').value,endDate:document.getElementById('anEnd').value,pinned:document.getElementById('anPinned').checked};
-  saveData(); showAdminTab('announcements');
-};
-window.deleteAnn = function(i){ if(confirm('Silinsin mi?')){ data.announcements.splice(i,1); saveData(); showAdminTab('announcements'); } };
-window._tempAnnImg='';
+  /* 2. Mobil menü */
+  var navBtn = doc.querySelector('.nav-toggle'), menu = doc.getElementById('menu');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    navBtn.setAttribute('aria-expanded', String(open));
+    navBtn.querySelector('.sr-only').textContent = open ? 'Close menu' : 'Open menu';
+    navBtn.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
+  }
+  if (navBtn && menu) {
+    navBtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); navBtn.focus(); } });
+    doc.addEventListener('click', function (e) { if (menu.classList.contains('open') && !e.target.closest('.nav')) setMenu(false); });
+  }
 
-/* ── LINKS ADMIN ── */
-function linkAdminForm(c){
-  c.innerHTML=`<h3>Faydalı Linkler</h3>
-  <div class="admin-tabs">
-    <button class="admin-tab active" onclick="showLinkSub('list',this)">Liste (${data.links.length})</button>
-    <button class="admin-tab" onclick="showLinkSub('add',this)">+ Ekle</button>
-  </div>
-  <div id="linkSubArea">${renderLinkList()}</div>`;
-  window.showLinkSub=(t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.getElementById('linkSubArea').innerHTML=t==='list'?renderLinkList():renderLinkAddForm(); };
-}
-function renderLinkList(){
-  if(!data.links.length) return '<div class="empty-state">Link yok</div>';
-  return `<div class="admin-list">${data.links.map((l,i)=>`
-    <div class="admin-item"><div class="admin-item-body"><div class="admin-item-title">${escapeHtml(l.title)}</div><div class="admin-item-sub">${escapeHtml(l.url)}</div></div>
-    <div class="admin-item-acts"><button class="btn btn-sm btn-outline" onclick="editLink(${i})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteLink(${i})"><i class="fas fa-trash"></i></button></div>
-    </div>`).join('')}</div>`;
-}
-function renderLinkAddForm(l,i){
-  const isEdit=l!==undefined;
-  return `<div class="add-form-section"><h4><i class="fas fa-plus-circle"></i> ${isEdit?'Düzenle':'Yeni Link'}</h4>
-    <div class="form-grid-2">
-      <div class="form-group"><label>Başlık *</label><input id="lTitle" value="${escapeHtml(l?l.title:'')}"></div>
-      <div class="form-group"><label>URL *</label><input id="lUrl" value="${escapeHtml(l?l.url:'')}"></div>
-      <div class="form-group"><label>Açıklama</label><input id="lDesc" value="${escapeHtml(l?l.description:'')}"></div>
-      <div class="form-group"><label>İkon (Font Awesome sınıfı)</label><input id="lIcon" value="${escapeHtml(l?l.icon:'fas fa-link')}" placeholder="fas fa-link"></div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <button class="btn" onclick="${isEdit?`updateLink(${i})`:'saveLink()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
-      ${isEdit?`<button class="btn btn-outline" onclick="showLinkSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
-    </div></div>`;
-}
-window.saveLink = function(){
-  const title=document.getElementById('lTitle').value.trim(), url=document.getElementById('lUrl').value.trim();
-  if(!title||!url){showToast('Başlık ve URL zorunlu'); return;}
-  data.links.push({id:uid(),title,url,description:document.getElementById('lDesc').value.trim(),icon:document.getElementById('lIcon').value.trim()||'fas fa-link'});
-  saveData(true);
-  document.getElementById('linkSubArea').innerHTML=renderLinkList();
-  showToast('Link eklendi ✓');
-};
-window.editLink=(i)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); document.getElementById('linkSubArea').innerHTML=renderLinkAddForm(data.links[i],i); };
-window.updateLink=function(i){ data.links[i]={id:data.links[i].id,title:document.getElementById('lTitle').value.trim(),url:document.getElementById('lUrl').value.trim(),description:document.getElementById('lDesc').value.trim(),icon:document.getElementById('lIcon').value.trim()||'fas fa-link'}; saveData(); showAdminTab('links'); };
-window.deleteLink=(i)=>{ if(confirm('Silinsin mi?')){ data.links.splice(i,1); saveData(); showAdminTab('links'); } };
+  /* 3. Kaydırırken etkin menü bağlantısı */
+  var navLinks = $all('.menu a[href^="#"]'), byId = {};
+  navLinks.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var a = byId[en.target.id]; if (a) a.setAttribute('aria-current', 'location');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(byId).forEach(function (id) { var s = doc.getElementById(id); if (s) spy.observe(s); });
+  }
 
-/* ── BLOG ADMIN ── */
-function blogAdminForm(c){
-  c.innerHTML=`<h3>Blog Yazıları</h3>
-  <div class="admin-tabs">
-    <button class="admin-tab active" onclick="showBlogSub('list',this)">Liste (${data.blog.filter(b=>b.published!==false).length} yayımlandı)</button>
-    <button class="admin-tab" onclick="showBlogSub('add',this)">+ Yeni Yazı</button>
-  </div>
-  <div id="blogSubArea">${renderBlogList()}</div>`;
-  window.showBlogSub=(t,btn)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const sub=document.getElementById('blogSubArea'); if(t==='list') sub.innerHTML=renderBlogList(); else sub.innerHTML=renderBlogAddForm(); };
-}
-function renderBlogList(){
-  if(!data.blog.length) return '<div class="empty-state">Yazı yok</div>';
-  return `<div class="admin-list">${data.blog.map((b,i)=>`
-    <div class="admin-item"><div class="admin-item-body">
-      <div class="admin-item-title"><span style="background:${b.published!==false?'#d4edda':'#f8d7da'};color:${b.published!==false?'#155724':'#721c24'};border-radius:50px;padding:2px 8px;font-size:0.72rem;font-weight:700;margin-right:6px">${b.published!==false?'YAYINDA':'TASLAK'}</span>${escapeHtml(b.title)}</div>
-      <div class="admin-item-sub">${b.date||''} · ${b.category||'Kategori yok'}</div>
-    </div><div class="admin-item-acts">
-      <button class="btn btn-sm ${b.published!==false?'btn-outline':'btn-success'}" onclick="toggleBlogPub(${i})" title="${b.published!==false?'Taslağa Al':'Yayımla'}">${b.published!==false?'⏸':'▶'}</button>
-      <button class="btn btn-sm btn-outline" onclick="editBlog(${i})"><i class="fas fa-edit"></i></button>
-      <button class="btn btn-sm btn-danger" onclick="deleteBlog(${i})"><i class="fas fa-trash"></i></button>
-    </div></div>`).join('')}</div>`;
-}
-function renderBlogAddForm(b,i){
-  const isEdit=b!==undefined;
-  return `<div class="add-form-section"><h4><i class="fas fa-${isEdit?'edit':'plus-circle'}"></i> ${isEdit?'Yazı Düzenle':'Yeni Blog Yazısı'}</h4>
-    <div class="form-group"><label>Başlık *</label><input id="blTitle" value="${escapeHtml(b?b.title:'')}"></div>
-    <div class="form-group"><label>Özet (kart görünümü için)</label><textarea id="blExcerpt" rows="2">${escapeHtml(b?b.excerpt:'')}</textarea></div>
-    <div class="form-group"><label>İçerik (tam yazı) *</label><textarea id="blContent" rows="8" placeholder="Blog yazısının tam içeriği...">${escapeHtml(b?b.content||b.excerpt:'')}</textarea></div>
-    <div class="form-grid-3">
-      <div class="form-group"><label>Kategori</label><input id="blCat" value="${escapeHtml(b?b.category:'')}"></div>
-      <div class="form-group"><label>Tarih</label><input type="date" id="blDate" value="${b?b.date:''}"></div>
-      <div class="form-group"><label>Okuma Süresi</label><input id="blRead" value="${escapeHtml(b?b.readTime:'5 dk')}" placeholder="5 dk"></div>
-    </div>
-    <div class="form-group"><label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="blPub" ${(!b||b.published!==false)?'checked':''}> Hemen yayımla</label></div>
-    <div class="form-group"><label>Kapak Görseli</label><div id="blogImgUpload"></div></div>
-    <div style="display:flex;gap:8px">
-      <button class="btn" onclick="${isEdit?`updateBlog(${i})`:'saveBlog()'}"><i class="fas fa-save"></i> ${isEdit?'Güncelle':'Ekle'}</button>
-      ${isEdit?`<button class="btn btn-outline" onclick="showBlogSub('list',document.querySelector('.admin-tab'))">İptal</button>`:''}
-    </div></div>`;
-}
-window.saveBlog = function(){
-  const title=document.getElementById('blTitle').value.trim(), content=document.getElementById('blContent').value.trim();
-  if(!title||!content){showToast('Başlık ve içerik zorunlu'); return;}
-  data.blog.unshift({id:uid(),title,excerpt:document.getElementById('blExcerpt').value.trim(),content,category:document.getElementById('blCat').value.trim(),date:document.getElementById('blDate').value||new Date().toISOString().split('T')[0],readTime:document.getElementById('blRead').value.trim()||'5 dk',published:document.getElementById('blPub').checked,image:window._tempBlogImg||''});
-  window._tempBlogImg=''; saveData(); showAdminTab('blog');
-};
-window.editBlog=(i)=>{ document.querySelectorAll('#adminContent .admin-tab').forEach(b=>b.classList.remove('active')); const sub=document.getElementById('blogSubArea'); sub.innerHTML=renderBlogAddForm(data.blog[i],i); const up=document.getElementById('blogImgUpload'); if(up) up.appendChild(createUploadArea(data.blog[i].image||'', b64=>{ data.blog[i].image=b64; window._tempBlogImg=b64; })); };
-window.updateBlog=function(i){ data.blog[i]={...data.blog[i],title:document.getElementById('blTitle').value.trim(),excerpt:document.getElementById('blExcerpt').value.trim(),content:document.getElementById('blContent').value.trim(),category:document.getElementById('blCat').value.trim(),date:document.getElementById('blDate').value,readTime:document.getElementById('blRead').value.trim(),published:document.getElementById('blPub').checked}; if(window._tempBlogImg) data.blog[i].image=window._tempBlogImg; window._tempBlogImg=''; saveData(); showAdminTab('blog'); };
-window.toggleBlogPub=function(i){ data.blog[i].published=!data.blog[i].published; saveData(true); showAdminTab('blog'); };
-window.deleteBlog=(i)=>{ if(confirm('Silinsin mi?')){ data.blog.splice(i,1); saveData(); showAdminTab('blog'); } };
-window._tempBlogImg='';
+  /* 4. Yayın süzgeci, arama ve otomatik sayılar */
+  var pubs = $all('.pub'), groups = $all('.pub-group'), chips = $all('.chip');
+  var q = doc.getElementById('pub-q'), live = doc.getElementById('pub-status'), empty = doc.querySelector('.pub-empty');
+  var filter = 'hepsi';
+  function norm(s) {
+    return (s || '').toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i');
+  }
+  pubs.forEach(function (p) { p._text = norm(p.textContent); });
+  var counts = { makale: 0, kitap: 0, bolum: 0, bildiri: 0 };
+  pubs.forEach(function (p) { if (counts[p.dataset.type] != null) counts[p.dataset.type]++; });
+  chips.forEach(function (c) { var n = c.querySelector('.n'); if (n) n.textContent = ' ' + (c.dataset.filter === 'hepsi' ? pubs.length : (counts[c.dataset.filter] || 0)); });
+  $all('[data-count]').forEach(function (el) { var k = el.dataset.count; if (counts[k] != null) el.textContent = counts[k]; });
 
-/* ── CONTACT ADMIN ── */
-function contactAdminForm(c){
-  c.innerHTML=`<h3>İletişim Bilgileri</h3>
-  <div class="admin-form">
-    <div class="form-group"><label>Adres / Ofis</label><textarea id="ctAddr" rows="2">${escapeHtml(data.contact.address||'')}</textarea></div>
-    <div class="form-grid-2">
-      <div class="form-group"><label>E-posta</label><input id="ctEmail" type="email" value="${escapeHtml(data.contact.email||'')}"></div>
-      <div class="form-group"><label>Telefon</label><input id="ctPhone" value="${escapeHtml(data.contact.phone||'')}"></div>
-    </div>
-    <div class="form-group"><label>Mesai Saatleri</label><input id="ctHours" value="${escapeHtml(data.contact.hours||'')}"></div>
-    <button class="btn" onclick="saveContact()"><i class="fas fa-save"></i> Kaydet</button>
-  </div>`;
-}
-function saveContact(){ data.contact={address:document.getElementById('ctAddr').value.trim(),email:document.getElementById('ctEmail').value.trim(),phone:document.getElementById('ctPhone').value.trim(),hours:document.getElementById('ctHours').value.trim()}; saveData(); }
+  function applyFilter(announce) {
+    var term = q ? norm(q.value.trim()) : '', shown = 0;
+    pubs.forEach(function (p) {
+      var ok = (filter === 'hepsi' || p.dataset.type === filter) && (!term || p._text.indexOf(term) !== -1);
+      p.hidden = !ok; if (ok) shown++;
+    });
+    groups.forEach(function (g) {
+      var vis = g.querySelectorAll('.pub:not([hidden])').length;
+      g.hidden = vis === 0;
+      var c = g.querySelector('h3 .count'); if (c) c.textContent = '(' + vis + ')';
+    });
+    if (empty) empty.hidden = shown !== 0;
+    if (announce && live) live.textContent = shown ? shown + ' publications shown' : 'No matching publications';
+  }
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      filter = c.dataset.filter;
+      chips.forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+      applyFilter(true);
+    });
+  });
+  if (q) q.addEventListener('input', function () { applyFilter(true); });
+  applyFilter(false);
 
-/* ── SETTINGS ADMIN ── */
-function settingsAdminForm(c){
-  c.innerHTML=`<h3>Genel Ayarlar</h3>
-  <div class="admin-form">
-    <div class="form-grid-2">
-      <div class="form-group"><label>Site Adı (Navbar)</label><input id="stName" value="${escapeHtml(data.settings.siteName||'')}"></div>
-      <div class="form-group"><label>Footer Metni</label><input id="stFooter" value="${escapeHtml(data.settings.footerText||'')}"></div>
-    </div>
-    <button class="btn" onclick="saveSettings()"><i class="fas fa-save"></i> Kaydet</button>
-    <hr style="margin:20px 0;border:none;border-top:1px solid var(--border)">
-    <h4 style="margin-bottom:14px;color:var(--primary)">🔐 Admin Hesabı</h4>
-    <div class="form-grid-2">
-      <div class="form-group"><label>Kullanıcı Adı</label><input id="stUser" value="${escapeHtml(data.admin.username||'')}"></div>
-      <div class="form-group"><label>Yeni Şifre (boş = değişmez)</label><input id="stPass" type="password" autocomplete="new-password"></div>
-    </div>
-    <div class="form-group"><label>Şifre Tekrar</label><input id="stPass2" type="password" autocomplete="new-password"></div>
-    <button class="btn" onclick="saveAdminCreds()"><i class="fas fa-key"></i> Şifreyi Güncelle</button>
-    <hr style="margin:20px 0;border:none;border-top:1px solid var(--border)">
-    <h4 style="margin-bottom:14px;color:#e74c3c">⚠ Veri Yönetimi</h4>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-download"></i> JSON Dışa Aktar</button>
-      <label class="btn btn-outline" style="cursor:pointer"><i class="fas fa-upload"></i> JSON İçe Aktar<input type="file" accept=".json" style="display:none" onchange="importData(event)"></label>
-      <button class="btn btn-danger" onclick="resetAllData()"><i class="fas fa-trash"></i> Tüm Veriyi Sıfırla</button>
-    </div>
-  </div>`;
-}
-function saveSettings(){ data.settings.siteName=document.getElementById('stName').value.trim(); data.settings.footerText=document.getElementById('stFooter').value.trim(); saveData(); }
-function saveAdminCreds(){ const u=document.getElementById('stUser').value.trim(), p1=document.getElementById('stPass').value, p2=document.getElementById('stPass2').value; if(!u){showToast('Kullanıcı adı boş olamaz');return;} if(p1){ if(p1!==p2){showToast('Şifreler uyuşmuyor');return;} if(p1.length<4){showToast('En az 4 karakter');return;} data.admin.password=p1; } data.admin.username=u; saveData(); showToast('Admin bilgileri güncellendi'); }
-function exportData(){ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='akademik_veri.json'; a.click(); }
-function importData(e){ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ try{ const p=JSON.parse(ev.target.result); if(!p.admin)p.admin=data.admin; data=p; saveData(); showAdminTab('settings'); showToast('Veri içe aktarıldı ✓'); }catch(e2){showToast('Geçersiz dosya');} }; r.readAsText(f); }
-function resetAllData(){ if(confirm('TÜM VERİLER SİLİNECEK. Emin misiniz?')){ localStorage.removeItem('academicData'); location.reload(); } }
+  /* 5. APA atfını panoya kopyalama */
+  function fallbackCopy(text) {
+    return new Promise(function (resolve, reject) {
+      var ta = doc.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+      doc.body.appendChild(ta); ta.select();
+      try { doc.execCommand('copy') ? resolve() : reject(); } catch (e) { reject(e); }
+      doc.body.removeChild(ta);
+    });
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(function () { return fallbackCopy(text); });
+    return fallbackCopy(text);
+  }
+  function flash(btn, msg, ok) {
+    var label = btn.querySelector('span'); if (!label) return;
+    clearTimeout(btn._t); if (!btn._orig) btn._orig = label.textContent;
+    label.textContent = msg; btn.classList.toggle('done', ok);
+    if (live) live.textContent = msg;
+    btn._t = setTimeout(function () { label.textContent = btn._orig; btn.classList.remove('done'); }, 1800);
+  }
+  doc.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy'); if (!btn) return;
+    var cite = btn.closest('.pub').querySelector('.cite'); if (!cite) return;
+    var text = cite.textContent.replace(/\s+/g, ' ').trim();
+    copyText(text).then(function () { flash(btn, 'Copied', true); }, function () { flash(btn, 'Copy failed', false); });
+  });
 
-/* ═══════════════════════════════════════════════
-   NAVIGATION & AUTH
-═══════════════════════════════════════════════ */
-function openLogin(){ document.getElementById('loginModal').classList.add('active'); document.getElementById('loginErr').innerHTML=''; }
-function closeLogin(){ document.getElementById('loginModal').classList.remove('active'); }
-function handleLogin(e){
-  e.preventDefault();
-  const u=document.getElementById('loginUser').value, p=document.getElementById('loginPass').value;
-  if(u===data.admin.username && p===data.admin.password){ closeLogin(); openAdmin(); }
-  else { document.getElementById('loginErr').innerHTML='<div class="notif notif-err">Kullanıcı adı veya şifre hatalı</div>'; }
-}
-function openAdmin(){ document.getElementById('adminOverlay').classList.add('active'); currentAdminTab='hero'; buildAdminSidebar(); showAdminTab('hero'); }
-function closeAdmin(){ document.getElementById('adminOverlay').classList.remove('active'); }
-function toggleMobileMenu(){ document.getElementById('navLinks').classList.toggle('active'); }
-window.addEventListener('scroll',()=>{ document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300); });
-loadData();
+  /* 6. E-posta adresi (otomatik toplayıcılara karşı parçalı yazılır) */
+  $all('.js-mail').forEach(function (a) {
+    var addr = a.dataset.u + '@' + a.dataset.d;
+    a.href = 'mailto:' + addr;
+    if (a.hasAttribute('data-show')) a.textContent = addr;
+  });
+
+  /* 7. Yazdırma / PDF: tüm yayınları ve kapalı bölümleri açar */
+  var reopened = [], saved = null;
+  window.addEventListener('beforeprint', function () {
+    saved = { filter: filter, q: q ? q.value : '' };
+    filter = 'hepsi'; if (q) q.value = '';
+    applyFilter(false);
+    reopened = $all('details:not([open])');
+    reopened.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener('afterprint', function () {
+    reopened.forEach(function (d) { d.open = false; });
+    reopened = [];
+    if (saved) { filter = saved.filter; if (q) q.value = saved.q; saved = null; }
+    applyFilter(false);
+  });
+  $all('.js-print').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
+})();
 </script>
 </body>
-</html>'''
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lojistik Veri Analitiği: R ile Uygulamalar — Soru Programı | Dr. Ersin Sünbül</title>
+<meta name="author" content="Dr. Ersin Sünbül">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317202e'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23fbfaf7'%3EES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap">
+<style>
+:root{
+  --dark:#17202e; --mid:#1d4f7a; --red:#8a2432; --green:#1f6a3b;
+  --bg:#fbfaf7; --card:#FFFFFF; --line:#e4e0d8; --text:#222;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{background:var(--dark);color:#fff;padding:26px 18px;text-align:center}
+header h1{font-size:1.5rem;margin-bottom:6px}
+header .sub{font-size:.92rem;color:#BDD7EE}
+.wrap{max-width:900px;margin:0 auto;padding:20px;flex:1;width:100%}
+.info{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:18px;font-size:.88rem;color:#444;line-height:1.6}
+.info b{color:var(--dark)}
+.section-title{font-size:1.05rem;font-weight:800;color:var(--dark);margin:22px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;cursor:pointer;transition:.15s;text-align:left}
+.card:hover{border-color:var(--mid);box-shadow:0 3px 10px rgba(31,56,100,.12);transform:translateY(-2px)}
+.card .kod{font-size:.78rem;font-weight:800;letter-spacing:.4px;color:var(--mid);margin-bottom:4px}
+.card .ad{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.3}
+.card .alt{font-size:.8rem;color:#666}
+.card .skor{margin-top:10px;font-size:.78rem;font-weight:700;color:var(--green)}
+.exam-card{background:linear-gradient(135deg,var(--dark),var(--mid));color:#fff}
+.exam-card .ad{color:#fff}
+.exam-card .alt{color:#CFE0F5}
+.exam-card .skor{color:#FFE7A3}
+#quizScreen{display:none}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.quiz-header .progress{font-size:.85rem;color:#666;font-weight:700}
+.back-btn{background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:.85rem;cursor:pointer;color:var(--dark);font-weight:700}
+.back-btn:hover{background:#eee}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.qtext{font-size:1.08rem;font-weight:700;color:var(--dark);margin-bottom:18px;line-height:1.5}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px;font-size:.95rem;cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--mid)}
+.opt.correct{background:#EAF6EA;border-color:var(--green);color:var(--green);font-weight:700}
+.opt.wrong{background:#FBE9E9;border-color:var(--red);color:var(--red);font-weight:700}
+.opt[disabled]{cursor:default}
+.next-btn{margin-top:16px;background:var(--dark);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:.95rem;font-weight:700;cursor:pointer;display:none}
+.next-btn:hover{background:var(--mid)}
+.result-box{text-align:center;padding:40px 20px}
+.result-box .big{font-size:2.6rem;font-weight:800;color:var(--dark);margin-bottom:8px}
+.result-box .msg{font-size:1rem;color:#555;margin-bottom:24px}
+footer{text-align:center;font-size:.78rem;color:#888;padding:20px}
+
+body{font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+header h1{font-family:'Source Serif 4',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+header .sub a,footer a{color:inherit;text-decoration:underline;text-underline-offset:.18em}
+header .sub a{color:#f2c9a8}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lojistik Veri Analitiği: R ile Uygulamalar</h1>
+  <div class="sub">İnteraktif Soru Programı · Dr. Ersin Sünbül</div>
+  <div class="sub"><a href="index.html">← Ders materyalleri</a> · <a href="../">Ana sayfa</a></div>
+</header>
+<div class="wrap">
+  <div id="menuScreen">
+    <div class="info">
+      <b>Nasıl çalışır?</b> Bir ünite kartına tıklayıp o haftanın sorularıyla kendinizi test edin.
+      <b>Vize</b> ve <b>Final</b> denemeleri her açılışta ilgili haftaların sorularından farklı 25 soru seçer.
+      Skorlarınız bu tarayıcıda saklanır ve her kartta en iyi skorunuz gösterilir.
+    </div>
+
+    <div class="section-title">Sınav Denemeleri</div>
+    <div class="grid" id="examGrid"></div>
+
+    <div class="section-title">Ünite Bazlı Çalışma</div>
+    <div class="grid" id="unitGrid"></div>
+  </div>
+
+  <div id="quizScreen">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="backToMenu()">← Menüye Dön</button>
+      <div class="progress" id="progressText"></div>
+    </div>
+    <div class="qcard" id="qcard"></div>
+  </div>
+</div>
+<footer>Sorular ders notlarına dayanır. · © 2026 Dr. Ersin Sünbül · <a href="index.html">Ders materyalleri</a></footer>
+
+<script>
+const UNITELER = [
+{id:'h1', kod:'Hafta 1', ad:'Veri Analitiğine Giriş', sorular:[
+  {q:"Betimsel analitik hangi soruyu sorar?", opts:["Ne oldu?","Neden oldu?","Ne olacak?","Ne yapmalıyım?"], c:0},
+  {q:"OTIF neyi ölçer?", opts:["Zamanında ve eksiksiz teslimat oranı","Araç yakıt tüketimi","Depo sıcaklığı","Çalışan sayısı"], c:0},
+  {q:"RStudio'da kodun kalıcı olarak yazıldığı panel hangisidir?", opts:["Script/Kaynak paneli","Konsol","Environment","Plots"], c:0},
+  {q:"500 siparişten 410'u zamanında ve eksiksiz teslim edilmişse OTIF yüzde kaçtır?", opts:["%82","%90","%41","%68"], c:0},
+  {q:"Aşağıdakilerden hangisi lojistik veri kaynaklarından biri değildir?", opts:["TMS","WMS","ERP","Sosyal medya beğeni sayısı"], c:3},
+  {q:"Tanısal analitik hangi soruyu sorar?", opts:["Neden oldu?","Ne olacak?","Ne yapmalıyım?","Ne oldu?"], c:0},
+  {q:"Yönlendirici analitik temelde ne önerir?", opts:["Karar/eylem","Sadece özet","Sadece tahmin","Hiçbiri"], c:0},
+  {q:"R script'in Excel'e göre üstünlüğü nedir?", opts:["Tekrar çalıştırılabilir olması","Renkli olması","Ücretsiz olması","Grafik içermesi"], c:0},
+]},
+{id:'h2', kod:'Hafta 2', ad:"R'ye Giriş", sorular:[
+  {q:"R'da bir vektör oluşturmak için kullanılan fonksiyon hangisidir?", opts:["c()","v()","vec()","list()"], c:0},
+  {q:"R'da vektör indekslemesi kaçtan başlar?", opts:["0","1","-1","Değişkendir"], c:1},
+  {q:"Bir veri çerçevesinde belirli bir sütuna erişmek için hangi operatör kullanılır?", opts:["$","#","&","%"], c:0},
+  {q:"Bir paketi kurduktan sonra her oturumda yeniden kullanılabilir hâle getirmek için hangi fonksiyon çalıştırılır?", opts:["install.packages()","library()","require.packages()","load()"], c:1},
+  {q:"teslimat <- c(120, 95, 140); teslimat[2] komutunun sonucu nedir?", opts:["120","95","140","Hata verir"], c:1},
+  {q:"class() fonksiyonu bir nesne hakkında ne döndürür?", opts:["Nesnenin tipini","Nesnenin uzunluğunu","Nesnenin adını","Nesnenin boyutunu"], c:0},
+  {q:"Mantıksal (logical) veri tipi hangi değerleri alır?", opts:["TRUE / FALSE","0 / 1 (sadece)","Metin","Tarih"], c:0},
+  {q:"R'da kendi fonksiyonunuzu tanımlamak için hangi anahtar kelime kullanılır?", opts:["function()","func()","def()","lambda()"], c:0},
+]},
+{id:'h3', kod:'Hafta 3', ad:'Veri Aktarma ve Okuma', sorular:[
+  {q:"CSV dosyalarını okumak için readr paketinin kullandığı fonksiyon hangisidir?", opts:["read_csv()","read_excel()","load_csv()","import_csv()"], c:0},
+  {q:"R'nin dosya aramaya başladığı varsayılan klasöre ne ad verilir?", opts:["Çalışma dizini","Kök dizin","Paket dizini","Kütüphane dizini"], c:0},
+  {q:"Bir veri çerçevesinin yapısını özetleyen fonksiyon hangisidir?", opts:["str()","sum()","mean()","class()"], c:0},
+  {q:"Tidy data ilkesine göre her satır neyi temsil eder?", opts:["Bir gözlem","Bir değişken","Bir dosya","Bir paket"], c:0},
+  {q:"Bir Excel dosyasında belirli bir sayfayı okumak için read_excel() fonksiyonuna hangi argüman verilir?", opts:["sheet","page","tab","sayfa"], c:0},
+  {q:"head() fonksiyonu varsayılan olarak kaç satır gösterir?", opts:["6","10","1","Tümünü"], c:0},
+  {q:"summary() fonksiyonu bir veri çerçevesi için ne üretir?", opts:["İstatistiksel özet","Sadece satır sayısı","Sadece sütun adları","Grafik"], c:0},
+  {q:"list.files() fonksiyonu ne yapar?", opts:["Çalışma dizinindeki dosyaları listeler","Bir dosyayı siler","Paket kurar","Grafik çizer"], c:0},
+]},
+{id:'h4', kod:'Hafta 4', ad:'Veri Temizleme ve Dönüştürme I', sorular:[
+  {q:"R'da eksik değer hangi sembolle temsil edilir?", opts:["NA","NULL","0","\"-\""], c:0},
+  {q:"mean() fonksiyonunun eksik değerleri göz ardı ederek hesaplama yapması için hangi argüman kullanılır?", opts:["na.rm = TRUE","skip.na = TRUE","ignore = TRUE","remove.na = TRUE"], c:0},
+  {q:"IQR kuralına göre aykırı değer sınırı nasıl hesaplanır?", opts:["Q1 − 1,5×IQR / Q3 + 1,5×IQR","Ortalama ± 1 standart sapma","Min ve Maks değerler","Medyan ± IQR"], c:0},
+  {q:"dplyr'da belirli bir koşulu sağlayan satırları seçen fiil hangisidir?", opts:["filter()","select()","arrange()","mutate()"], c:0},
+  {q:"Bir metin sütununu tarih tipine dönüştürmek için hangi fonksiyon kullanılır?", opts:["as.Date()","as.numeric()","as.character()","as.factor()"], c:0},
+  {q:"mutate() fonksiyonu ne işe yarar?", opts:["Yeni değişken türetir","Satır siler","Sütun siler","Veri aktarır"], c:0},
+  {q:"arrange(desc(x)) ifadesi ne yapar?", opts:["x'e göre azalan sıralar","x'e göre artan sıralar","x'i siler","x'i filtreler"], c:0},
+  {q:"Bir aykırı değer tespit edildiğinde ilk yapılması gereken nedir?", opts:["Kaynağını araştırmak","Hemen silmek","Görmezden gelmek","Ortalamayı almak"], c:0},
+]},
+{id:'h5', kod:'Hafta 5', ad:'Veri Temizleme ve Dönüştürme II', sorular:[
+  {q:"İki tabloyu ortak bir sütun üzerinden birleştirmeye ne denir?", opts:["Join","Pivot","Filter","Mutate"], c:0},
+  {q:"Sol tablodaki tüm satırları koruyan join türü hangisidir?", opts:["left_join()","inner_join()","right_join()","full_join()"], c:0},
+  {q:"Bir grup içindeki gözlem sayısını sayan dplyr fonksiyonu hangisidir?", opts:["n()","count()","length()","nrow()"], c:0},
+  {q:"Geniş formattaki sütunları uzun formata çeviren fonksiyon hangisidir?", opts:["pivot_longer()","pivot_wider()","group_by()","left_join()"], c:0},
+  {q:"group_by() tek başına çalıştırıldığında ne yapar?", opts:["Görünmez bir gruplama etiketi ekler","Veriyi siler","Grafik çizer","Veriyi sıralar"], c:0},
+  {q:"summarise() bir grup için tipik olarak ne üretir?", opts:["Özet istatistik","Ham veri","Grafik","Filtre"], c:0},
+  {q:"inner_join() hangi satırları sonuçta tutar?", opts:["Her iki tabloda da eşleşenleri","Sadece sol tablo satırlarını","Sadece sağ tablo satırlarını","Tüm satırları"], c:0},
+  {q:"pivot_wider() fonksiyonu ne yapar?", opts:["Uzun formatı genişe çevirir","Genişi uzuna çevirir","Veriyi siler","Veriyi filtreler"], c:0},
+]},
+{id:'h6', kod:'Hafta 6', ad:'Betimsel İstatistik ve KPI Hesaplama', sorular:[
+  {q:"Aykırı değerlere karşı dayanıklı (robust) merkezi eğilim ölçüsü hangisidir?", opts:["Medyan","Ortalama","Varyans","Standart sapma"], c:0},
+  {q:"Varyansın kareköküne ne denir?", opts:["Standart sapma","Medyan","Mod","IQR"], c:0},
+  {q:"Bir kategorik değişkenin frekanslarını oranlara çeviren fonksiyon hangisidir?", opts:["prop.table()","table()","summary()","mean()"], c:0},
+  {q:"sum(durum == \"Zamaninda\") ifadesi ne hesaplar?", opts:["\"Zamaninda\" olan gözlem sayısı","Tüm gözlem sayısı","Ortalama durum","Hata verir"], c:0},
+  {q:"Bir KPI hesaplamanın \"ikinci yarısı\" olarak tanımlanan adım nedir?", opts:["İçgörü yazma","Veri aktarma","Paket kurma","Grafik çizme"], c:0},
+  {q:"table() fonksiyonu bir kategorik değişken için ne üretir?", opts:["Kategori frekanslarını","Ortalamayı","Grafiği","Veri çerçevesini"], c:0},
+  {q:"Ortalamanın \"aykırı değerlere hassas olması\" ne anlama gelir?", opts:["Aykırı değer ortalamayı önemli ölçüde etkiler","Ortalama hiç değişmez","Medyan etkilenir","Hiçbiri"], c:0},
+  {q:"Standart sapması yüksek bir depo için ne söylenebilir?", opts:["Performansı değişken/öngörülemez","Performansı çok istikrarlıdır","Ortalaması düşüktür","Hiçbir şey söylenemez"], c:0},
+]},
+{id:'h7', kod:'Hafta 7', ad:'Veri Görselleştirme I: ggplot2 Temelleri', sorular:[
+  {q:"Bir zaman serisi trendini göstermek için en uygun geom_ fonksiyonu hangisidir?", opts:["geom_line()","geom_col()","geom_point()","geom_bar()"], c:0},
+  {q:"ggplot2'de aes() fonksiyonu temelde ne yapar?", opts:["Veri sütunlarını görsel özelliklere eşler","Başlık ekler","Tema uygular","Grafiği kaydeder"], c:0},
+  {q:"Önceden hesaplanmış (özetlenmiş) verilerle çubuk grafik çizen fonksiyon hangisidir?", opts:["geom_col()","geom_bar()","geom_line()","geom_point()"], c:0},
+  {q:"İki sayısal değişken arasındaki ilişkiyi göstermek için hangi grafik türü kullanılır?", opts:["Dağılım (scatter)","Çubuk","Pasta","Çizgi"], c:0},
+  {q:"Bir grafiğe başlık ve eksen etiketi eklemek için hangi fonksiyon kullanılır?", opts:["labs()","aes()","geom_col()","theme_minimal()"], c:0},
+  {q:"theme_minimal() fonksiyonu bir grafiğe ne yapar?", opts:["Sadeleştirir","Veriyi değiştirir","Grafiği siler","Renk ekler"], c:0},
+  {q:"geom_bar() ile geom_col() arasındaki temel fark nedir?", opts:["geom_bar ham veriyi sayar, geom_col özetlenmiş veriyi çizer","İkisi tamamen aynıdır","geom_col ham veriyi sayar","Aralarında fark yoktur"], c:0},
+  {q:"\"Chart junk\" kavramı neyi ifade eder?", opts:["Gereksiz görsel süslemeyi","Faydalı bir grafik öğesini","Bir veri türünü","Bir R paketini"], c:0},
+]},
+{id:'h9', kod:'Hafta 9', ad:'Veri Görselleştirme II', sorular:[
+  {q:"Birden fazla kategoriyi aynı zaman serisi grafiğinde renkle ayırmak için aes() içine hangi argüman eklenir?", opts:["color","size","shape","alpha"], c:0},
+  {q:"Aynı grafiği bir kategorik değişkenin her seviyesi için ayrı panele bölen fonksiyon hangisidir?", opts:["facet_wrap()","geom_col()","aes()","labs()"], c:0},
+  {q:"Bir grafiği dosyaya kaydetmek için kullanılan fonksiyon hangisidir?", opts:["ggsave()","ggplot()","geom_save()","export()"], c:0},
+  {q:"ggsave()'de dpi argümanı neyi belirler?", opts:["Çözünürlük","Renk","Boyut birimi","Yazı tipi"], c:0},
+  {q:"position = \"dodge\" bir çubuk grafikte ne yapar?", opts:["Alt kategorileri yan yana gösterir","Üst üste yığar","Verileri siler","Filtreler"], c:0},
+  {q:"position = \"stack\" bir çubuk grafikte ne yapar?", opts:["Alt kategorileri üst üste yığar","Yan yana gösterir","Verileri siler","Filtreler"], c:0},
+  {q:"rep() fonksiyonundaki \"each\" argümanı ne yapar?", opts:["Her elemanı art arda tekrarlar","Tüm diziyi baştan tekrarlar","Elemanları siler","Hiçbir işlev görmez"], c:0},
+  {q:"facet_wrap() ne zaman aes(color=...) yaklaşımına tercih edilir?", opts:["Çok sayıda kategori olduğunda","Sadece iki kategori olduğunda","Hiçbir zaman","Her zaman"], c:0},
+]},
+{id:'h10', kod:'Hafta 10', ad:'Tahmine Giriş', sorular:[
+  {q:"Belirli bir dönemde düzenli olarak tekrar eden dalgalanmaya ne ad verilir?", opts:["Mevsimsellik","Trend","Döngü","Gürültü"], c:0},
+  {q:"Hareketli ortalama yönteminin temel zayıflığı nedir?", opts:["Trendi geriden takip eder","Hesaplaması çok zordur","Yalnızca R'da çalışır","Negatif değer üretir"], c:0},
+  {q:"Üstel düzeltmede alpha = 1 olduğunda tahmin hangi yönteme eşdeğer olur?", opts:["Naif tahmin (son değer)","3 aylık hareketli ortalama","Trend analizi","Mevsimsel ayarlama"], c:0},
+  {q:"Farklı ölçekteki serileri karşılaştırmak için hangi metrik daha uygundur?", opts:["MAPE","MAE","Toplam hata","Varyans"], c:0},
+  {q:"MAE neyi ifade eder?", opts:["Ortalama mutlak hata","Ortalama yüzde hata","Varyans","Standart sapma"], c:0},
+  {q:"Üstel düzeltmede yüksek alpha değeri ne anlama gelir?", opts:["Son gözleme yüksek ağırlık, hızlı tepki","Geçmişe yüksek ağırlık","Sabit bir tahmin","Hiçbiri"], c:0},
+  {q:"tail(vektor, 3) ifadesi ne yapar?", opts:["Vektörün son 3 elemanını alır","İlk 3 elemanı alır","Tüm elemanları alır","Vektörü sıralar"], c:0},
+  {q:"Zaman serisi bileşenlerinden \"trend\" neyi ifade eder?", opts:["Uzun vadeli artış/azalış eğilimini","Kısa vadeli rastgele dalgalanmayı","Mevsimsel tekrarı","Hiçbirini"], c:0},
+]},
+{id:'h11', kod:'Hafta 11', ad:'Karşılaştırmalı Analiz: Panel Perspektifi', sorular:[
+  {q:"Aynı birimlerin birden fazla dönemde tekrar tekrar gözlemlendiği veri yapısına ne denir?", opts:["Panel veri","Kesit verisi","Zaman serisi","Rastgele veri"], c:0},
+  {q:"Her birim için eşit sayıda gözlem içeren panele ne denir?", opts:["Dengeli panel","Dengesiz panel","Eksik panel","Rastgele panel"], c:0},
+  {q:"Bir performans değerini bir referans değerle karşılaştırma tekniğine ne denir?", opts:["Kıyaslama (benchmarking)","Gruplama","Pivot","Filtreleme"], c:0},
+  {q:"Bir grafiğe yatay referans çizgisi eklemek için hangi fonksiyon kullanılır?", opts:["geom_hline()","geom_col()","geom_point()","labs()"], c:0},
+  {q:"sapma = performans − referans formülünde sapma negatifse ne anlama gelir?", opts:["Performans referansın altındadır","Performans referansın üstündedir","Veri hatalıdır","Hesap yanlıştır"], c:0},
+  {q:"group_by(depo, ay), group_by(depo)'dan ne zaman farklı sonuç verir?", opts:["Aynı depo-ay kombinasyonunda birden fazla satır varsa","Her zaman aynı sonucu verir","Asla farklı olamaz","Hiçbiri"], c:0},
+  {q:"Dengesiz bir panelde en olası hata nedir?", opts:["Eksik dönemi sıfır performans sanmak","Hiçbir risk yoktur","Analiz otomatik kolaylaşır","Veri miktarı artar"], c:0},
+  {q:"Sektör ortalamasıyla kıyaslamanın bir sınırlılığı nedir?", opts:["Büyüklük/konum gibi bağlamsal faktörleri göz ardı edebilir","Hiçbir sınırlılığı yoktur","Her zaman tam adildir","Hiçbiri"], c:0},
+]},
+{id:'h12', kod:'Hafta 12', ad:'Dashboard ve Otomatik Raporlama', sorular:[
+  {q:"R Markdown belgesinde meta bilgileri tutan bölüme ne denir?", opts:["YAML başlığı","Kod parçası","Metin bloğu","Parametre"], c:0},
+  {q:"Bir kod parçasının çıktısını gösterip kodun kendisini gizlemek için hangi argüman kullanılır?", opts:["echo = FALSE","eval = FALSE","hide = TRUE","show = FALSE"], c:0},
+  {q:"Aynı R Markdown şablonunun farklı girdilerle çalıştırılmasını sağlayan tekniğe ne denir?", opts:["Parametreli rapor","Statik rapor","Sabit rapor","Otomatik rapor (parametresiz)"], c:0},
+  {q:"R Shiny'nin temel özelliği nedir?", opts:["Reaktif/interaktif olması","Yalnızca PDF üretmesi","Sadece grafik çizmesi","Veritabanı yönetmesi"], c:0},
+  {q:"Düzenli, arşivlenmesi gereken bir yönetim kurulu raporu için hangi araç daha uygundur?", opts:["R Markdown","Shiny","İkisi de aynı","Hiçbiri"], c:0},
+  {q:"params$ ifadesi ne için kullanılır?", opts:["YAML'de tanımlı parametreye erişmek için","Paket yüklemek için","Grafik çizmek için","Veri silmek için"], c:0},
+  {q:"\"Knit\" düğmesi ne işe yarar?", opts:["Belgeyi çalıştırıp çıktı üretir","Veriyi siler","Paket kurar","R oturumunu kapatır"], c:0},
+  {q:"Shiny'de \"reaktif\" olmak ne anlama gelir?", opts:["Kullanıcı girdisi değişince çıktı otomatik güncellenir","Program otomatik kapanır","Veri otomatik silinir","Hiçbiri"], c:0},
+]},
+];
+
+let currentQuiz = null;
+let qIndex = 0;
+let score = 0;
+let answered = false;
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+/* Deneme: ilgili haftalardan sırayla (dengeli) ve rastgele 25 soru */
+function examPool(maxWeek){
+  const banks = shuffle(UNITELER.filter(u => parseInt(u.id.slice(1), 10) <= maxWeek)).map(u => shuffle(u.sorular));
+  const out = [];
+  for(let r = 0; out.length < 25; r++){
+    let added = false;
+    for(const b of banks){ if(r < b.length && out.length < 25){ out.push(b[r]); added = true; } }
+    if(!added) break;
+  }
+  return out;
+}
+
+function prepareQuestions(raw){
+  return shuffle(raw).map(item=>{
+    const correctText = item.opts[item.c];
+    const opts = shuffle(item.opts);
+    return {q:item.q, opts, c: opts.indexOf(correctText)};
+  });
+}
+
+function bestScore(key){
+  try { const v = localStorage.getItem('mat_lojistik-veri-analitigi_'+key);
+  return v ? JSON.parse(v) : null; } catch (e) { return null; }
+}
+function saveBestScore(key, pct){
+  const cur = bestScore(key);
+  if(!cur || pct > cur){
+    try { localStorage.setItem('mat_lojistik-veri-analitigi_'+key, JSON.stringify(pct)); } catch (e) {}
+  }
+}
+
+function renderMenu(){
+  const examGrid = document.getElementById('examGrid');
+  examGrid.innerHTML = '';
+  const exams = [
+    {key:'vize', kod:'8. Hafta', ad:'VİZE Denemesi', alt:'25 soru · Kapsam: 1-7. haftalar · her açılışta farklı', pick:()=>examPool(7)},
+    {key:'final', kod:'14. Hafta', ad:'FİNAL Denemesi', alt:'25 soru · Kapsam: 1-13. haftalar · her açılışta farklı', pick:()=>examPool(13)},
+  ];
+  exams.forEach(e=>{
+    const best = bestScore(e.key);
+    const div = document.createElement('div');
+    div.className = 'card exam-card';
+    div.onclick = ()=>startQuiz(e.pick(), e.ad, e.key);
+    div.innerHTML = '<div class="kod">'+e.kod+'</div><div class="ad">'+e.ad+'</div><div class="alt">'+e.alt+'</div>' +
+      (best!==null ? '<div class="skor">En iyi skor: %'+best+'</div>' : '');
+    examGrid.appendChild(div);
+  });
+
+  const unitGrid = document.getElementById('unitGrid');
+  unitGrid.innerHTML = '';
+  UNITELER.forEach(u=>{
+    const best = bestScore(u.id);
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.onclick = ()=>startQuiz(u.sorular, u.kod+': '+u.ad, u.id);
+    div.innerHTML = '<div class="kod">'+u.kod+'</div><div class="ad">'+u.ad+'</div><div class="alt">'+u.sorular.length+' soru</div>' +
+      (best!==null ? '<div class="skor">En iyi skor: %'+best+'</div>' : '');
+    unitGrid.appendChild(div);
+  });
+}
+
+function startQuiz(rawQuestions, title, storageKey){
+  currentQuiz = {title, storageKey, questions: prepareQuestions(rawQuestions)};
+  qIndex = 0; score = 0; answered = false;
+  document.getElementById('menuScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  showQuestion();
+}
+
+function backToMenu(){
+  document.getElementById('quizScreen').style.display = 'none';
+  document.getElementById('menuScreen').style.display = 'block';
+  renderMenu();
+}
+
+function showQuestion(){
+  answered = false;
+  const total = currentQuiz.questions.length;
+  document.getElementById('progressText').textContent = currentQuiz.title + ' — Soru ' + (qIndex+1) + ' / ' + total;
+  const item = currentQuiz.questions[qIndex];
+  const card = document.getElementById('qcard');
+  card.innerHTML = '';
+
+  const qt = document.createElement('div');
+  qt.className = 'qtext';
+  qt.textContent = (qIndex+1) + '. ' + item.q;
+  card.appendChild(qt);
+
+  item.opts.forEach((opt, i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = String.fromCharCode(97+i) + ') ' + opt;
+    btn.onclick = ()=>selectAnswer(i);
+    card.appendChild(btn);
+  });
+
+  const nb = document.createElement('button');
+  nb.className = 'next-btn';
+  nb.id = 'nextBtn';
+  nb.textContent = (qIndex === total-1) ? 'Sonucu Gör' : 'Sonraki Soru →';
+  nb.onclick = nextQuestion;
+  card.appendChild(nb);
+}
+
+function selectAnswer(i){
+  if(answered) return;
+  answered = true;
+  const item = currentQuiz.questions[qIndex];
+  const opts = document.querySelectorAll('.opt');
+  opts.forEach((btn, idx)=>{
+    btn.disabled = true;
+    if(idx === item.c) btn.classList.add('correct');
+    else if(idx === i) btn.classList.add('wrong');
+  });
+  if(i === item.c) score++;
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+function nextQuestion(){
+  if(qIndex < currentQuiz.questions.length - 1){
+    qIndex++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+function finishQuiz(){
+  const total = currentQuiz.questions.length;
+  const pct = Math.round((score/total)*100);
+  saveBestScore(currentQuiz.storageKey, pct);
+  const card = document.getElementById('qcard');
+  document.getElementById('progressText').textContent = currentQuiz.title + ' — Tamamlandı';
+  card.innerHTML =
+    '<div class="result-box">' +
+      '<div class="big">' + score + ' / ' + total + '</div>' +
+      '<div class="msg">Doğru cevap oranınız: %' + pct + '</div>' +
+      '<button class="next-btn" style="display:inline-block" onclick="backToMenu()">Menüye Dön</button>' +
+    '</div>';
+}
+
+renderMenu();
+</script>
+</body>
+</html>
